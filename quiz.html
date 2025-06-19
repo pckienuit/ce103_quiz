@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Thi Trắc Nghiệm - CE103</title>
+    <link rel="stylesheet" href="css/quiz.css">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            }
+        };
+    </script>
+</head>
+<body>
+    <div class="quiz-container">
+        <div id="start-screen">
+            <h1>Thi Thử Trắc Nghiệm CE103</h1>
+            <p>Bài thi gồm 40 câu hỏi ngẫu nhiên. Thời gian làm bài: 70 phút.</p>
+            <button id="start-quiz-btn">Bắt đầu thi</button>
+        </div>        <div id="quiz-screen" class="hidden">
+            <div id="quiz-header">
+                <div id="question-counter">Câu 1 / 40</div>
+                <div id="timer">Thời gian: 70:00</div>
+                <button id="exit-quiz-btn" class="exit-btn" title="Thoát (ESC)">Thoát</button>
+            </div>
+            <div id="question-area">
+                <h2 id="question-text"></h2>
+                <div id="options-container"></div>
+            </div>
+            <div id="explanation-area" class="hidden">
+                <h3>Giải thích chi tiết:</h3>
+                <p id="explanation-text"></p>
+            </div>
+            <button id="next-question-btn" class="hidden">Câu tiếp theo</button>
+        </div>
+
+        <div id="result-screen" class="hidden">
+            <h1>Kết quả bài thi</h1>
+            <p>Số câu đúng: <span id="score"></span> / 40</p>
+            <p>Tỷ lệ: <span id="percentage"></span>%</p>
+            <p id="result-message"></p>
+            <button id="restart-quiz-btn">Làm lại bài khác</button>
+            <a href="index.html" class="nav-link">Về trang chủ</a>
+        </div>
+    </div>
+    <script src="js/quiz.js"></script>
+</body>
+</html>

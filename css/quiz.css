@@ -1,0 +1,74 @@
+/* Thêm CSS từ style.css và tùy chỉnh */
+body { font-family: Arial, sans-serif; background-color: #f0f2f5; color: #333; margin: 0; padding: 20px; }
+.quiz-container { max-width: 800px; margin: auto; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+.hidden { display: none; }
+#start-screen { text-align: center; }
+#start-quiz-btn, #next-question-btn, #restart-quiz-btn {
+    display: block;
+    width: 200px;
+    padding: 15px;
+    margin: 20px auto;
+    font-size: 1.1em;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+#start-quiz-btn:hover, #next-question-btn:hover, #restart-quiz-btn:hover { background-color: #218838; }
+#quiz-header { 
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+    margin-bottom: 20px; 
+    font-weight: bold; 
+    flex-wrap: wrap;
+    gap: 10px;
+}
+#quiz-header > div {
+    flex: 1;
+    min-width: 120px;
+}
+.exit-btn {
+    padding: 8px 16px;
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.9em;
+    transition: background-color 0.2s;
+    flex-shrink: 0;
+}
+.exit-btn:hover { background-color: #c82333; }
+#question-text { margin-bottom: 20px; }
+.option-btn {
+    display: block;
+    width: 100%;
+    padding: 15px;
+    margin-bottom: 10px;
+    text-align: left;
+    background-color: #e9ecef;
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+.option-btn:hover:not([disabled]) { background-color: #007bff; color: white; }
+.option-btn.correct { background-color: #28a745; color: white; }
+.option-btn.incorrect { background-color: #dc3545; color: white; }
+#explanation-area { margin-top: 20px; padding: 15px; background-color: #f8f9fa; border: 1px solid #dee2e6; border-radius: 5px; }
+/* Styling for mathematical formulas */
+.MathJax {
+    font-size: 1.1em !important;
+}
+mjx-container {
+    margin: 0.5em 0;
+}
+#explanation-area mjx-container {
+    display: inline-block;
+    margin: 0.2em;
+}
+#result-screen { text-align: center; }
+.nav-link { display: inline-block; margin-top: 10px; padding: 10px 15px; background-color: #007bff; color: white; text-decoration: none; border-radius: 5px;}
+.nav-link:hover { background-color: #0056b3; }
