@@ -41,8 +41,8 @@ body { font-family: Arial, sans-serif; background-color: #f0f2f5; color: #333; }
 
 /* Code highlighting styles for flashcards */
 .code-block {
-    background-color: #2d3748;
-    border: 1px solid #4a5568;
+    background-color: #f8f9fa;
+    border: 2px solid #e9ecef;
     border-radius: 8px;
     margin: 10px 0;
     padding: 12px;
@@ -57,27 +57,63 @@ body { font-family: Arial, sans-serif; background-color: #f0f2f5; color: #333; }
     padding: 0;
     background: transparent;
     border: none;
-    color: #e2e8f0;
+    color: #2d3748;
 }
 .code-block code {
-    color: #e2e8f0;
+    color: #2d3748;
     background: transparent;
     padding: 0;
     border: none;
     font-size: inherit;
 }
 .inline-code {
-    background-color: #2d3748;
-    color: #e2e8f0;
+    background-color: #e2e8f0;
+    color: #2d3748;
     padding: 2px 6px;
     border-radius: 4px;
     font-family: 'Courier New', Consolas, monospace;
     font-size: 0.9em;
-    border: 1px solid #4a5568;
+    border: 1px solid #cbd5e0;
+}
+.inline-code-bright {
+    background-color: #fef5e7;
+    color: #744210;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-family: 'Courier New', Consolas, monospace;
+    font-size: 0.9em;
+    border: 1px solid #f6ad55;
+    font-weight: 600;
+}
+.tech-term {
+    background-color: #e6fffa;
+    color: #065f46;
+    padding: 1px 4px;
+    border-radius: 3px;
+    font-weight: 600;
+    border: 1px solid #81e6d9;
+}
+.number-highlight {
+    background-color: #fef2f2;
+    color: #991b1b;
+    padding: 1px 4px;
+    border-radius: 3px;
+    font-family: 'Courier New', Consolas, monospace;
+    font-weight: 600;
+    border: 1px solid #fca5a5;
+}
+.formula-var {
+    background-color: #ede9fe;
+    color: #5b21b6;
+    padding: 1px 4px;
+    border-radius: 3px;
+    font-style: italic;
+    font-weight: 600;
+    border: 1px solid #c4b5fd;
 }
 .code-label {
-    background-color: #4a5568;
-    color: #e2e8f0;
+    background-color: #4299e1;
+    color: white;
     padding: 4px 8px;
     font-size: 11px;
     font-weight: bold;
@@ -86,15 +122,15 @@ body { font-family: Arial, sans-serif; background-color: #f0f2f5; color: #333; }
     display: inline-block;
 }
 .question-with-code {
-    background-color: rgba(255, 255, 255, 0.1);
+    background-color: #f7fafc;
     padding: 12px;
     border-radius: 8px;
-    border-left: 3px solid #fff;
+    border-left: 3px solid #4299e1;
     text-align: left;
 }
 .card-back .question-with-code {
     background-color: #f7fafc;
-    border-left: 3px solid #3182ce;
+    border-left: 3px solid #4299e1;
 }
 /* Mathematical formulas in flashcards */
 .MathJax {
@@ -103,9 +139,9 @@ body { font-family: Arial, sans-serif; background-color: #f0f2f5; color: #333; }
 mjx-container {
     margin: 0.3em 0;
 }
-/* Override Prism styles for flashcards */
-.token.keyword { color: #f56565 !important; }
-.token.register { color: #48bb78 !important; }
-.token.number { color: #ed8936 !important; }
-.token.string { color: #38b2ac !important; }
-.token.comment { color: #a0aec0 !important; }
+/* Override Prism styles for bright theme */
+.token.keyword { color: #d69e2e !important; font-weight: bold; }
+.token.register { color: #38a169 !important; font-weight: bold; }
+.token.number { color: #e53e3e !important; font-weight: bold; }
+.token.string { color: #3182ce !important; }
+.token.comment { color: #718096 !important; }

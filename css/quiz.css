@@ -105,13 +105,49 @@ mjx-container {
     font-size: inherit;
 }
 .inline-code {
-    background-color: #2d3748;
-    color: #e2e8f0;
+    background-color: #e2e8f0;
+    color: #2d3748;
     padding: 2px 6px;
     border-radius: 4px;
     font-family: 'Courier New', Consolas, monospace;
     font-size: 0.9em;
-    border: 1px solid #4a5568;
+    border: 1px solid #cbd5e0;
+}
+.inline-code-bright {
+    background-color: #fef5e7;
+    color: #744210;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-family: 'Courier New', Consolas, monospace;
+    font-size: 0.9em;
+    border: 1px solid #f6ad55;
+    font-weight: 600;
+}
+.tech-term {
+    background-color: #e6fffa;
+    color: #065f46;
+    padding: 1px 4px;
+    border-radius: 3px;
+    font-weight: 600;
+    border: 1px solid #81e6d9;
+}
+.number-highlight {
+    background-color: #fef2f2;
+    color: #991b1b;
+    padding: 1px 4px;
+    border-radius: 3px;
+    font-family: 'Courier New', Consolas, monospace;
+    font-weight: 600;
+    border: 1px solid #fca5a5;
+}
+.formula-var {
+    background-color: #ede9fe;
+    color: #5b21b6;
+    padding: 1px 4px;
+    border-radius: 3px;
+    font-style: italic;
+    font-weight: 600;
+    border: 1px solid #c4b5fd;
 }
 .code-label {
     background-color: #4a5568;

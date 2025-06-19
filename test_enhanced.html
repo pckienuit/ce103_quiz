@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Test Flashcards & Enhanced Highlighting - CE103</title>
+    <link rel="stylesheet" href="css/flashcards.css">
+    <!-- Prism.js for code highlighting -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-assembler.min.js"></script>
+    <!-- MathJax for mathematical formulas -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            }
+        };
+    </script>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 40px; background-color: #f0f2f5; }
+        .container { max-width: 900px; margin: auto; background: white; padding: 20px; border-radius: 8px; }
+        .test-section { margin: 30px 0; padding: 20px; border: 1px solid #ccc; border-radius: 8px; }
+        .nav-buttons { margin: 20px 0; text-align: center; }
+        .nav-buttons a { 
+            display: inline-block; 
+            margin: 0 10px; 
+            padding: 10px 20px; 
+            background-color: #007bff; 
+            color: white; 
+            text-decoration: none; 
+            border-radius: 5px; 
+        }
+        .nav-buttons a:hover { background-color: #0056b3; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎯 Test Enhanced Code Highlighting</h1>
+        
+        <div class="test-section">
+            <h2>✨ Highlighting trong dấu backtick</h2>
+            <p>8051 sử dụng lệnh `MOV A, #20H` để tải giá trị immediate vào thanh ghi <code class="tech-term">ACC</code>.</p>
+            <p>Các lệnh nhảy như `JZ label` và `JNZ label` thường được sử dụng trong vòng lặp.</p>
+            <p>Thanh ghi <code class="tech-term">DPTR</code> có thể được tải bằng lệnh `MOV DPTR, #4000H`.</p>
+        </div>
+
+        <div class="test-section">
+            <h2>🔧 Highlighting thuật ngữ kỹ thuật</h2>
+            <p>Vi điều khiển 8051 có các thanh ghi quan trọng như ACC, PSW, DPTR, PC, SP.</p>
+            <p>Bộ nhớ bao gồm ROM, RAM, và có thể mở rộng với EEPROM.</p>
+            <p>Các giao tiếp như UART, SPI, I2C thường được sử dụng trong embedded systems.</p>
+            <p>Các chức năng khác bao gồm PWM, ADC, DAC cho điều khiển analog.</p>
+        </div>
+
+        <div class="test-section">
+            <h2>🔢 Highlighting số và địa chỉ</h2>
+            <p>Địa chỉ 4000H trong bộ nhớ, giá trị 0xFF, số binary 11010110B.</p>
+            <p>Thanh ghi tại địa chỉ 80H, giá trị hex 0x1234, binary 10101010B.</p>
+        </div>
+
+        <div class="test-section">
+            <h2>📐 Highlighting công thức toán học</h2>
+            <p>Thời gian chu kỳ máy được tính: T_machine = 12 / f_osc</p>
+            <p>Với tần số f_osc = 12MHz, ta có T_cycle = 1μs</p>
+            <p>Số lệnh thực hiện: N_instructions = 1,000,000 lệnh/giây</p>
+            
+            <h3>Công thức MathJax:</h3>
+            $$T_{machine} = \frac{12}{f_{osc}}$$
+            <p>Khi $f_{osc} = 12MHz$, ta có: $T_{machine} = 1\mu s$</p>
+        </div>
+
+        <div class="test-section">
+            <h2>💻 Code Block Assembly</h2>
+            <div class="question-with-code">
+                <p>Ví dụ về đoạn mã assembly:</p>
+                <div class="code-label">8051 Assembly Code</div>
+                <div class="code-block">
+                    <pre><code class="language-assembler">MOV A, #45H
+MOV B, #F5H
+MUL AB
+DJNZ R0, loop
+CJNE A, #20H, next</code></pre>
+                </div>
+                <p>Đây là ví dụ về syntax highlighting cho assembly code.</p>
+            </div>
+        </div>
+
+        <div class="nav-buttons">
+            <a href="index.html">🏠 Trang chủ</a>
+            <a href="flashcards.html">📚 Flashcards Mới</a>
+            <a href="quiz.html">📝 Quiz</a>
+            <a href="test_complete.html">🧪 Test Complete</a>
+        </div>
+    </div>
+    
+    <script>
+        // Simulate the formatting function
+        function formatCodeInText(text) {
+            let formattedText = text;
+            
+            // Format backtick code
+            formattedText = formattedText.replace(/`([^`]+)`/g, '<code class="inline-code-bright">$1</code>');
+            
+            // Highlight tech terms
+            formattedText = formattedText.replace(
+                /\b(ROM|RAM|EEPROM|UART|SPI|I2C|PWM|ADC|DAC|CPU|ALU|PC|SP|DPTR|ACC|PSW|IE|IP|TCON|TMOD|SCON|SBUF|TH0|TL0|TH1|TL1)\b/g,
+                '<span class="tech-term">$&</span>'
+            );
+            
+            // Highlight numbers
+            formattedText = formattedText.replace(
+                /\b(0x[0-9A-Fa-f]+|[0-9A-Fa-f]+[Hh]|[01]+[Bb])\b/g,
+                '<span class="number-highlight">$&</span>'
+            );
+            
+            // Highlight formula variables
+            formattedText = formattedText.replace(
+                /\b(T_machine|f_osc|T_cycle|N_instructions)\b/g,
+                '<span class="formula-var">$&</span>'
+            );
+            
+            return formattedText;
+        }
+
+        // Apply formatting to all paragraphs
+        document.addEventListener('DOMContentLoaded', function() {
+            const paragraphs = document.querySelectorAll('p');
+            paragraphs.forEach(p => {
+                if (!p.innerHTML.includes('<')) {
+                    p.innerHTML = formatCodeInText(p.innerHTML);
+                }
+            });
+            
+            // Highlight code
+            if (window.Prism) {
+                Prism.highlightAll();
+            }
+            
+            // Process math
+            if (window.MathJax) {
+                MathJax.typesetPromise().catch(function (err) {
+                    console.log('MathJax error: ' + err.message);
+                });
+            }
+        });
+    </script>
+</body>
+</html>
