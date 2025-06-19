@@ -66,6 +66,14 @@ body { font-family: Arial, sans-serif; background-color: #f0f2f5; color: #333; }
     border: none;
     font-size: inherit;
 }
+/* Override Prism styles for bright theme */
+.code-block .token.keyword { color: #d69e2e !important; font-weight: bold; }
+.code-block .token.register { color: #38a169 !important; font-weight: bold; }
+.code-block .token.number { color: #e53e3e !important; font-weight: bold; }
+.code-block .token.string { color: #3182ce !important; }
+.code-block .token.comment { color: #718096 !important; }
+.code-block .token.operator { color: #805ad5 !important; }
+.code-block .token.punctuation { color: #4a5568 !important; }
 .inline-code {
     background-color: #e2e8f0;
     color: #2d3748;
@@ -75,62 +83,164 @@ body { font-family: Arial, sans-serif; background-color: #f0f2f5; color: #333; }
     font-size: 0.9em;
     border: 1px solid #cbd5e0;
 }
+/* Bright theme styles cho flashcards */
 .inline-code-bright {
-    background-color: #fef5e7;
-    color: #744210;
+    background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+    color: #92400e;
+    padding: 3px 8px;
+    border-radius: 6px;
+    font-family: 'Fira Code', 'Consolas', 'Monaco', 'Courier New', monospace;
+    font-size: 0.85em;
+    font-weight: 700;
+    border: 1px solid #f59e0b;
+    box-shadow: 0 2px 4px rgba(245, 158, 11, 0.2);
+    text-shadow: 0 1px 1px rgba(255,255,255,0.8);
+    letter-spacing: 0.3px;
+}
+
+.tech-term {
+    background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%);
+    color: #047857;
     padding: 2px 6px;
     border-radius: 4px;
-    font-family: 'Courier New', Consolas, monospace;
-    font-size: 0.9em;
-    border: 1px solid #f6ad55;
-    font-weight: 600;
+    font-weight: 700;
+    border: 1px solid #10b981;
+    box-shadow: 0 1px 3px rgba(16, 185, 129, 0.2);
+    text-shadow: 0 1px 1px rgba(255,255,255,0.6);
 }
-.tech-term {
-    background-color: #e6fffa;
-    color: #065f46;
-    padding: 1px 4px;
-    border-radius: 3px;
-    font-weight: 600;
-    border: 1px solid #81e6d9;
-}
+
 .number-highlight {
-    background-color: #fef2f2;
-    color: #991b1b;
-    padding: 1px 4px;
-    border-radius: 3px;
-    font-family: 'Courier New', Consolas, monospace;
-    font-weight: 600;
-    border: 1px solid #fca5a5;
+    background: linear-gradient(135deg, #fecaca 0%, #fca5a5 100%);
+    color: #b91c1c;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-family: 'Fira Code', 'Consolas', 'Monaco', 'Courier New', monospace;
+    font-weight: 700;
+    border: 1px solid #ef4444;
+    box-shadow: 0 1px 3px rgba(239, 68, 68, 0.2);
+    text-shadow: 0 1px 1px rgba(255,255,255,0.6);
 }
+
 .formula-var {
-    background-color: #ede9fe;
+    background: linear-gradient(135deg, #e0e7ff 0%, #c7d2fe 100%);
     color: #5b21b6;
-    padding: 1px 4px;
-    border-radius: 3px;
+    padding: 2px 6px;
+    border-radius: 4px;
     font-style: italic;
-    font-weight: 600;
-    border: 1px solid #c4b5fd;
+    font-weight: 700;
+    border: 1px solid #8b5cf6;
+    box-shadow: 0 1px 3px rgba(139, 92, 246, 0.2);
+    text-shadow: 0 1px 1px rgba(255,255,255,0.6);
 }
+
+.code-block {
+    background: linear-gradient(135deg, #fefbff 0%, #f8f9fa 100%);
+    border: 2px solid #e1e8ed;
+    border-radius: 12px;
+    margin: 15px 0;
+    padding: 16px;
+    font-family: 'Fira Code', 'Consolas', 'Monaco', 'Courier New', monospace;
+    font-size: 13px;
+    line-height: 1.5;
+    overflow-x: auto;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.08);
+    position: relative;
+}
+
+.code-block::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, #3b82f6, #8b5cf6, #ef4444);
+    border-radius: 12px 12px 0 0;
+}
+
+.code-block pre {
+    margin: 0;
+    padding: 0;
+    background: transparent;
+    border: none;
+    color: #2d3748;
+    font-size: inherit;
+}
+
+.code-block code {
+    color: #2d3748;
+    background: transparent;
+    padding: 0;
+    border: none;
+    font-size: inherit;
+    font-family: inherit;
+}
+
 .code-label {
-    background-color: #4299e1;
+    background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
     color: white;
-    padding: 4px 8px;
-    font-size: 11px;
+    padding: 6px 12px;
+    font-size: 12px;
     font-weight: bold;
-    margin-bottom: 5px;
-    border-radius: 4px 4px 0 0;
+    margin-bottom: 8px;
+    border-radius: 6px;
     display: inline-block;
+    box-shadow: 0 2px 4px rgba(59, 130, 246, 0.3);
+    text-shadow: 0 1px 2px rgba(0,0,0,0.3);
 }
+
 .question-with-code {
-    background-color: #f7fafc;
-    padding: 12px;
-    border-radius: 8px;
-    border-left: 3px solid #4299e1;
+    background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+    padding: 16px;
+    border-radius: 10px;
+    border-left: 4px solid #3b82f6;
     text-align: left;
+    box-shadow: 0 2px 8px rgba(59, 130, 246, 0.1);
 }
+
 .card-back .question-with-code {
-    background-color: #f7fafc;
-    border-left: 3px solid #4299e1;
+    background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+    border-left: 4px solid #3b82f6;
+}
+
+/* Override Prism styles for bright theme trong flashcards */
+.code-block .token.keyword { 
+    color: #d97706 !important; 
+    font-weight: bold !important;
+    text-shadow: 0 1px 1px rgba(255,255,255,0.8);
+}
+
+.code-block .token.register { 
+    color: #059669 !important; 
+    font-weight: bold !important;
+    text-shadow: 0 1px 1px rgba(255,255,255,0.6);
+}
+
+.code-block .token.number { 
+    color: #dc2626 !important; 
+    background: rgba(254, 202, 202, 0.5);
+    padding: 1px 3px;
+    border-radius: 3px;
+    font-weight: bold !important;
+}
+
+.code-block .token.string { 
+    color: #2563eb !important; 
+    font-weight: 500;
+}
+
+.code-block .token.comment { 
+    color: #6b7280 !important; 
+    font-style: italic;
+}
+
+.code-block .token.operator { 
+    color: #7c3aed !important; 
+    font-weight: bold;
+}
+
+.code-block .token.punctuation { 
+    color: #374151 !important; 
 }
 /* Mathematical formulas in flashcards */
 .MathJax {

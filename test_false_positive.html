@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test False Positive Highlighting - CE103 Quiz</title>
+    <link rel="stylesheet" href="css/flashcards.css">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            }
+        };
+    </script>
+</head>
+<body>
+    <div class="flashcard-container">
+        <h1>Test Highlighting False Positives</h1>
+        
+        <div style="margin: 20px 0; padding: 15px; border: 2px solid #e1e8ed; border-radius: 8px;">
+            <h2>Test Case 1: Từ "chỉ" KHÔNG nên highlight "CH"</h2>
+            <div id="test1">
+                <p>Câu hỏi: Khi chỉ thị MOV được thực hiện, nó chỉ di chuyển dữ liệu chứ không thay đổi thanh ghi nguồn.</p>
+                <p>Giải thích: Lệnh MOV A, #50H chỉ sao chép giá trị 50H vào thanh ghi A. Chỉ có điều này là chính xác.</p>
+                <p>Lưu ý: Chỉ định rõ ràng các thanh ghi khi sử dụng MOV.</p>
+            </div>
+        </div>
+
+        <div style="margin: 20px 0; padding: 15px; border: 2px solid #e1e8ed; border-radius: 8px;">
+            <h2>Test Case 2: Từ "machine" KHÔNG nên highlight "MAC"</h2>
+            <div id="test2">
+                <p>Thời gian machine cycle được tính bằng công thức $T_{machine} = \frac{12}{f_{osc}}$</p>
+                <p>Machine language programming với assembly instructions như MOV, ADD.</p>
+            </div>
+        </div>
+
+        <div style="margin: 20px 0; padding: 15px; border: 2px solid #e1e8ed; border-radius: 8px;">
+            <h2>Test Case 3: Assembly instructions hợp lệ PHẢI highlight</h2>
+            <div id="test3">
+                <p>Sử dụng lệnh MOV A, R0 để di chuyển dữ liệu.</p>
+                <p>Lệnh ADD A, #10H thực hiện phép cộng.</p>
+                <p>JMP 0x1000 để nhảy đến địa chỉ.</p>
+            </div>
+        </div>
+
+        <div style="margin: 20px 0; padding: 15px; border: 2px solid #e1e8ed; border-radius: 8px;">
+            <h2>Test Case 4: Từ tiếng Việt chứa assembly letters</h2>
+            <div id="test4">
+                <p>Việc add thêm tính năng mới rất quan trọng.</p>
+                <p>Call center hỗ trợ khách hàng 24/7.</p>
+                <p>Sub menu con trong giao diện người dùng.</p>
+                <p>Pop up thông báo hiển thị liên tục.</p>
+            </div>
+        </div>
+
+        <div style="margin: 20px 0; padding: 15px; border: 2px solid #e1e8ed; border-radius: 8px;">
+            <h2>Test Case 5: Mixed content</h2>
+            <div id="test5">
+                <p>Trong chỉ thị assembly, lệnh MOV A, R0 được sử dụng để chỉ định việc di chuyển dữ liệu.</p>
+                <p>Machine cycle gồm các bước: fetch, decode, execute. Lệnh ADD A, #50H thực hiện chức năng cộng.</p>
+            </div>
+        </div>
+
+        <button onclick="runHighlightingTest()" style="padding: 10px 20px; background: #007bff; color: white; border: none; border-radius: 5px; cursor: pointer; margin: 20px 0;">
+            Chạy Test Highlighting
+        </button>
+
+        <div id="results" style="margin-top: 20px;"></div>
+    </div>
+
+    <script>
+        // Import improved highlighting function
+        function formatCodeInText(text) {
+            let formattedText = text;
+            
+            // 1. Bảo vệ nội dung trong backticks và math formulas
+            const protectedContent = [];
+            
+            // Bảo vệ backticks
+            formattedText = formattedText.replace(/`([^`]+)`/g, function(match, content, offset) {
+                const placeholder = `__PROTECTED_${protectedContent.length}__`;
+                protectedContent.push(`<code class="inline-code-bright">${content}</code>`);
+                return placeholder;
+            });
+            
+            // Bảo vệ công thức LaTeX (Math formulas)
+            formattedText = formattedText.replace(/\$\$[^$]+\$\$|\$[^$]+\$/g, function(match, offset) {
+                const placeholder = `__PROTECTED_${protectedContent.length}__`;
+                protectedContent.push(match);
+                return placeholder;
+            });
+            
+            // 2. Xử lý assembly code blocks (đoạn mã hoàn chỉnh)
+            if (/đoạn\s+(mã|chương\s+trình)/i.test(formattedText)) {
+                const colonIndex = formattedText.indexOf(':');
+                if (colonIndex !== -1) {
+                    const description = formattedText.substring(0, colonIndex + 1).trim();
+                    const afterColon = formattedText.substring(colonIndex + 1);
+                    
+                    // Tìm phần code assembly
+                    const codeMatch = afterColon.match(/^[^.!?]*?(?=\.|$)/);
+                    if (codeMatch) {
+                        const codeText = codeMatch[0].trim();
+                        const remainingText = afterColon.substring(codeMatch[0].length).trim();
+                        
+                        // Kiểm tra có chứa lệnh assembly không
+                        if (/\b(MOV|JMP|ADD|SUB|MUL|DIV|SETB|CLR|MOVC|PUSH|POP|CALL|RET|DJNZ|CJNE|JZ|JNZ|JC|JNC)\s+/i.test(codeText)) {
+                            let cleanCode = codeText
+                                .replace(/\s*[.!?]\s*$/, '')
+                                .replace(/^\s*[:;,]\s*/, '')
+                                .trim();
+                            
+                            const instructions = cleanCode.split(/[;,]/)
+                                .map(inst => inst.trim())
+                                .filter(inst => inst && /\b(MOV|JMP|ADD|SUB|MUL|DIV|SETB|CLR|MOVC|PUSH|POP|CALL|RET|DJNZ|CJNE|JZ|JNZ|JC|JNC)\s+/i.test(inst));
+                            
+                            if (instructions.length > 0) {
+                                const formattedCode = instructions.join(';\n');
+                                formattedText = `
+                                    <div class="question-with-code">
+                                        <p>${description}</p>
+                                        <div class="code-label">Assembly Code</div>
+                                        <div class="code-block">
+                                            <pre><code class="language-assembler">${formattedCode}</code></pre>
+                                        </div>
+                                        ${remainingText ? `<p>${remainingText}</p>` : ''}
+                                    </div>
+                                `;
+                                // Khôi phục nội dung đã bảo vệ và return
+                                return restoreProtectedContent(formattedText, protectedContent);
+                            }
+                        }
+                    }
+                }
+            }
+            
+            // 3. Highlight assembly instructions riêng lẻ - CHỈ khi chắc chắn là lệnh assembly
+            formattedText = formattedText.replace(
+                /(?:^|[\s\.,;:!?\(\)\[\]])(MOV|JMP|ADD|SUB|MUL|DIV|SETB|CLR|MOVC|PUSH|POP|CALL|RET|DJNZ|CJNE|JZ|JNZ|JC|JNC)\s+([A-Z0-9#@,\+\-\[\]\s]+?)(?=[\s\.,;:!?\(\)\[\]]|$)/gi,
+                function(match, instruction, args, offset) {
+                    // Kiểm tra toàn bộ từ chứa instruction để đảm bảo không phải từ tiếng Việt
+                    const fullText = formattedText;
+                    const matchStart = offset;
+                    const matchEnd = offset + match.length;
+                    
+                    // Lấy context rộng hơn để kiểm tra
+                    const contextBefore = fullText.substring(Math.max(0, matchStart - 20), matchStart);
+                    const contextAfter = fullText.substring(matchEnd, Math.min(fullText.length, matchEnd + 20));
+                    
+                    // Kiểm tra từ hoàn chỉnh chứa instruction
+                    const wordBoundaryBefore = /\s|^|[\.,;:!?\(\)\[\]]/.test(fullText.charAt(matchStart - 1) || ' ');
+                    const wordBoundaryAfter = /\s|$|[\.,;:!?\(\)\[\]]/.test(fullText.charAt(matchEnd) || ' ');
+                    
+                    // Không highlight nếu không có word boundary rõ ràng
+                    if (!wordBoundaryBefore || !wordBoundaryAfter) {
+                        return match;
+                    }
+                    
+                    // Kiểm tra có phải trong từ tiếng Việt không
+                    const vietnamesePattern = /[a-zàáãạảăắằẳẵặâấầẩẫậèéẹẻẽêềếểễệìíĩỉịòóõọỏôốồổỗộơớờởỡợùúũụủưứừửữựỳýỹỵỷđ]/i;
+                    
+                    // Kiểm tra ký tự trước instruction
+                    const charBeforeInstruction = fullText.charAt(matchStart - 1);
+                    if (charBeforeInstruction && vietnamesePattern.test(charBeforeInstruction)) {
+                        return match;
+                    }
+                    
+                    // Kiểm tra trong context có từ tiếng Việt chứa instruction không
+                    const beforeWords = contextBefore.split(/\s+/).filter(w => w.length > 0);
+                    const afterWords = contextAfter.split(/\s+/).filter(w => w.length > 0);
+                    
+                    // Kiểm tra từ cuối trong context trước
+                    if (beforeWords.length > 0) {
+                        const lastWord = beforeWords[beforeWords.length - 1];
+                        if (lastWord.toLowerCase().includes(instruction.toLowerCase()) && vietnamesePattern.test(lastWord)) {
+                            return match;
+                        }
+                    }
+                    
+                    // Kiểm tra từ đầu trong context sau
+                    if (afterWords.length > 0) {
+                        const firstWord = afterWords[0];
+                        if (firstWord.toLowerCase().includes(instruction.toLowerCase()) && vietnamesePattern.test(firstWord)) {
+                            return match;
+                        }
+                    }
+                    
+                    // Kiểm tra args có hợp lệ không
+                    if (!args.trim() || args.trim().length === 0) {
+                        return match;
+                    }
+                    
+                    // Kiểm tra args có format assembly đúng không
+                    const validAssemblyArgs = /^[A-Z0-9#@,\+\-\[\]\s\.]+$/i.test(args.trim());
+                    if (!validAssemblyArgs) {
+                        return match;
+                    }
+                    
+                    // Tách start character nếu có
+                    const startChar = match.charAt(0);
+                    const instructionPart = `${instruction} ${args.trim()}`;
+                    
+                    // Chỉ highlight nếu tất cả điều kiện đều thỏa mãn
+                    if (!/[a-zA-Z]/.test(startChar) || /[\s\.,;:!?\(\)\[\]]/.test(startChar)) {
+                        return `${startChar === instruction.charAt(0) ? '' : startChar}<code class="language-assembler inline-code-bright">${instructionPart}</code>`;
+                    }
+                    
+                    return match;
+                }
+            );
+            
+            // 4. Highlight các thuật ngữ kỹ thuật - CHỈ khi là từ riêng biệt và không phải tiếng Việt
+            formattedText = formattedText.replace(
+                /\b(ROM|RAM|EEPROM|UART|SPI|I2C|PWM|ADC|DAC|CPU|ALU|PC|SP|DPTR|ACC|PSW|IE|IP|TCON|TMOD|SCON|SBUF|TH0|TL0|TH1|TL1)\b/g,
+                function(match, p1, offset) {
+                    // Kiểm tra context để tránh highlight sai
+                    const beforeChar = offset > 0 ? formattedText[offset - 1] : ' ';
+                    const afterChar = offset + match.length < formattedText.length ? formattedText[offset + match.length] : ' ';
+                    
+                    // Không highlight nếu nằm trong từ tiếng Việt
+                    if (/[a-zàáãạảăắằẳẵặâấầẩẫậèéẹẻẽêềếểễệìíĩỉịòóõọỏôốồổỗộơớờởỡợùúũụủưứừửữựỳýỹỵỷđ]/i.test(beforeChar) ||
+                        /[a-zàáãạảăắằẳẵặâấầẩẫậèéẹẻẽêềếểễệìíĩỉịòóõọỏôốồổỗộơớờởỡợùúũụủưứừửữựỳýỹỵỷđ]/i.test(afterChar)) {
+                        return match;
+                    }
+                    
+                    return `<span class="tech-term">${match}</span>`;
+                }
+            );
+            
+            // 5. Highlight các số hex và binary - an toàn hơn với pattern chính xác
+            formattedText = formattedText.replace(
+                /\b(0x[0-9A-Fa-f]{1,8}|[0-9A-Fa-f]{1,4}[Hh]|[01]{4,16}[Bb])\b/g,
+                '<span class="number-highlight">$1</span>'
+            );
+            
+            // 6. Highlight biến công thức - CHỈ khi không trong context toán học
+            formattedText = formattedText.replace(
+                /\b(T_machine|f_osc|T_cycle|N_instructions)\b/g,
+                function(match, p1, offset) {
+                    // Kiểm tra có trong công thức toán học không
+                    const context = formattedText.substring(Math.max(0, offset - 30), Math.min(formattedText.length, offset + match.length + 30));
+                    
+                    // Không highlight nếu có dấu toán học xung quanh hoặc trong protected content
+                    if (/[=+\-*/]/.test(context) || /__PROTECTED_\d+__/.test(context)) {
+                        return match;
+                    }
+                    
+                    return `<span class="formula-var">${match}</span>`;
+                }
+            );
+            
+            // 7. Khôi phục nội dung đã bảo vệ
+            return restoreProtectedContent(formattedText, protectedContent);
+        }
+        
+        // Hàm khôi phục nội dung đã bảo vệ
+        function restoreProtectedContent(text, protectedContent) {
+            protectedContent.forEach((replacement, index) => {
+                text = text.replace(`__PROTECTED_${index}__`, replacement);
+            });
+            return text;
+        }
+
+        function runHighlightingTest() {
+            const tests = [
+                { id: 'test1', name: 'Từ "chỉ" KHÔNG nên highlight "CH"', expected: 'NO false highlights' },
+                { id: 'test2', name: 'Từ "machine" KHÔNG nên highlight "MAC"', expected: 'NO false highlights' },
+                { id: 'test3', name: 'Assembly instructions hợp lệ PHẢI highlight', expected: 'Should highlight MOV, ADD, JMP' },
+                { id: 'test4', name: 'Từ tiếng Việt chứa assembly letters', expected: 'NO highlights in Vietnamese words' },
+                { id: 'test5', name: 'Mixed content', expected: 'Only real assembly instructions highlighted' }
+            ];
+
+            let results = '<h2>Kết quả Test False Positive:</h2>';
+
+            tests.forEach(test => {
+                const element = document.getElementById(test.id);
+                const originalHTML = element.innerHTML;
+                
+                // Apply formatting to each paragraph
+                const paragraphs = element.querySelectorAll('p');
+                paragraphs.forEach(p => {
+                    const originalText = p.textContent;
+                    const formattedText = formatCodeInText(originalText);
+                    p.innerHTML = formattedText;
+                });
+
+                // Count highlights
+                const highlightedElements = element.querySelectorAll('code.inline-code-bright, .tech-term, .number-highlight');
+                const highlightCount = highlightedElements.length;
+
+                results += `
+                    <div style="margin: 15px 0; padding: 15px; border: 1px solid #ddd; border-radius: 8px; background: #f8f9fa;">
+                        <h3 style="color: #007bff; margin: 0 0 10px 0;">${test.name}</h3>
+                        <p><strong>Expected:</strong> ${test.expected}</p>
+                        <p><strong>Highlights found:</strong> ${highlightCount}</p>
+                        <div style="background: white; padding: 15px; border-radius: 5px; border: 1px solid #eee;">
+                            ${element.innerHTML}
+                        </div>
+                        <details style="margin-top: 10px;">
+                            <summary style="cursor: pointer; color: #6c757d;">Show highlighted elements</summary>
+                            <pre style="background: #f8f9fa; padding: 10px; margin: 5px 0; border-radius: 4px; font-size: 12px;">${Array.from(highlightedElements).map(el => el.outerHTML).join('\\n')}</pre>
+                        </details>
+                    </div>
+                `;
+            });
+
+            document.getElementById('results').innerHTML = results;
+
+            // Render code highlighting với Prism.js
+            if (window.Prism) {
+                Prism.highlightAll();
+            }
+
+            // Render lại các công thức toán học với MathJax
+            if (window.MathJax) {
+                MathJax.typesetPromise().catch(function (err) {
+                    console.log('MathJax error: ' + err.message);
+                });
+            }
+        }
+
+        // Auto run tests when page loads
+        window.addEventListener('load', function() {
+            setTimeout(runHighlightingTest, 1000);
+        });
+    </script>
+</body>
+</html>

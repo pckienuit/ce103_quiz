@@ -50,16 +50,29 @@ document.addEventListener('DOMContentLoaded', () => {
                     }
                 }
             }
-            // 3. Highlight assembly instructions không trong backticks
+            // 3. Highlight assembly instructions - CHỈ khi nó là lệnh hoàn chỉnh
             else {
+                // Chỉ highlight lệnh assembly hoàn chỉnh với đối số
                 formattedText = formattedText.replace(
-                    /\b(MOV|JMP|ADD|SUB|MUL|DIV|SETB|CLR|MOVC|PUSH|POP|CALL|RET|DJNZ|CJNE|JZ|JNZ|JC|JNC)\s+[^.,;`]*[;]?/gi,
-                    '<code class="language-assembler inline-code-bright">$&</code>'
+                    /\b(MOV|JMP|ADD|SUB|MUL|DIV|SETB|CLR|MOVC|PUSH|POP|CALL|RET|DJNZ|CJNE|JZ|JNZ|JC|JNC)\s+[A-Z0-9#@,\s\+\-\[\]]+(?=[\s.,;]|$)/gi,
+                    function(match, instruction) {
+                        // Kiểm tra xem có phải trong context tiếng Việt không
+                        const beforeMatch = formattedText.substring(0, formattedText.indexOf(match));
+                        const afterMatch = formattedText.substring(formattedText.indexOf(match) + match.length);
+                        
+                        // Nếu trước hoặc sau là chữ tiếng Việt thì không highlight
+                        if (/[a-zàáãạảăắằẳẵặâấầẩẫậèéẹẻẽêềếểễệìíĩỉịòóõọỏôốồổỗộơớờởỡợùúũụủưứừửữựỳýỹỵỷđ]$/i.test(beforeMatch) ||
+                            /^[a-zàáãạảăắằẳẵặâấầẩẫậèéẹẻẽêềếểễệìíĩỉịòóõọỏôốồổỗộơớờởỡợùúũụủưứừửữựỳýỹỵỷđ]/i.test(afterMatch)) {
+                            return match;
+                        }
+                        
+                        return `<code class="language-assembler inline-code-bright">${match}</code>`;
+                    }
                 );
             }
         }
         
-        // 4. Highlight các thuật ngữ kỹ thuật và tên thanh ghi
+        // 4. Highlight các thuật ngữ kỹ thuật - CHỈ khi là từ riêng biệt
         formattedText = formattedText.replace(
             /\b(ROM|RAM|EEPROM|UART|SPI|I2C|PWM|ADC|DAC|CPU|ALU|PC|SP|DPTR|ACC|PSW|IE|IP|TCON|TMOD|SCON|SBUF|TH0|TL0|TH1|TL1)\b/g,
             '<span class="tech-term">$&</span>'
@@ -71,10 +84,18 @@ document.addEventListener('DOMContentLoaded', () => {
             '<span class="number-highlight">$&</span>'
         );
         
-        // 6. Highlight các công thức và biến
+        // 6. KHÔNG highlight công thức toán học nếu chúng là công thức thực sự
+        // Chỉ highlight khi không có ký tự toán học xung quanh
         formattedText = formattedText.replace(
-            /\b(T_machine|f_osc|T_cycle|N_instructions)\b/g,
-            '<span class="formula-var">$&</span>'
+            /\b(T_machine|f_osc|T_cycle|N_instructions)(?!\s*[=+\-*/])/g,
+            function(match) {
+                // Kiểm tra xem có phải trong công thức toán học không
+                const context = formattedText.substring(Math.max(0, formattedText.indexOf(match) - 20), formattedText.indexOf(match) + match.length + 20);
+                if (/[=+\-*/]/.test(context)) {
+                    return match; // Không highlight nếu là công thức
+                }
+                return `<span class="formula-var">${match}</span>`;
+            }
         );
         
         return formattedText;
