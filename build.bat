@@ -4,9 +4,9 @@ REM Usage: build.bat [command]
 
 if "%1"=="" (
     echo Usage: build.bat [command]
-    echo.
-    echo Available commands:
+    echo.    echo Available commands:
     echo   test      - Run all tests
+    echo   ai        - Test Gemini AI integration
     echo   quiz      - Open quiz in browser
     echo   cards     - Open flashcards in browser
     echo   validate  - Validate data files
@@ -20,7 +20,22 @@ if "%1"=="test" (
     start http://localhost/ce103_quiz/test_improved_highlighting.html
     timeout /t 2 >nul
     start http://localhost/ce103_quiz/test_false_positive.html
-    echo Tests opened in browser tabs
+    timeout /t 2 >nul
+    start http://localhost/ce103_quiz/test_preprocessing_system.html
+    timeout /t 2 >nul
+    start http://localhost/ce103_quiz/test_complete_system.html
+    echo All tests opened in browser tabs
+    goto :eof
+)
+
+if "%1"=="ai" (
+    echo Testing enhanced AI system...
+    start http://localhost/ce103_quiz/test_preprocessing_system.html
+    timeout /t 2 >nul
+    start http://localhost/ce103_quiz/test_sample_enhanced.html
+    timeout /t 2 >nul
+    start http://localhost/ce103_quiz/test_complete_system.html
+    echo Enhanced AI tests opened in browser
     goto :eof
 )
 
@@ -53,26 +68,46 @@ if "%1"=="serve" (
     goto :eof
 )
 
+if "%1"=="preprocess" (
+    echo Running Gemini AI preprocessing...
+    python preprocess_with_gemini.py
+    goto :eof
+)
+
+if "%1"=="monitor" (
+    echo Starting preprocessing monitor...
+    monitor_preprocessing.bat
+    goto :eof
+)
+
 if "%1"=="help" (
-    echo CE103 Quiz - Bright Theme Code Highlighting
-    echo ==========================================
+    echo CE103 Quiz - Enhanced AI System
+    echo ==============================
     echo.
     echo This project includes:
-    echo - 230 quiz questions with smart highlighting
+    echo - 230 quiz questions with AI-enhanced highlighting
     echo - 60 specialized flashcards
+    echo - Pre-processing approach with Gemini AI
     echo - Mathematical formula support with MathJax
     echo - Assembly code syntax highlighting
-    echo - False positive prevention for Vietnamese text
+    echo - Instant highlighting with offline capability
     echo.
     echo Files:
-    echo - quiz.html           : Main quiz application
-    echo - flashcards.html     : Flashcards study tool
-    echo - css/quiz_bright.css : Bright theme stylesheet
-    echo - js/quiz_improved.js : Enhanced quiz logic
+    echo - quiz.html                    : Main quiz application
+    echo - flashcards.html             : Flashcards study tool
+    echo - css/quiz_bright.css         : Bright theme stylesheet
+    echo - js/enhanced_highlighter.js  : Enhanced highlighting system
+    echo - preprocess_with_gemini.py   : AI preprocessing script
     echo.
-    echo Test files:
-    echo - test_improved_highlighting.html : General highlighting tests
-    echo - test_false_positive.html       : False positive prevention tests
+    echo Commands:
+    echo - test       : Run all tests
+    echo - ai         : Test enhanced AI system
+    echo - quiz       : Open quiz application
+    echo - cards      : Open flashcards application
+    echo - preprocess : Run Gemini AI preprocessing
+    echo - monitor    : Monitor preprocessing status
+    echo - validate   : Validate data files
+    echo - serve      : Start local server
     echo.
     goto :eof
 )

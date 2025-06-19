@@ -17,6 +17,16 @@ Interactive quiz and flashcards application for CE103 (Computer Engineering) cou
 - **Responsive design** tối ưu cho mobile
 - **Professional color scheme** phù hợp academic environment
 
+### 🤖 **Enhanced AI System**
+- **Pre-processing approach** với Gemini 2.5 Flash Preview
+- **Instant highlighting** - no real-time API calls during quiz
+- **Enhanced JSON data** với pre-analyzed content
+- **Intelligent highlighting** thay thế string-based detection  
+- **Context-aware processing** - hiểu ngữ cảnh Vietnamese + Technical
+- **Fallback system** - automatic fallback to regex highlighting
+- **Better performance** - no waiting for AI analysis
+- **Offline capability** - works without internet connection
+
 ### 🧠 **Smart Code Highlighting**
 - **Assembly syntax highlighting** với Prism.js
 - **False positive prevention** - không highlight sai từ tiếng Việt
@@ -80,6 +90,7 @@ ce103_quiz/
 │
 ├── 📂 api/
 │   ├── 📄 get_questions.php         # Quiz questions API
+│   ├── 📄 gemini_analyzer.php       # Gemini AI analysis API
 │   ├── 📄 questions.json            # 230 quiz questions
 │   └── 📄 flashcards.json           # 60 flashcards data
 │
@@ -90,8 +101,9 @@ ce103_quiz/
 │   └── 📄 style.css                 # Base styles
 │
 ├── 📂 js/
-│   ├── 📄 quiz_improved.js          # Enhanced quiz logic
-│   ├── 📄 flashcards_improved.js    # Enhanced flashcards logic
+│   ├── 📄 quiz_improved.js          # Enhanced quiz logic with AI
+│   ├── 📄 flashcards_improved.js    # Enhanced flashcards logic with AI
+│   ├── 📄 gemini_highlighter.js     # Gemini AI integration module
 │   ├── 📄 quiz.js                   # Original quiz script
 │   └── 📄 flashcards.js             # Original flashcards script
 │
@@ -290,3 +302,60 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ---
 
 **Made with ❤️ for CE103 Students**
+
+## 🤖 Gemini AI Integration
+
+### Features
+- **Intelligent Text Analysis**: AI-powered content analysis thay thế regex-based highlighting
+- **Context Understanding**: Hiểu được sự khác biệt giữa technical terms và Vietnamese words
+- **Fallback System**: Automatic fallback về highlighting cũ nếu API không available
+- **Performance Optimization**: Caching system để giảm API calls
+- **Real-time Status**: Visual indicators cho AI processing status
+
+### Configuration
+
+1. **API Key Setup**: Gemini API key đã được configure trong `api/gemini_analyzer.php`
+2. **Model Selection**: Sử dụng `gemini-2.5-flash-preview-05-20` cho optimal performance
+3. **Caching**: 100-item cache với FIFO replacement policy
+4. **Error Handling**: Graceful degradation khi AI service unavailable
+
+### Testing
+
+Sử dụng test page để verify AI integration:
+```bash
+# Open Gemini AI test page
+http://localhost/ce103_quiz/test_gemini_ai.html
+```
+
+### API Status Indicators
+
+- 🤖 **AI Ready**: Enhanced AI system hoạt động bình thường
+- 📝 **Basic highlighting**: Fallback regex mode đang active
+- ⚠️ **Enhanced data unavailable**: Enhanced JSON files chưa được generate
+- ✅ **Enhanced content**: AI-processed content đang được sử dụng
+
+## 🔄 Pre-processing System
+
+### Generate Enhanced Data
+
+```bash
+# Run Gemini AI preprocessing
+cd c:\xampp\htdocs\ce103_quiz
+python preprocess_with_gemini.py
+```
+
+### Enhanced Files Generated
+- `api/questions_enhanced.json` - 230 questions with AI analysis
+- `api/flashcards_enhanced.json` - 60 flashcards with AI analysis
+
+### Migration Guide
+See [PREPROCESSING_MIGRATION.md](PREPROCESSING_MIGRATION.md) for detailed migration information.
+
+### Testing Enhanced System
+```bash
+# Test enhanced system status
+http://localhost/ce103_quiz/test_preprocessing_system.html
+
+# Test with sample enhanced data
+http://localhost/ce103_quiz/test_sample_enhanced.html
+```

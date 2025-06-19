@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Gemini AI Integration - CE103 Quiz</title>
+    <link rel="stylesheet" href="css/quiz_bright.css">
+    <!-- Prism.js for code highlighting -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+    <!-- MathJax for mathematical formulas -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            }
+        };
+    </script>
+</head>
+<body>
+    <div class="quiz-container">
+        <h1>🤖 Test Gemini AI Integration</h1>
+        <div id="ai-status" class="ai-status">Initializing...</div>
+        
+        <div style="margin: 20px 0; padding: 20px; background: #f8f9fa; border-radius: 8px;">
+            <h3>Test Text Analysis</h3>
+            <textarea id="input-text" style="width: 100%; height: 100px; margin-bottom: 10px;" placeholder="Nhập text cần phân tích...">Lệnh MOV A, #20H được sử dụng để nạp giá trị 20H vào thanh ghi ACC. Sau đó lệnh ADD A, R0 sẽ cộng giá trị trong R0 với ACC.</textarea>
+            <button onclick="testGeminiAnalysis()" style="padding: 10px 20px; background: #007bff; color: white; border: none; border-radius: 4px; cursor: pointer;">Analyze with Gemini AI</button>
+        </div>
+
+        <div style="margin: 20px 0;">
+            <h3>Analysis Results</h3>
+            <div id="original-result" style="margin-bottom: 20px;">
+                <h4>Original Text:</h4>
+                <div id="original-text" style="padding: 15px; background: #e9ecef; border-radius: 4px; min-height: 50px;"></div>
+            </div>
+            
+            <div id="gemini-result">
+                <h4>Gemini AI Analysis:</h4>
+                <div id="gemini-text" style="padding: 15px; background: #d4edda; border-radius: 4px; min-height: 50px;"></div>
+            </div>
+        </div>
+
+        <div style="margin: 20px 0;">
+            <h3>API Status</h3>
+            <div id="api-info" style="padding: 15px; background: #fff3cd; border-radius: 4px;">
+                <div id="model-info">Model: Not tested</div>
+                <div id="response-time">Response Time: -</div>
+                <div id="cache-stats">Cache Stats: -</div>
+            </div>
+        </div>
+
+        <div style="margin: 20px 0;">
+            <h3>Sample Test Cases</h3>
+            <button onclick="testCase1()" style="margin: 5px; padding: 8px 16px; background: #28a745; color: white; border: none; border-radius: 4px; cursor: pointer;">Assembly Code</button>
+            <button onclick="testCase2()" style="margin: 5px; padding: 8px 16px; background: #28a745; color: white; border: none; border-radius: 4px; cursor: pointer;">Vietnamese + Tech Terms</button>
+            <button onclick="testCase3()" style="margin: 5px; padding: 8px 16px; background: #28a745; color: white; border: none; border-radius: 4px; cursor: pointer;">Math Formula</button>
+            <button onclick="testCase4()" style="margin: 5px; padding: 8px 16px; background: #28a745; color: white; border: none; border-radius: 4px; cursor: pointer;">Mixed Content</button>
+        </div>
+
+        <a href="index.html" style="display: inline-block; margin-top: 20px; padding: 10px 20px; background: #6c757d; color: white; text-decoration: none; border-radius: 4px;">Về trang chủ</a>
+    </div>
+
+    <script src="js/gemini_highlighter.js"></script>
+    <script>
+        let startTime;
+
+        function updateStatus(message, type = 'active') {
+            const statusEl = document.getElementById('ai-status');
+            statusEl.textContent = message;
+            statusEl.className = `ai-status ${type}`;
+        }
+
+        async function testGeminiAnalysis() {
+            const inputText = document.getElementById('input-text').value;
+            if (!inputText.trim()) {
+                alert('Vui lòng nhập text để test!');
+                return;
+            }
+
+            // Show original text
+            document.getElementById('original-text').textContent = inputText;
+
+            // Update status
+            updateStatus('Analyzing with Gemini AI...', 'active');
+            startTime = Date.now();
+
+            try {
+                // Test Gemini analysis
+                const result = await geminiHighlighter.analyzeText(inputText);
+                
+                // Show results
+                document.getElementById('gemini-text').innerHTML = result;
+                
+                // Update status and info
+                const responseTime = Date.now() - startTime;
+                updateStatus('Analysis Complete!', 'active');
+                
+                document.getElementById('model-info').textContent = 'Model: gemini-2.5-flash-preview-05-20';
+                document.getElementById('response-time').textContent = `Response Time: ${responseTime}ms`;
+                
+                // Get cache stats
+                const cacheStats = geminiHighlighter.getCacheStats();
+                document.getElementById('cache-stats').textContent = `Cache: ${cacheStats.size}/${cacheStats.maxSize} items`;
+
+                // Render with Prism and MathJax
+                if (window.Prism) {
+                    Prism.highlightAllUnder(document.getElementById('gemini-text'));
+                }
+                if (window.MathJax) {
+                    MathJax.typesetPromise([document.getElementById('gemini-text')]);
+                }
+
+            } catch (error) {
+                console.error('Gemini analysis failed:', error);
+                document.getElementById('gemini-text').innerHTML = `<span style="color: red;">Error: ${error.message}</span>`;
+                updateStatus('Analysis Failed', 'error');
+            }
+        }
+
+        function testCase1() {
+            document.getElementById('input-text').value = 'Lệnh MOV A, #20H nạp giá trị 20H vào thanh ghi ACC. Sau đó ADD A, R0 cộng với thanh ghi R0.';
+            testGeminiAnalysis();
+        }
+
+        function testCase2() {
+            document.getElementById('input-text').value = 'Vi điều khiển 8051 có bộ nhớ ROM và RAM. Chỉ thị MOV không làm thay đổi cờ trong PSW.';
+            testGeminiAnalysis();
+        }
+
+        function testCase3() {
+            document.getElementById('input-text').value = 'Công thức tính toán: $f(x) = ax^2 + bx + c$ và $$\\sum_{i=1}^{n} x_i = x_1 + x_2 + ... + x_n$$';
+            testGeminiAnalysis();
+        }
+
+        function testCase4() {
+            document.getElementById('input-text').value = 'Vi điều khiển `8051` có thanh ghi ACC với địa chỉ 0xE0. Lệnh SETB P1.0 thiết lập bit 0 của PORT1.';
+            testGeminiAnalysis();
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            setTimeout(() => {
+                if (window.geminiHighlighter) {
+                    updateStatus('Gemini AI Ready', 'active');
+                } else {
+                    updateStatus('Gemini AI Not Available', 'error');
+                }
+            }, 1000);
+        });
+    </script>
+</body>
+</html>

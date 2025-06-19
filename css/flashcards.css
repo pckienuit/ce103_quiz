@@ -255,3 +255,46 @@ mjx-container {
 .token.number { color: #e53e3e !important; font-weight: bold; }
 .token.string { color: #3182ce !important; }
 .token.comment { color: #718096 !important; }
+/* Loading indicator for Gemini AI processing in flashcards */
+.loading-text {
+    color: #6c757d;
+    font-style: italic;
+    text-align: center;
+    padding: 20px;
+    background: linear-gradient(90deg, #e9ecef 25%, transparent 25%, transparent 50%, #e9ecef 50%, #e9ecef 75%, transparent 75%, transparent);
+    background-size: 20px 20px;
+    animation: loading-stripes 1s linear infinite;
+    border-radius: 4px;
+    border: 1px solid #dee2e6;
+}
+
+@keyframes loading-stripes {
+    0% { background-position: 0 0; }
+    100% { background-position: 20px 0; }
+}
+
+/* Gemini AI status indicator for flashcards */
+.ai-status {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    padding: 5px 10px;
+    border-radius: 15px;
+    font-size: 0.8em;
+    z-index: 1000;
+}
+
+.ai-status.active {
+    background-color: #28a745;
+    color: white;
+}
+
+.ai-status.fallback {
+    background-color: #ffc107;
+    color: #212529;
+}
+
+.ai-status.error {
+    background-color: #dc3545;
+    color: white;
+}

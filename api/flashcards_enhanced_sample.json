@@ -1,0 +1,42 @@
+[
+  {
+    "id": 1,
+    "term": "CPU",
+    "definition": "Central Processing Unit - bộ xử lý trung tâm của vi điều khiển, thực hiện các lệnh và điều khiển hoạt động của hệ thống.",
+    "topic": "Kiến trúc vi điều khiển",
+    "ai_analysis": {
+      "term": {
+        "original_text": "CPU",
+        "highlighted_spans": [
+          {
+            "text": "CPU",
+            "type": "technical",
+            "start": 0,
+            "end": 3,
+            "confidence": 0.98
+          }
+        ],
+        "has_math": false,
+        "has_code": false,
+        "language_mix": "pure_technical"
+      },
+      "definition": {
+        "original_text": "Central Processing Unit - bộ xử lý trung tâm của vi điều khiển, thực hiện các lệnh và điều khiển hoạt động của hệ thống.",
+        "highlighted_spans": [
+          {
+            "text": "Central Processing Unit",
+            "type": "technical",
+            "start": 0,
+            "end": 23,
+            "confidence": 0.95
+          }
+        ],
+        "has_math": false,
+        "has_code": false,
+        "language_mix": "vietnamese_technical"
+      },
+      "processed_at": 1718808000,
+      "model_used": "gemini-2.5-flash-preview-05-20"
+    }
+  }
+]

@@ -4,14 +4,16 @@
     "version": "2.0.0",
     "description": "Interactive quiz and flashcards with smart code highlighting",
     "author": "CE103 Development Team"
-  },
-  "features": {
+  },  "features": {
     "brightTheme": true,
     "mathJaxSupport": true,
     "assemblyHighlighting": true,
     "falsePositivePrevention": true,
     "vietnameseTextSupport": true,
-    "responsiveDesign": true
+    "responsiveDesign": true,
+    "geminiAIIntegration": true,
+    "intelligentHighlighting": true,
+    "cachingSystem": true
   },
   "quiz": {
     "totalQuestions": 230,
@@ -94,5 +96,29 @@
     "mathFormulaTests": true,
     "responsiveTests": true,
     "performanceTests": true
+  },
+  "geminiAI": {
+    "enabled": true,
+    "model": "gemini-2.5-flash-preview-05-20",
+    "apiEndpoint": "api/gemini_analyzer.php",
+    "features": {
+      "contextAwareAnalysis": true,
+      "vietnameseSupport": true,
+      "technicalTermRecognition": true,
+      "assemblyCodeDetection": true,
+      "mathematicalFormulaProtection": true
+    },
+    "performance": {
+      "cacheSize": 100,
+      "cachePolicy": "FIFO",
+      "fallbackSystem": true,
+      "errorRecovery": true
+    },
+    "configuration": {
+      "temperature": 0.1,
+      "topK": 1,
+      "topP": 0.8,
+      "maxOutputTokens": 2048
+    }
   }
 }

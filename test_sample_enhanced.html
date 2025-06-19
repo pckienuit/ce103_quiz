@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Test Enhanced System with Sample Data</title>
+    <link rel="stylesheet" href="css/quiz_bright.css">
+    <!-- Prism.js for code highlighting -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+</head>
+<body>
+    <div class="quiz-container">
+        <h1>🧪 Test Enhanced System with Sample Data</h1>
+        
+        <div id="ai-status" class="ai-status">🔄 Loading...</div>
+        
+        <div style="margin: 20px 0;">
+            <button onclick="testSampleData()" style="padding: 10px 20px; background: #007bff; color: white; border: none; border-radius: 4px; cursor: pointer;">
+                🧪 Test Sample Enhanced Data
+            </button>
+        </div>
+        
+        <div id="question-display" style="margin: 20px 0; padding: 20px; border: 1px solid #ddd; border-radius: 8px; display: none;">
+            <h3>Enhanced Question Display:</h3>
+            <div id="question-text" style="margin: 10px 0; font-weight: bold;"></div>
+            <div id="options-container" style="margin: 10px 0;"></div>
+            <div id="explanation-text" style="margin: 10px 0; padding: 10px; background: #f8f9fa; border-radius: 4px;"></div>
+        </div>
+        
+        <div id="flashcard-display" style="margin: 20px 0; padding: 20px; border: 1px solid #ddd; border-radius: 8px; display: none;">
+            <h3>Enhanced Flashcard Display:</h3>
+            <div id="flashcard-term" style="margin: 10px 0; font-weight: bold; font-size: 1.2em;"></div>
+            <div id="flashcard-definition" style="margin: 10px 0; padding: 10px; background: #f8f9fa; border-radius: 4px;"></div>
+        </div>
+        
+        <div id="result" style="margin: 20px 0; padding: 15px; background: #f8f9fa; border-radius: 8px;">
+            <strong>Click the test button to see enhanced highlighting in action...</strong>
+        </div>
+        
+        <div style="margin: 20px 0;">
+            <a href="test_preprocessing_system.html" style="padding: 10px 20px; background: #6c757d; color: white; text-decoration: none; border-radius: 4px; margin-right: 10px;">Back to System Test</a>
+            <a href="quiz.html" style="padding: 10px 20px; background: #28a745; color: white; text-decoration: none; border-radius: 4px; margin-right: 10px;">Go to Quiz</a>
+            <a href="flashcards.html" style="padding: 10px 20px; background: #ffc107; color: white; text-decoration: none; border-radius: 4px;">Go to Flashcards</a>
+        </div>
+    </div>
+
+    <script>
+        // Enhanced Highlighter Class (inline for testing)
+        class EnhancedHighlighter {
+            constructor() {
+                this.enhancedQuestions = null;
+                this.enhancedFlashcards = null;
+                this.loaded = false;
+            }
+
+            async loadSampleData() {
+                try {
+                    // Load sample enhanced questions
+                    const questionsResponse = await fetch('api/questions_enhanced_sample.json');
+                    if (questionsResponse.ok) {
+                        this.enhancedQuestions = await questionsResponse.json();
+                        console.log('✅ Sample enhanced questions loaded');
+                    }
+
+                    // Load sample enhanced flashcards
+                    const flashcardsResponse = await fetch('api/flashcards_enhanced_sample.json');
+                    if (flashcardsResponse.ok) {
+                        this.enhancedFlashcards = await flashcardsResponse.json();
+                        console.log('✅ Sample enhanced flashcards loaded');
+                    }
+
+                    this.loaded = true;
+                    return true;
+                } catch (error) {
+                    console.error('❌ Failed to load sample data:', error);
+                    return false;
+                }
+            }
+
+            applyHighlighting(text, analysis) {
+                if (!analysis || !analysis.highlighted_spans) {
+                    return text;
+                }
+
+                // Sort spans by start position (reverse order for proper replacement)
+                const spans = [...analysis.highlighted_spans].sort((a, b) => b.start - a.start);
+                
+                let highlightedText = text;
+
+                for (const span of spans) {
+                    const before = highlightedText.substring(0, span.start);
+                    const spanText = highlightedText.substring(span.start, span.end);
+                    const after = highlightedText.substring(span.end);
+
+                    let cssClass = '';
+                    switch (span.type) {
+                        case 'assembly':
+                            cssClass = 'inline-code-bright';
+                            break;
+                        case 'technical':
+                            cssClass = 'tech-term';
+                            break;
+                        case 'number':
+                            cssClass = 'number-highlight';
+                            break;
+                        case 'formula':
+                            cssClass = 'formula-var';
+                            break;
+                        default:
+                            cssClass = 'inline-code-bright';
+                    }
+
+                    const highlightedSpan = `<span class="${cssClass}">${spanText}</span>`;
+                    highlightedText = before + highlightedSpan + after;
+                }
+
+                return highlightedText;
+            }
+
+            getEnhancedQuestion(index) {
+                if (!this.enhancedQuestions || index >= this.enhancedQuestions.length) {
+                    throw new Error('Question not found');
+                }
+
+                const question = this.enhancedQuestions[index];
+                
+                // Apply highlighting to question text
+                const highlightedQuestion = this.applyHighlighting(
+                    question.question, 
+                    question.ai_analysis.question
+                );
+
+                // Apply highlighting to options
+                const highlightedOptions = {};
+                for (const [key, optionText] of Object.entries(question.options)) {
+                    highlightedOptions[key] = this.applyHighlighting(
+                        optionText,
+                        question.ai_analysis.options[key]
+                    );
+                }
+
+                // Apply highlighting to explanation
+                const highlightedExplanation = this.applyHighlighting(
+                    question.explanation,
+                    question.ai_analysis.explanation
+                );
+
+                return {
+                    ...question,
+                    question: highlightedQuestion,
+                    options: highlightedOptions,
+                    explanation: highlightedExplanation,
+                    metadata: {
+                        hasAI: true,
+                        hasMath: question.ai_analysis.question.has_math,
+                        hasCode: question.ai_analysis.question.has_code,
+                        languageMix: question.ai_analysis.question.language_mix,
+                        processedAt: question.ai_analysis.processed_at,
+                        modelUsed: question.ai_analysis.model_used
+                    }
+                };
+            }
+
+            getEnhancedFlashcard(index) {
+                if (!this.enhancedFlashcards || index >= this.enhancedFlashcards.length) {
+                    throw new Error('Flashcard not found');
+                }
+
+                const card = this.enhancedFlashcards[index];
+                
+                // Apply highlighting to term
+                const highlightedTerm = this.applyHighlighting(
+                    card.term, 
+                    card.ai_analysis.term
+                );
+
+                // Apply highlighting to definition
+                const highlightedDefinition = this.applyHighlighting(
+                    card.definition,
+                    card.ai_analysis.definition
+                );
+
+                return {
+                    ...card,
+                    term: highlightedTerm,
+                    definition: highlightedDefinition,
+                    metadata: {
+                        hasAI: true,
+                        processedAt: card.ai_analysis.processed_at,
+                        modelUsed: card.ai_analysis.model_used
+                    }
+                };
+            }
+        }
+
+        // Global instance
+        window.enhancedHighlighter = new EnhancedHighlighter();
+
+        function updateStatus(message, type = 'active') {
+            const statusEl = document.getElementById('ai-status');
+            if (statusEl) {
+                statusEl.textContent = message;
+                statusEl.className = `ai-status ${type}`;
+            }
+        }
+
+        async function testSampleData() {
+            updateStatus('🔄 Loading sample enhanced data...', 'active');
+            const resultDiv = document.getElementById('result');
+            
+            try {
+                const loaded = await window.enhancedHighlighter.loadSampleData();
+                
+                if (!loaded) {
+                    throw new Error('Failed to load sample data');
+                }
+
+                // Test enhanced question
+                const enhancedQuestion = window.enhancedHighlighter.getEnhancedQuestion(0);
+                
+                // Display enhanced question
+                document.getElementById('question-text').innerHTML = enhancedQuestion.question;
+                
+                const optionsContainer = document.getElementById('options-container');
+                optionsContainer.innerHTML = '';
+                for (const [key, optionText] of Object.entries(enhancedQuestion.options)) {
+                    const optionDiv = document.createElement('div');
+                    optionDiv.innerHTML = `<strong>${key}.</strong> ${optionText}`;
+                    optionDiv.style.margin = '5px 0';
+                    optionsContainer.appendChild(optionDiv);
+                }
+                
+                document.getElementById('explanation-text').innerHTML = enhancedQuestion.explanation;
+                document.getElementById('question-display').style.display = 'block';
+
+                // Test enhanced flashcard
+                const enhancedFlashcard = window.enhancedHighlighter.getEnhancedFlashcard(0);
+                
+                document.getElementById('flashcard-term').innerHTML = enhancedFlashcard.term;
+                document.getElementById('flashcard-definition').innerHTML = enhancedFlashcard.definition;
+                document.getElementById('flashcard-display').style.display = 'block';
+
+                updateStatus('✅ Enhanced sample data working perfectly!', 'active');
+                resultDiv.innerHTML = `
+                    <h4>✅ Enhanced Sample Data Test Successful!</h4>
+                    <p>✓ Sample enhanced questions loaded and displayed</p>
+                    <p>✓ Sample enhanced flashcards loaded and displayed</p>
+                    <p>✓ AI highlighting applied successfully</p>
+                    <p>✓ Technical terms, numbers, and other elements highlighted</p>
+                    <p><strong>Model used:</strong> ${enhancedQuestion.metadata.modelUsed}</p>
+                    <p><strong>Language mix:</strong> ${enhancedQuestion.metadata.languageMix}</p>
+                    <p><em>The system is ready for the full enhanced dataset!</em></p>
+                `;
+                
+            } catch (error) {
+                updateStatus('❌ Test failed', 'error');
+                resultDiv.innerHTML = `
+                    <h4>❌ Sample Data Test Failed</h4>
+                    <p><strong>Error:</strong> ${error.message}</p>
+                    <p>Please check if the sample JSON files exist and are properly formatted.</p>
+                `;
+            }
+        }
+
+        // Auto-initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            updateStatus('🚀 Sample test system ready', 'active');
+        });
+    </script>
+</body>
+</html>

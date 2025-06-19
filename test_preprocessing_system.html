@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Test Enhanced Highlighting System</title>
+    <link rel="stylesheet" href="css/quiz_bright.css">
+    <!-- Prism.js for code highlighting -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+    <!-- MathJax for mathematical formulas -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            }
+        };
+    </script>
+</head>
+<body>
+    <div class="quiz-container">
+        <h1>🧪 Test Enhanced Highlighting System</h1>
+        
+        <div id="ai-status" class="ai-status">🔄 Initializing...</div>
+        
+        <div style="margin: 20px 0; padding: 20px; border: 1px solid #ddd; border-radius: 8px;">
+            <h3>Test Text Samples:</h3>
+            
+            <div style="margin: 10px 0;">
+                <strong>Sample 1 (Assembly):</strong>
+                <div id="test1">MOV A, #0xFF; JMP 2000H; ADD A, R0</div>
+            </div>
+            
+            <div style="margin: 10px 0;">
+                <strong>Sample 2 (Technical Terms):</strong>
+                <div id="test2">CPU xử lý dữ liệu từ RAM và ROM thông qua UART</div>
+            </div>
+            
+            <div style="margin: 10px 0;">
+                <strong>Sample 3 (Numbers):</strong>
+                <div id="test3">Địa chỉ 0xFF00 trong ROM chứa giá trị 1010B</div>
+            </div>
+            
+            <div style="margin: 10px 0;">
+                <strong>Sample 4 (Math Formula):</strong>
+                <div id="test4">Tính toán: $f(x) = x^2 + 2x + 1$ và $$\sum_{i=1}^{n} i = \frac{n(n+1)}{2}$$</div>
+            </div>
+        </div>
+        
+        <div style="margin: 20px 0;">
+            <button onclick="testEnhancedHighlighter()" style="padding: 10px 20px; background: #007bff; color: white; border: none; border-radius: 4px; cursor: pointer;">
+                🧪 Test Enhanced Highlighting
+            </button>
+            <button onclick="testFallbackHighlighting()" style="padding: 10px 20px; background: #28a745; color: white; border: none; border-radius: 4px; cursor: pointer; margin-left: 10px;">
+                🔧 Test Fallback Highlighting
+            </button>
+        </div>
+        
+        <div id="result" style="margin: 20px 0; padding: 15px; background: #f8f9fa; border-radius: 8px;">
+            <strong>Results will appear here...</strong>
+        </div>
+        
+        <div style="margin: 20px 0;">
+            <a href="quiz.html" style="padding: 10px 20px; background: #6c757d; color: white; text-decoration: none; border-radius: 4px; margin-right: 10px;">Go to Quiz</a>
+            <a href="flashcards.html" style="padding: 10px 20px; background: #6c757d; color: white; text-decoration: none; border-radius: 4px; margin-right: 10px;">Go to Flashcards</a>
+            <a href="index.html" style="padding: 10px 20px; background: #6c757d; color: white; text-decoration: none; border-radius: 4px;">Back to Home</a>
+        </div>
+    </div>
+
+    <script src="js/enhanced_highlighter.js"></script>
+    <script>
+        function updateStatus(message, type = 'active') {
+            const statusEl = document.getElementById('ai-status');
+            if (statusEl) {
+                statusEl.textContent = message;
+                statusEl.className = `ai-status ${type}`;
+            }
+        }
+
+        async function testEnhancedHighlighter() {
+            updateStatus('🔄 Testing enhanced highlighting...', 'active');
+            const resultDiv = document.getElementById('result');
+            
+            try {
+                if (!window.enhancedHighlighter) {
+                    throw new Error('Enhanced highlighter not available');
+                }
+                
+                // Try to load enhanced data
+                try {
+                    await window.enhancedHighlighter.loadEnhancedData();
+                    updateStatus('✅ Enhanced data loaded successfully!', 'active');
+                    resultDiv.innerHTML = `
+                        <h4>✅ Enhanced Highlighting Test Successful!</h4>
+                        <p>✓ Enhanced highlighter loaded</p>
+                        <p>✓ Enhanced JSON data available</p>
+                        <p>✓ Ready for AI-powered highlighting</p>
+                        <p><strong>Questions available:</strong> ${window.enhancedHighlighter.enhancedQuestions?.length || 'N/A'}</p>
+                        <p><strong>Flashcards available:</strong> ${window.enhancedHighlighter.enhancedFlashcards?.length || 'N/A'}</p>
+                    `;
+                } catch (enhancedError) {
+                    updateStatus('⚠️ Enhanced data unavailable, testing fallback', 'fallback');
+                    resultDiv.innerHTML = `
+                        <h4>⚠️ Enhanced Data Not Available</h4>
+                        <p>❌ Enhanced JSON files not found</p>
+                        <p>💡 This is expected if preprocessing hasn't completed yet</p>
+                        <p><strong>Error:</strong> ${enhancedError.message}</p>
+                        <p><strong>Solution:</strong> Run the Python preprocessing script first</p>
+                    `;
+                }
+            } catch (error) {
+                updateStatus('❌ Test failed', 'error');
+                resultDiv.innerHTML = `
+                    <h4>❌ Test Failed</h4>
+                    <p><strong>Error:</strong> ${error.message}</p>
+                `;
+            }
+        }
+
+        async function testFallbackHighlighting() {
+            updateStatus('🔧 Testing fallback highlighting...', 'fallback');
+            const resultDiv = document.getElementById('result');
+            
+            try {
+                if (!window.enhancedHighlighter) {
+                    throw new Error('Enhanced highlighter not available');
+                }
+                
+                // Test fallback highlighting
+                const testTexts = [
+                    'MOV A, #0xFF; JMP 2000H; ADD A, R0',
+                    'CPU xử lý dữ liệu từ RAM và ROM thông qua UART',
+                    'Địa chỉ 0xFF00 trong ROM chứa giá trị 1010B'
+                ];
+                
+                let results = '';
+                testTexts.forEach((text, index) => {
+                    const highlighted = window.enhancedHighlighter.fallbackHighlight(text);
+                    results += `
+                        <div style="margin: 10px 0; padding: 10px; border: 1px solid #ddd; border-radius: 4px;">
+                            <strong>Test ${index + 1}:</strong><br>
+                            <strong>Original:</strong> ${text}<br>
+                            <strong>Highlighted:</strong> ${highlighted}
+                        </div>
+                    `;
+                });
+                
+                updateStatus('✅ Fallback highlighting working', 'fallback');
+                resultDiv.innerHTML = `
+                    <h4>🔧 Fallback Highlighting Test Results</h4>
+                    <p>✓ Fallback highlighting system working</p>
+                    <p>✓ Regex patterns applied successfully</p>
+                    ${results}
+                `;
+                
+                // Apply highlighting to test divs
+                document.getElementById('test1').innerHTML = window.enhancedHighlighter.fallbackHighlight(document.getElementById('test1').textContent);
+                document.getElementById('test2').innerHTML = window.enhancedHighlighter.fallbackHighlight(document.getElementById('test2').textContent);
+                document.getElementById('test3').innerHTML = window.enhancedHighlighter.fallbackHighlight(document.getElementById('test3').textContent);
+                
+                // Trigger MathJax
+                if (window.MathJax) {
+                    MathJax.typesetPromise([document.getElementById('test4')]).catch(function (err) {
+                        console.log('MathJax error: ' + err.message);
+                    });
+                }
+                
+            } catch (error) {
+                updateStatus('❌ Fallback test failed', 'error');
+                resultDiv.innerHTML = `
+                    <h4>❌ Fallback Test Failed</h4>
+                    <p><strong>Error:</strong> ${error.message}</p>
+                `;
+            }
+        }
+
+        // Auto-test on load
+        document.addEventListener('DOMContentLoaded', async () => {
+            updateStatus('🚀 System initialized', 'active');
+            
+            // Wait a bit then auto-test
+            setTimeout(async () => {
+                await testEnhancedHighlighter();
+            }, 1000);
+        });
+    </script>
+</body>
+</html>
