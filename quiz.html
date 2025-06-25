@@ -27,7 +27,27 @@
                 <div id="question-counter">Câu 1 / 40</div>
                 <div id="timer">Thời gian: 70:00</div>
                 <button id="exit-quiz-btn" class="exit-btn" title="Thoát (ESC)">Thoát</button>
+                <button id="toggle-navigation-btn" class="nav-toggle-btn" title="Hiện/Ẩn bảng điều hướng">📋</button>
             </div>
+            
+            <!-- Question Navigation Panel -->
+            <div id="navigation-panel" class="navigation-panel hidden">
+                <div class="nav-header">
+                    <h3>Điều hướng câu hỏi</h3>
+                    <button id="close-navigation-btn">&times;</button>
+                </div>
+                <div class="nav-legend">
+                    <span class="legend-item"><span class="legend-dot answered"></span> Đã làm</span>
+                    <span class="legend-item"><span class="legend-dot current"></span> Hiện tại</span>
+                    <span class="legend-item"><span class="legend-dot unanswered"></span> Chưa làm</span>
+                </div>
+                <div id="question-grid" class="question-grid"></div>
+                <div class="nav-controls">
+                    <button id="prev-question-btn" class="nav-btn">⬅ Câu trước</button>
+                    <button id="next-question-nav-btn" class="nav-btn">Câu sau ➡</button>
+                </div>
+            </div>
+            
             <div id="question-area">
                 <h2 id="question-text"></h2>
                 <div id="options-container"></div>
@@ -36,7 +56,11 @@
                 <h3>Giải thích chi tiết:</h3>
                 <p id="explanation-text"></p>
             </div>
-            <button id="next-question-btn" class="hidden">Câu tiếp theo</button>
+            <div class="question-controls">
+                <button id="prev-question-main-btn" class="control-btn">⬅ Câu trước</button>
+                <button id="next-question-btn" class="hidden control-btn">Câu tiếp theo ➡</button>
+                <button id="finish-quiz-btn" class="control-btn finish-btn hidden">🏁 Hoàn thành bài thi</button>
+            </div>
         </div>
 
         <div id="result-screen" class="hidden">

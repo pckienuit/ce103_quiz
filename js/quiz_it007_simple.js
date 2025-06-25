@@ -21,12 +21,23 @@ document.addEventListener('DOMContentLoaded', () => {
     const resultMessage = document.getElementById('result-message');
     const topicBreakdown = document.getElementById('topic-breakdown');
 
+    // Navigation elements
+    const navToggleBtn = document.getElementById('toggle-navigation-btn');
+    const navigationPanel = document.getElementById('navigation-panel');
+    const navCloseBtn = document.getElementById('close-navigation-btn');
+    const prevQuestionBtn = document.getElementById('prev-question-btn');
+    const nextQuestionNavBtn = document.getElementById('next-question-nav-btn');
+    const finishQuizBtn = document.getElementById('finish-quiz-btn');
+    const questionsGrid = document.getElementById('question-grid');
+    const prevQuestionMainBtn = document.getElementById('prev-question-main-btn');
+
     let allQuestions = [];
     let currentQuizQuestions = [];
     let currentQuestionIndex = 0;
     let score = 0;
     let timerInterval;
     let topicStats = {};
+    let questionAnswers = {}; // Track answers for each question
     const QUIZ_DURATION = 75 * 60; // 75 phút tính bằng giây
     const NUM_QUESTIONS = 40;
 
@@ -62,6 +73,7 @@ document.addEventListener('DOMContentLoaded', () => {
         currentQuestionIndex = 0;
         score = 0;
         topicStats = {};
+        questionAnswers = {}; // Reset answers tracking
         shuffleArray(allQuestions);
         currentQuizQuestions = allQuestions.slice(0, NUM_QUESTIONS);
 
@@ -73,6 +85,7 @@ document.addEventListener('DOMContentLoaded', () => {
             topicStats[q.topic].total++;
         });
 
+        createNavigationOverlay();
         displayQuestion();
         startTimer();
     }
@@ -99,6 +112,108 @@ document.addEventListener('DOMContentLoaded', () => {
         return formattedText;
     }
 
+    // Navigation functions
+    function createNavigationOverlay() {
+        if (!questionsGrid) {
+            console.log('❌ questionsGrid not found!');
+            return;
+        }
+        
+        questionsGrid.innerHTML = '';
+        for (let i = 0; i < NUM_QUESTIONS; i++) {
+            const questionBox = document.createElement('div');
+            questionBox.className = 'question-box';
+            questionBox.textContent = i + 1;
+            questionBox.dataset.questionIndex = i;
+            questionBox.addEventListener('click', () => goToQuestion(i));
+            questionsGrid.appendChild(questionBox);
+        }
+        updateNavigationGrid();
+    }
+
+    function updateNavigationGrid() {
+        if (!questionsGrid) return;
+        
+        const questionBoxes = questionsGrid.querySelectorAll('.question-box');
+        questionBoxes.forEach((box, index) => {
+            box.className = 'question-box';
+            if (index === currentQuestionIndex) {
+                box.classList.add('current');
+            } else if (questionAnswers[index] !== undefined && questionAnswers[index].hasBeenAnswered) {
+                box.classList.add('answered');
+            }
+        });
+    }
+
+    function showNavigation() {
+        if (navigationPanel) {
+            navigationPanel.classList.remove('hidden');
+            updateNavigationGrid();
+            console.log('✅ Navigation panel shown');
+        } else {
+            console.log('❌ navigationPanel not found');
+        }
+    }
+
+    function closeNavigation() {
+        if (navigationPanel) {
+            navigationPanel.classList.add('hidden');
+            console.log('✅ Navigation panel closed');
+        }
+    }
+
+    function goToQuestion(questionIndex) {
+        if (questionIndex >= 0 && questionIndex < NUM_QUESTIONS) {
+            currentQuestionIndex = questionIndex;
+            displayQuestion();
+            closeNavigation();
+            console.log(`✅ Jumped to question ${questionIndex + 1}`);
+        }
+    }
+
+    function goToPrevQuestion() {
+        if (currentQuestionIndex > 0) {
+            currentQuestionIndex--;
+            displayQuestion();
+            console.log(`✅ Went to previous question ${currentQuestionIndex + 1}`);
+        } else {
+            console.log('❌ Already at first question');
+        }
+    }
+
+    function goToNextQuestion() {
+        if (currentQuestionIndex < NUM_QUESTIONS - 1) {
+            currentQuestionIndex++;
+            displayQuestion();
+            console.log(`✅ Went to next question ${currentQuestionIndex + 1}`);
+        } else {
+            console.log('❌ Already at last question');
+        }
+    }
+
+    function updateNavigationButtons() {
+        if (prevQuestionBtn) {
+            prevQuestionBtn.disabled = currentQuestionIndex === 0;
+        }
+        if (nextQuestionNavBtn) {
+            nextQuestionNavBtn.disabled = currentQuestionIndex === NUM_QUESTIONS - 1;
+        }
+        if (prevQuestionMainBtn) {
+            if (currentQuestionIndex === 0) {
+                prevQuestionMainBtn.classList.add('hidden');
+            } else {
+                prevQuestionMainBtn.classList.remove('hidden');
+            }
+        }
+        if (finishQuizBtn) {
+            if (currentQuestionIndex === NUM_QUESTIONS - 1) {
+                finishQuizBtn.classList.remove('hidden');
+            } else {
+                finishQuizBtn.classList.add('hidden');
+            }
+        }
+    }
+
     // Hàm hiển thị câu hỏi
     function displayQuestion() {
         resetState();
@@ -122,6 +237,37 @@ document.addEventListener('DOMContentLoaded', () => {
             optionsContainer.appendChild(button);
         }
 
+        // Restore previous answer if exists
+        const previousAnswer = questionAnswers[currentQuestionIndex];
+        if (previousAnswer !== undefined && previousAnswer.hasBeenAnswered) {
+            const selectedBtn = optionsContainer.querySelector(`[data-answer="${previousAnswer.selectedAnswer}"]`);
+            const correctAnswer = question.answer;
+            
+            if (selectedBtn) {
+                if (previousAnswer.selectedAnswer === correctAnswer) {
+                    selectedBtn.classList.add('correct');
+                } else {
+                    selectedBtn.classList.add('incorrect');
+                }
+            }
+
+            // Show correct answer
+            Array.from(optionsContainer.children).forEach(button => {
+                if (button.dataset.answer === correctAnswer) {
+                    button.classList.add('correct');
+                }
+                button.disabled = true;
+            });
+
+            explanationText.innerHTML = formatCodeInText(question.explanation);
+            explanationArea.classList.remove('hidden');
+            nextBtn.classList.remove('hidden');
+        }
+
+        // Update navigation
+        updateNavigationGrid();
+        updateNavigationButtons();
+
         // Render lại các công thức toán học với MathJax
         if (window.MathJax) {
             MathJax.typesetPromise([questionText, optionsContainer]).catch(function (err) {
@@ -142,13 +288,29 @@ document.addEventListener('DOMContentLoaded', () => {
         const selectedBtn = e.target.closest('.option-btn');
         if (!selectedBtn) return;
 
+        // Prevent multiple selections
+        if (selectedBtn.disabled) return;
+
         const selectedAnswer = selectedBtn.dataset.answer;
         const correctAnswer = currentQuizQuestions[currentQuestionIndex].answer;
         const currentTopic = currentQuizQuestions[currentQuestionIndex].topic;
 
+        // Store the answer (only count score if this is the first time answering)
+        if (questionAnswers[currentQuestionIndex] === undefined) {
+            if (selectedAnswer === correctAnswer) {
+                score++;
+                topicStats[currentTopic].correct++;
+            }
+        }
+        
+        // Store the answer for navigation tracking
+        questionAnswers[currentQuestionIndex] = {
+            selectedAnswer: selectedAnswer,
+            isCorrect: selectedAnswer === correctAnswer,
+            hasBeenAnswered: true
+        };
+
         if (selectedAnswer === correctAnswer) {
-            score++;
-            topicStats[currentTopic].correct++;
             selectedBtn.classList.add('correct');
         } else {
             selectedBtn.classList.add('incorrect');
@@ -173,6 +335,11 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         
         nextBtn.classList.remove('hidden');
+        
+        // Update navigation grid to show this question as answered
+        updateNavigationGrid();
+        
+        console.log(`✅ Answer stored for question ${currentQuestionIndex + 1}: ${selectedAnswer}`);
     }
 
     // Hàm bắt đầu đếm giờ
@@ -270,6 +437,69 @@ document.addEventListener('DOMContentLoaded', () => {
     restartBtn.addEventListener('click', () => {
         startQuiz();
     });
+
+    // Navigation event listeners - with debugging
+    console.log('🔧 Checking navigation elements...');
+    console.log('navToggleBtn:', navToggleBtn);
+    console.log('navigationPanel:', navigationPanel);
+    console.log('navCloseBtn:', navCloseBtn);
+    console.log('prevQuestionBtn:', prevQuestionBtn);
+    console.log('nextQuestionNavBtn:', nextQuestionNavBtn);
+    console.log('finishQuizBtn:', finishQuizBtn);
+    console.log('questionsGrid:', questionsGrid);
+    console.log('prevQuestionMainBtn:', prevQuestionMainBtn);
+    
+    if (navToggleBtn) {
+        navToggleBtn.addEventListener('click', showNavigation);
+        console.log('✅ Navigation toggle button found');
+    } else {
+        console.log('❌ Navigation toggle button not found!');
+    }
+    
+    if (navCloseBtn) {
+        navCloseBtn.addEventListener('click', closeNavigation);
+        console.log('✅ Navigation close button found');
+    } else {
+        console.log('❌ Navigation close button not found!');
+    }
+    
+    if (prevQuestionBtn) {
+        prevQuestionBtn.addEventListener('click', goToPrevQuestion);
+        console.log('✅ Previous question button (nav) found');
+    } else {
+        console.log('❌ Previous question button (nav) not found!');
+    }
+    
+    if (nextQuestionNavBtn) {
+        nextQuestionNavBtn.addEventListener('click', goToNextQuestion);
+        console.log('✅ Next question button (nav) found');
+    } else {
+        console.log('❌ Next question button (nav) not found!');
+    }
+    
+    if (finishQuizBtn) {
+        finishQuizBtn.addEventListener('click', showResults);
+        console.log('✅ Finish quiz button found');
+    } else {
+        console.log('❌ Finish quiz button not found!');
+    }
+
+    if (prevQuestionMainBtn) {
+        prevQuestionMainBtn.addEventListener('click', goToPrevQuestion);
+        console.log('✅ Previous question main button found');
+    } else {
+        console.log('❌ Previous question main button not found!');
+    }
+
+    // Close navigation when clicking outside
+    if (navigationPanel) {
+        navigationPanel.addEventListener('click', (e) => {
+            // Don't close if clicking inside the panel content
+            if (e.target === navigationPanel) {
+                closeNavigation();
+            }
+        });
+    }
 
     // Tải câu hỏi khi trang được load
     fetchQuestions();
