@@ -3,45 +3,72 @@
  * Sử dụng pre-processed Gemini AI data để highlight text
  */
 
-class EnhancedHighlighter {
-    constructor() {
+class EnhancedHighlighter {    constructor() {
         this.enhancedQuestions = null;
         this.enhancedFlashcards = null;
         this.loaded = false;
+        this.currentSubject = null;
         this.cache = new Map();
-    }
-
-    /**
+    }/**
      * Load enhanced data files
      */
-    async loadEnhancedData() {
-        if (this.loaded) return;
+    async loadEnhancedData(subject = 'ce103') {
+        if (this.loaded && this.currentSubject === subject) return;
 
         try {
-            // Load enhanced questions
-            const questionsResponse = await fetch('api/questions_enhanced.json');
-            if (questionsResponse.ok) {
-                this.enhancedQuestions = await questionsResponse.json();
-                console.log('✅ Enhanced questions loaded');
+            this.currentSubject = subject;
+            
+            if (subject === 'it007') {
+                // Load IT007 enhanced questions if available
+                try {
+                    const it007Response = await fetch('api/it007_questions_enhanced.json');
+                    if (it007Response.ok) {
+                        this.enhancedQuestions = await it007Response.json();
+                        console.log('✅ Enhanced IT007 questions loaded');
+                    } else {
+                        throw new Error('Enhanced IT007 questions not found');
+                    }
+                } catch (error) {
+                    console.warn('Enhanced IT007 data not available, using fallback');
+                    // Fallback to original IT007 questions
+                    const originalResponse = await fetch('api/get_it007_questions.php');
+                    if (originalResponse.ok) {
+                        this.enhancedQuestions = await originalResponse.json();
+                        console.log('✅ Original IT007 questions loaded as fallback');
+                    } else {
+                        throw new Error('IT007 questions not found');
+                    }
+                }
+                
+                // IT007 doesn't have flashcards yet
+                this.enhancedFlashcards = [];
+                
             } else {
-                throw new Error('Enhanced questions not found');
-            }
+                // Load CE103 enhanced questions
+                const questionsResponse = await fetch('api/questions_enhanced.json');
+                if (questionsResponse.ok) {
+                    this.enhancedQuestions = await questionsResponse.json();
+                    console.log('✅ Enhanced CE103 questions loaded');
+                } else {
+                    throw new Error('Enhanced CE103 questions not found');
+                }
 
-            // Load enhanced flashcards
-            const flashcardsResponse = await fetch('api/flashcards_enhanced.json');
-            if (flashcardsResponse.ok) {
-                this.enhancedFlashcards = await flashcardsResponse.json();
-                console.log('✅ Enhanced flashcards loaded');
-            } else {
-                throw new Error('Enhanced flashcards not found');
+                // Load enhanced flashcards
+                const flashcardsResponse = await fetch('api/flashcards_enhanced.json');
+                if (flashcardsResponse.ok) {
+                    this.enhancedFlashcards = await flashcardsResponse.json();
+                    console.log('✅ Enhanced flashcards loaded');
+                } else {
+                    throw new Error('Enhanced flashcards not found');
+                }
             }
 
             this.loaded = true;
-            console.log('🤖 Enhanced highlighting system ready');
+            console.log(`🤖 Enhanced highlighting system ready for ${subject.toUpperCase()}`);
 
         } catch (error) {
             console.error('❌ Failed to load enhanced data:', error);
-            throw new Error('Enhanced data not available. Please run preprocessing first.');
+            throw new Error(`Enhanced data not available for ${subject}. Please run preprocessing first.`);
         }
     }
 

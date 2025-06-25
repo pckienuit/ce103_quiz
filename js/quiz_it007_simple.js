@@ -1,4 +1,5 @@
-document.addEventListener('DOMContentLoaded', () => {    // Các biến tham chiếu đến các phần tử HTML
+document.addEventListener('DOMContentLoaded', () => {
+    // Các biến tham chiếu đến các phần tử HTML
     const startScreen = document.getElementById('start-screen');
     const quizScreen = document.getElementById('quiz-screen');
     const resultScreen = document.getElementById('result-screen');
@@ -13,30 +14,34 @@ document.addEventListener('DOMContentLoaded', () => {    // Các biến tham chi
     const optionsContainer = document.getElementById('options-container');
     const explanationArea = document.getElementById('explanation-area');
     const explanationText = document.getElementById('explanation-text');
+    const topicIndicator = document.getElementById('topic-indicator');
 
     const scoreDisplay = document.getElementById('score');
     const percentageDisplay = document.getElementById('percentage');
     const resultMessage = document.getElementById('result-message');
+    const topicBreakdown = document.getElementById('topic-breakdown');
 
     let allQuestions = [];
     let currentQuizQuestions = [];
     let currentQuestionIndex = 0;
     let score = 0;
     let timerInterval;
-    const QUIZ_DURATION = 70 * 60; // 70 phút tính bằng giây
+    let topicStats = {};
+    const QUIZ_DURATION = 75 * 60; // 75 phút tính bằng giây
     const NUM_QUESTIONS = 40;
 
-    // Hàm fetch câu hỏi từ backend
+    // Hàm fetch câu hỏi IT007 từ backend
     async function fetchQuestions() {
         try {
-            const response = await fetch('api/get_questions.php');
+            const response = await fetch('api/get_it007_questions.php');
             if (!response.ok) {
                 throw new Error('Network response was not ok');
             }
             allQuestions = await response.json();
+            console.log(`Đã tải ${allQuestions.length} câu hỏi IT007`);
         } catch (error) {
-            console.error('Không thể tải câu hỏi:', error);
-            questionText.textContent = 'Lỗi tải câu hỏi. Vui lòng thử lại sau.';
+            console.error('Không thể tải câu hỏi IT007:', error);
+            questionText.textContent = 'Lỗi tải câu hỏi IT007. Vui lòng thử lại sau.';
         }
     }
 
@@ -56,27 +61,38 @@ document.addEventListener('DOMContentLoaded', () => {    // Các biến tham chi
 
         currentQuestionIndex = 0;
         score = 0;
+        topicStats = {};
         shuffleArray(allQuestions);
         currentQuizQuestions = allQuestions.slice(0, NUM_QUESTIONS);
 
+        // Khởi tạo thống kê chủ đề
+        currentQuizQuestions.forEach(q => {
+            if (!topicStats[q.topic]) {
+                topicStats[q.topic] = { total: 0, correct: 0 };
+            }
+            topicStats[q.topic].total++;
+        });
+
         displayQuestion();
         startTimer();
-    }    // Hàm format code trong text (phiên bản đơn giản cho CE103)
+    }
+
+    // Hàm format code trong text (phiên bản đơn giản cho IT007)
     function formatCodeInText(text) {
         let formattedText = text;
         
         // 1. Chỉ xử lý code trong backticks (`)
         formattedText = formattedText.replace(/`([^`]+)`/g, '<code class="inline-code">$1</code>');
         
-        // 2. Highlight một số thuật ngữ kỹ thuật cơ bản
+        // 2. Highlight một số thuật ngữ OS cơ bản
         formattedText = formattedText.replace(
-            /\b(ROM|RAM|CPU|UART|PWM|ADC|DAC)\b/g,
+            /\b(OS|CPU|RAM|Process|Thread|Deadlock|Semaphore|Mutex|FIFO|LIFO|LRU|FCFS|SJF|RR)\b/g,
             '<span class="tech-term">$&</span>'
         );
         
-        // 3. Highlight các số hex cơ bản
+        // 3. Highlight các số và thời gian
         formattedText = formattedText.replace(
-            /\b(0x[0-9A-Fa-f]+|[0-9A-Fa-f]+H)\b/g,
+            /\b(\d+ms|\d+s|\d+%|\d+KB|\d+MB|\d+GB)\b/g,
             '<span class="number-highlight">$&</span>'
         );
         
@@ -88,6 +104,9 @@ document.addEventListener('DOMContentLoaded', () => {    // Các biến tham chi
         resetState();
         const question = currentQuizQuestions[currentQuestionIndex];
         questionCounter.textContent = `Câu ${currentQuestionIndex + 1} / ${NUM_QUESTIONS}`;
+        
+        // Hiển thị chủ đề
+        topicIndicator.textContent = question.topic;
         
         // Format câu hỏi với code highlighting
         const formattedQuestion = formatCodeInText(question.question);
@@ -101,7 +120,9 @@ document.addEventListener('DOMContentLoaded', () => {    // Các biến tham chi
             button.dataset.answer = key;
             button.addEventListener('click', selectAnswer);
             optionsContainer.appendChild(button);
-        }        // Render lại các công thức toán học với MathJax
+        }
+
+        // Render lại các công thức toán học với MathJax
         if (window.MathJax) {
             MathJax.typesetPromise([questionText, optionsContainer]).catch(function (err) {
                 console.log('MathJax error: ' + err.message);
@@ -123,9 +144,11 @@ document.addEventListener('DOMContentLoaded', () => {    // Các biến tham chi
 
         const selectedAnswer = selectedBtn.dataset.answer;
         const correctAnswer = currentQuizQuestions[currentQuestionIndex].answer;
+        const currentTopic = currentQuizQuestions[currentQuestionIndex].topic;
 
         if (selectedAnswer === correctAnswer) {
             score++;
+            topicStats[currentTopic].correct++;
             selectedBtn.classList.add('correct');
         } else {
             selectedBtn.classList.add('incorrect');
@@ -137,7 +160,9 @@ document.addEventListener('DOMContentLoaded', () => {    // Các biến tham chi
                 button.classList.add('correct');
             }
             button.disabled = true; // Vô hiệu hóa các lựa chọn
-        });        explanationText.innerHTML = formatCodeInText(currentQuizQuestions[currentQuestionIndex].explanation);
+        });
+
+        explanationText.innerHTML = formatCodeInText(currentQuizQuestions[currentQuestionIndex].explanation);
         explanationArea.classList.remove('hidden');
         
         // Render lại các công thức toán học với MathJax
@@ -176,17 +201,47 @@ document.addEventListener('DOMContentLoaded', () => {    // Các biến tham chi
         scoreDisplay.textContent = score;
         percentageDisplay.textContent = percentage;
 
-        if (percentage >= 50) {
-            resultMessage.textContent = 'Chúc mừng! Bạn đã qua môn.';
-            resultMessage.style.color = 'green';
+        // Đánh giá kết quả
+        let message = '';
+        if (percentage >= 80) {
+            message = '🎉 Xuất sắc! Bạn đã nắm vững kiến thức IT007.';
+        } else if (percentage >= 70) {
+            message = '👍 Tốt! Bạn có hiểu biết tốt về Hệ điều hành.';
+        } else if (percentage >= 50) {
+            message = '📚 Khá! Hãy ôn tập thêm để nâng cao kiến thức.';
         } else {
-            resultMessage.textContent = 'Rất tiếc, bạn cần cố gắng hơn.';
-            resultMessage.style.color = 'red';
+            message = '💪 Cần cố gắng hơn! Hãy học kỹ lại các khái niệm cơ bản.';
         }
-    }    // Hàm thoát quiz và quay về trang chủ
+        resultMessage.textContent = message;
+
+        // Hiển thị thống kê theo chủ đề
+        displayTopicBreakdown();
+    }
+
+    // Hàm hiển thị thống kê theo chủ đề
+    function displayTopicBreakdown() {
+        let html = '<h3>📊 Kết quả theo chủ đề:</h3>';
+        html += '<div style="display: grid; gap: 10px;">';
+        
+        for (const [topic, stats] of Object.entries(topicStats)) {
+            const topicPercentage = ((stats.correct / stats.total) * 100).toFixed(1);
+            const color = topicPercentage >= 70 ? '#28a745' : topicPercentage >= 50 ? '#ffc107' : '#dc3545';
+            
+            html += `
+                <div style="display: flex; justify-content: space-between; align-items: center; padding: 10px; background: rgba(240, 147, 251, 0.1); border-radius: 5px;">
+                    <span style="font-weight: 500;">${topic}</span>
+                    <span style="color: ${color}; font-weight: bold;">${stats.correct}/${stats.total} (${topicPercentage}%)</span>
+                </div>
+            `;
+        }
+        
+        html += '</div>';
+        topicBreakdown.innerHTML = html;
+    }
+
+    // Hàm thoát quiz và quay về trang chủ
     function exitQuiz() {
-        const confirmExit = confirm('Bạn có chắc chắn muốn thoát? Tiến trình làm bài sẽ bị mất.');
-        if (confirmExit) {
+        if (confirm('Bạn có chắc chắn muốn thoát? Kết quả sẽ không được lưu.')) {
             clearInterval(timerInterval);
             window.location.href = 'index.html';
         }
@@ -211,9 +266,11 @@ document.addEventListener('DOMContentLoaded', () => {    // Các biến tham chi
             showResults();
         }
     });
+    
+    restartBtn.addEventListener('click', () => {
+        startQuiz();
+    });
 
-    restartBtn.addEventListener('click', startQuiz);
-
-    // Tải câu hỏi ngay khi trang được mở
+    // Tải câu hỏi khi trang được load
     fetchQuestions();
 });

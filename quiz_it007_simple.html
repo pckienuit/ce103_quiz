@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thi Trắc Nghiệm - IT007 Hệ Điều Hành</title>
+    <link rel="stylesheet" href="css/quiz.css">
+    <style>
+        /* IT007-specific styling */
+        body {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            background-attachment: fixed;
+        }
+        
+        .quiz-container {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 20px 40px rgba(240, 147, 251, 0.3);
+        }
+        
+        h1 {
+            color: #d63384;
+        }
+        
+        #start-quiz-btn, #next-question-btn, #restart-quiz-btn {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            border: none;
+        }
+        
+        #start-quiz-btn:hover, #next-question-btn:hover, #restart-quiz-btn:hover {
+            background: linear-gradient(135deg, #e083eb 0%, #e5475c 100%);
+            transform: translateY(-2px);
+        }
+        
+        .option-btn:hover:not([disabled]) {
+            background: linear-gradient(135deg, rgba(240, 147, 251, 0.8) 0%, rgba(245, 87, 108, 0.8) 100%);
+            color: white;
+        }
+        
+        .option-btn.correct {
+            background: linear-gradient(135deg, #20c997 0%, #0dcaf0 100%);
+            color: white;
+        }
+        
+        .option-btn.incorrect {
+            background: linear-gradient(135deg, #dc3545 0%, #fd7e14 100%);
+            color: white;
+        }
+        
+        #quiz-header {
+            background: linear-gradient(135deg, rgba(240, 147, 251, 0.1) 0%, rgba(245, 87, 108, 0.1) 100%);
+            border-bottom: 2px solid #f093fb;
+            padding: 15px;
+            border-radius: 8px 8px 0 0;
+            margin-bottom: 20px;
+        }
+        
+        .topic-indicator {
+            background: linear-gradient(135deg, rgba(240, 147, 251, 0.15) 0%, rgba(245, 87, 108, 0.15) 100%);
+            border: 1px solid #f093fb;
+            border-radius: 20px;
+            padding: 5px 15px;
+            margin-bottom: 15px;
+            font-size: 0.9em;
+            color: #d63384;
+            font-weight: 500;
+            text-align: center;
+        }
+    </style>
+    <!-- MathJax for mathematical formulas -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            }
+        };
+    </script>
+</head>
+<body>
+    <div class="quiz-container">
+        <div id="start-screen">
+            <h1>Thi Thử Trắc Nghiệm IT007</h1>
+            <h2>💻 Hệ Điều Hành</h2>
+            <p>Bài thi gồm 40 câu hỏi ngẫu nhiên. Thời gian làm bài: 75 phút.</p>
+            <div style="background: rgba(240, 147, 251, 0.1); padding: 15px; border-radius: 8px; margin: 20px 0;">
+                <p><strong>Nội dung thi:</strong></p>
+                <ul style="text-align: left; margin: 0;">
+                    <li>Đồng bộ hóa tiến trình</li>
+                    <li>Quản lý bộ nhớ</li>
+                    <li>Hệ thống file</li>
+                    <li>Deadlock và giải thuật</li>
+                    <li>Scheduling algorithms</li>
+                </ul>
+            </div>
+            <button id="start-quiz-btn">Bắt đầu thi</button>
+        </div>
+
+        <div id="quiz-screen" class="hidden">
+            <div id="quiz-header">
+                <div id="question-counter">Câu 1 / 40</div>
+                <div id="timer">Thời gian: 75:00</div>
+                <button id="exit-quiz-btn" class="exit-btn" title="Thoát (ESC)">Thoát</button>
+            </div>
+            
+            <div id="topic-indicator" class="topic-indicator"></div>
+            
+            <div id="question-area">
+                <h2 id="question-text"></h2>
+                <div id="options-container"></div>
+            </div>
+            <div id="explanation-area" class="hidden">
+                <h3>Giải thích chi tiết:</h3>
+                <p id="explanation-text"></p>
+            </div>
+            <button id="next-question-btn" class="hidden">Câu tiếp theo</button>
+        </div>
+
+        <div id="result-screen" class="hidden">
+            <h1>Kết quả bài thi IT007</h1>
+            <div style="background: rgba(240, 147, 251, 0.1); padding: 20px; border-radius: 10px; margin: 20px 0;">
+                <p>Số câu đúng: <span id="score"></span> / 40</p>
+                <p>Tỷ lệ: <span id="percentage" style="font-size: 2em; font-weight: bold; color: #d63384;"></span>%</p>
+                <p id="result-message"></p>
+            </div>
+            
+            <div id="topic-breakdown" style="margin-top: 20px; text-align: left;"></div>
+            
+            <div style="margin-top: 30px;">
+                <button id="restart-quiz-btn">Làm lại bài khác</button>
+                <a href="index.html" class="nav-link" style="background: linear-gradient(135deg, rgba(240, 147, 251, 0.8) 0%, rgba(245, 87, 108, 0.8) 100%); margin-left: 10px;">Về trang chủ</a>
+            </div>
+        </div>
+    </div>
+    <script src="js/quiz_it007_simple.js"></script>
+</body>
+</html>

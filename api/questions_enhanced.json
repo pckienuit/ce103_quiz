@@ -7296,7 +7296,7 @@
       "C": "65h",
       "D": "E5h"
     },
-    "answer": "A",
+    "answer": "B",
     "explanation": "1. `MOV AX, 1A2Bh`: AX = 1A2Bh, vậy AL = 2Bh = 00101011B. 2. `STC`: Set cờ Carry (CY = 1). 3. `MOV CL, 3`: Thanh ghi đếm CL = 3. 4. `RCL AL, CL`: Quay trái AL qua cờ Carry 3 lần. Trạng thái ban đầu: AL=00101011, CY=1. Lần 1: AL=01010111, CY=0. Lần 2: AL=10101110, CY=0. Lần 3: AL=01011100, CY=1. Kết quả cuối cùng: AL = 5CH. Có vẻ đáp án B đúng hơn. Hãy tính lại: AL=00101011, CY=1. Lần 1: AL=01010111, CY=0. Lần 2: AL=10101110, CY=0. Lần 3: AL=01011100, CY=1. AL=5Ch. Đáp án B là chính xác.",
     "ai_analysis": {
       "question": {

@@ -2,10 +2,8 @@
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
-    <title>Thi Trắc Nghiệm - CE103</title>    <link rel="stylesheet" href="css/quiz_bright.css">
-    <!-- Prism.js for code highlighting -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+    <title>Thi Trắc Nghiệm - CE103</title>
+    <link rel="stylesheet" href="css/quiz.css">
     <!-- MathJax for mathematical formulas -->
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
@@ -25,7 +23,6 @@
             <p>Bài thi gồm 40 câu hỏi ngẫu nhiên. Thời gian làm bài: 70 phút.</p>
             <button id="start-quiz-btn">Bắt đầu thi</button>
         </div>        <div id="quiz-screen" class="hidden">
-            <div id="ai-status" class="ai-status">🤖 AI Ready</div>
             <div id="quiz-header">
                 <div id="question-counter">Câu 1 / 40</div>
                 <div id="timer">Thời gian: 70:00</div>
@@ -48,9 +45,8 @@
             <p>Tỷ lệ: <span id="percentage"></span>%</p>
             <p id="result-message"></p>
             <button id="restart-quiz-btn">Làm lại bài khác</button>
-            <a href="index.html" class="nav-link">Về trang chủ</a>
-        </div>    </div>
-    <script src="js/enhanced_highlighter.js"></script>
-    <script src="js/quiz_improved.js"></script>
+            <a href="index.html" class="nav-link">Về trang chủ</a>        </div>
+    </div>
+    <script src="js/quiz.js"></script>
 </body>
 </html>

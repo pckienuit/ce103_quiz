@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CE103 Quiz System</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .main-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 15px;
+            padding: 3rem;
+            color: white;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+            margin: 2rem auto;
+            max-width: 600px;
+            text-align: center;
+        }
+        
+        .subject-title {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            font-weight: bold;
+        }
+        
+        .subject-description {
+            margin-bottom: 2rem;
+            line-height: 1.6;
+            font-size: 1.1rem;
+        }
+        
+        .stats {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 2rem;
+            background: rgba(255,255,255,0.1);
+            padding: 1rem;
+            border-radius: 10px;
+        }
+        
+        .stat-item {
+            text-align: center;
+        }
+        
+        .stat-number {
+            display: block;
+            font-size: 2rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+        
+        .stat-label {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+        
+        .actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .btn {
+            padding: 1rem 2rem;
+            border: 2px solid rgba(255,255,255,0.3);
+            background: rgba(255,255,255,0.2);
+            color: white;
+            text-decoration: none;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            min-width: 150px;
+        }
+        
+        .btn:hover {
+            background: rgba(255,255,255,0.3);
+            border-color: rgba(255,255,255,0.6);
+            transform: translateY(-2px);
+            text-decoration: none;
+            color: white;
+        }
+        
+        .btn-primary {
+            background: rgba(255,255,255,0.9);
+            color: #667eea;
+            border-color: white;
+        }
+        
+        .btn-primary:hover {
+            background: white;
+            color: #667eea;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🎓 CE103 Quiz System</h1>
+            <p>Hệ thống trắc nghiệm Vi xử lý - Vi điều khiển</p>
+        </header>
+
+        <main>
+            <div class="main-card">
+                <div class="subject-title">
+                    🔧 CE103 - Vi xử lý, Vi điều khiển
+                </div>
+                <div class="subject-description">
+                    Kiến trúc máy tính, lập trình Assembly, vi điều khiển 8051, 
+                    các giao tiếp ngoại vi và ứng dụng thực tế.
+                </div>
+                <div class="stats">
+                    <div class="stat-item">
+                        <span class="stat-number">230</span>
+                        <span class="stat-label">Câu hỏi</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">60</span>
+                        <span class="stat-label">Flashcards</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">70</span>
+                        <span class="stat-label">Phút thi</span>
+                    </div>
+                </div>
+                <div class="actions">
+                    <a href="quiz.html" class="btn btn-primary">
+                        📝 Bắt đầu thi
+                    </a>
+                    <a href="flashcards.html" class="btn">
+                        📚 Thẻ học
+                    </a>
+                </div>
+            </div>
+        </main>
+
+        <footer>
+            <p>&copy; 2025 CE103 Quiz System. Phát triển cho sinh viên Công nghệ thông tin.</p>
+        </footer>
+    </div>
+</body>
+</html>

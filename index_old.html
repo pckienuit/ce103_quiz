@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CE103 Quiz System - Hệ thống trắc nghiệm</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .subject-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 15px;
+            padding: 2rem;
+            color: white;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+            margin: 2rem auto;
+            max-width: 600px;
+        }
+        
+        .subject-title {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            font-weight: bold;
+            text-align: center;
+        }
+        
+        .subject-description {
+            margin-bottom: 1.5rem;
+            text-align: center;
+            line-height: 1.6;
+        }
+        
+        .subject-stats {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+        
+        .stat-item {
+            text-align: center;
+        }
+        
+        .stat-number {
+            display: block;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+        
+        .subject-actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+        }
+        
+        .subject-btn {
+            padding: 1rem 2rem;
+            border: 2px solid rgba(255,255,255,0.3);
+            background: rgba(255,255,255,0.2);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .subject-btn:hover {
+            background: rgba(255,255,255,0.3);
+            border-color: rgba(255,255,255,0.6);
+            transform: translateY(-2px);
+        }
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1.5rem;
+            font-size: 0.9rem;
+        }
+        
+        .stat-item {
+            text-align: center;
+        }
+        
+        .stat-number {
+            display: block;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+        
+        .subject-actions {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .subject-btn {
+            flex: 1;
+            padding: 0.8rem;
+            border: 2px solid rgba(255,255,255,0.3);
+            background: rgba(255,255,255,0.2);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .subject-btn:hover {
+            background: rgba(255,255,255,0.3);
+            border-color: rgba(255,255,255,0.6);
+            transform: translateY(-2px);
+        }
+        
+        .coming-soon {
+            opacity: 0.6;
+            position: relative;
+        }
+        
+        .coming-soon::after {
+            content: "Sắp ra mắt";
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: rgba(255,255,255,0.9);
+            color: #333;
+            padding: 0.3rem 0.6rem;
+            border-radius: 15px;
+            font-size: 0.7rem;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🎓 Quiz System</h1>
+            <p>Hệ thống trắc nghiệm và thẻ học thông minh đa môn học</p>
+        </header>
+
+        <main>
+            <div class="subject-grid">
+                <!-- CE103 - Vi xử lý, Vi điều khiển -->
+                <div class="subject-card ce103">
+                    <div class="subject-title">
+                        🔧 CE103 - Vi xử lý, Vi điều khiển
+                    </div>
+                    <div class="subject-description">
+                        Kiến trúc máy tính, lập trình Assembly, vi điều khiển 8051, 
+                        các giao tiếp ngoại vi và ứng dụng thực tế.
+                    </div>
+                    <div class="subject-stats">
+                        <div class="stat-item">
+                            <span class="stat-number">230</span>
+                            <span>Câu hỏi</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">40</span>
+                            <span>Câu/bài thi</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">60</span>
+                            <span>Flashcards</span>
+                        </div>
+                    </div>
+                    <div class="subject-actions">
+                        <a href="quiz.html?subject=ce103" class="subject-btn">
+                            📝 Trắc nghiệm
+                        </a>
+                        <a href="flashcards.html?subject=ce103" class="subject-btn">
+                            📚 Thẻ học
+                        </a>
+                    </div>
+                </div>
+
+                <!-- IT007 - Hệ điều hành -->
+                <div class="subject-card it007">
+                    <div class="subject-title">
+                        💻 IT007 - Hệ điều hành
+                    </div>
+                    <div class="subject-description">
+                        Tiến trình, luồng, đồng bộ hóa, quản lý bộ nhớ, 
+                        hệ thống file và bảo mật hệ điều hành.
+                    </div>
+                    <div class="subject-stats">
+                        <div class="stat-item">
+                            <span class="stat-number">25</span>
+                            <span>Câu hỏi</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">24</span>
+                            <span>Câu/bài thi</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">-</span>
+                            <span>Flashcards</span>
+                        </div>
+                    </div>
+                    <div class="subject-actions">
+                        <a href="quiz_it007.html" class="subject-btn">
+                            📝 Trắc nghiệm
+                        </a>
+                        <a href="#" class="subject-btn coming-soon" style="opacity: 0.5; pointer-events: none;">
+                            📚 Thẻ học
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Thông tin hệ thống -->
+            <div style="margin-top: 3rem; padding: 2rem; background: #f8f9fa; border-radius: 10px;">
+                <h3>🚀 Tính năng hệ thống</h3>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-top: 1rem;">
+                    <div>✨ AI-powered highlighting</div>
+                    <div>📐 Hỗ trợ công thức toán học</div>
+                    <div>🎨 Giao diện bright theme</div>
+                    <div>⏱️ Hẹn giờ tự động</div>
+                    <div>📊 Thống kê chi tiết</div>
+                    <div>💾 Lưu kết quả</div>
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+</html>

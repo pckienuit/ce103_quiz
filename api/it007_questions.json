@@ -1,0 +1,2342 @@
+[
+  {
+    "id": 1,
+    "topic": "Đồng bộ hoá tiến trình (Chương 5)",
+    "question": "Hiện tượng nhiều tiến trình truy cập và thao tác trên cùng một dữ liệu chia sẻ, và kết quả cuối cùng phụ thuộc vào thứ tự thực thi của chúng, được gọi là gì?",
+    "options": {
+      "A": "Tắc nghẽn (Deadlock)",
+      "B": "Đói tài nguyên (Starvation)",
+      "C": "Điều kiện tranh chấp (Race Condition)",
+      "D": "Phân mảnh (Fragmentation)"
+    },
+    "answer": "C",
+    "explanation": "Điều kiện tranh chấp (Race Condition) xảy ra khi hoạt động của hệ thống phụ thuộc vào thứ tự thực thi không thể đoán trước của các tiến trình đồng thời. Tắc nghẽn (Deadlock) là tình trạng các tiến trình chờ đợi nhau theo một chu trình đóng. Đói tài nguyên (Starvation) là tình trạng một tiến trình bị trì hoãn vô thời hạn. Phân mảnh (Fragmentation) liên quan đến việc lãng phí bộ nhớ."
+  },
+  {
+    "id": 2,
+    "topic": "Đồng bộ hoá tiến trình (Chương 5)",
+    "question": "Đoạn mã trong một tiến trình thực hiện thao tác trên dữ liệu chia sẻ được gọi là gì?",
+    "options": {
+      "A": "Vùng an toàn (Safe Section)",
+      "B": "Vùng tranh chấp (Critical Section)",
+      "C": "Vùng đệm (Buffer Section)",
+      "D": "Vùng nhớ chia sẻ (Shared Memory Section)"
+    },
+    "answer": "B",
+    "explanation": "Vùng tranh chấp (Critical Section) hay miền găng là đoạn mã mà tại đó tiến trình truy cập và sửa đổi dữ liệu chia sẻ."
+  },
+  {
+    "id": 3,
+    "topic": "Đồng bộ hoá tiến trình (Chương 5)",
+    "question": "Một giải pháp cho vấn đề vùng tranh chấp phải đảm bảo yêu cầu nào sau đây, nghĩa là tại một thời điểm chỉ có một tiến trình được ở trong vùng tranh chấp của nó?",
+    "options": {
+      "A": "Tiến triển (Progress)",
+      "B": "Chờ đợi giới hạn (Bounded Waiting)",
+      "C": "Loại trừ tương hỗ (Mutual Exclusion)",
+      "D": "Hiệu suất (Performance)"
+    },
+    "answer": "C",
+    "explanation": "Loại trừ tương hỗ (Mutual Exclusion) là yêu cầu cơ bản nhất của bài toán vùng tranh chấp, đảm bảo rằng nếu một tiến trình đang thực thi trong vùng tranh chấp của nó, thì không có tiến trình nào khác có thể thực thi trong vùng tranh chấp của chúng."
+  },
+  {
+    "id": 4,
+    "topic": "Đồng bộ hoá tiến trình (Chương 5)",
+    "question": "Yêu cầu \"Tiến triển\" (Progress) trong giải pháp cho vấn đề vùng tranh chấp có nghĩa là gì?",
+    "options": {
+      "A": "Mỗi tiến trình chỉ phải chờ một khoảng thời gian hữu hạn để vào vùng tranh chấp.",
+      "B": "Một tiến trình tạm dừng bên ngoài vùng tranh chấp không được ngăn cản các tiến trình khác vào vùng tranh chấp.",
+      "C": "Chỉ một tiến trình được ở trong vùng tranh chấp tại một thời điểm.",
+      "D": "Tốc độ thực thi của các tiến trình trong vùng tranh chấp phải được cải thiện."
+    },
+    "answer": "B",
+    "explanation": "Yêu cầu Tiến triển (Progress) đảm bảo rằng nếu không có tiến trình nào đang trong vùng tranh chấp và có một số tiến trình muốn vào, thì việc lựa chọn tiến trình tiếp theo sẽ không bị trì hoãn vô thời hạn. Một tiến trình không liên quan (đang ở ngoài vùng tranh chấp) không được phép cản trở."
+  },
+  {
+    "id": 5,
+    "topic": "Đồng bộ hoá tiến trình (Chương 5)",
+    "question": "Yêu cầu \"Chờ đợi giới hạn\" (Bounded waiting) nhằm mục đích ngăn chặn tình trạng nào?",
+    "options": {
+      "A": "Tắc nghẽn (Deadlock)",
+      "B": "Đói tài nguyên (Starvation)",
+      "C": "Nghịch đảo ưu tiên (Priority Inversion)",
+      "D": "Điều kiện tranh chấp (Race Condition)"
+    },
+    "answer": "B",
+    "explanation": "Chờ đợi giới hạn (Bounded waiting) đảm bảo rằng có một giới hạn về số lần các tiến trình khác được phép vào vùng tranh chấp của chúng sau khi một tiến trình đã đưa ra yêu cầu vào và trước khi yêu cầu đó được chấp nhận. Điều này ngăn chặn một tiến trình phải chờ đợi vô thời hạn (đói tài nguyên)."
+  },
+  {
+    "id": 6,
+    "topic": "Đồng bộ hoá tiến trình (Chương 5)",
+    "question": "Giải pháp phần mềm nào sử dụng biến turn và mảng flag để giải quyết vấn đề vùng tranh chấp cho 2 tiến trình?",
+    "options": {
+      "A": "Giải thuật Peterson",
+      "B": "Giải thuật Banker",
+      "C": "Giải thuật Dekker",
+      "D": "Giải thuật Bakery"
+    },
+    "answer": "A",
+    "explanation": "Giải thuật Peterson là một giải pháp phần mềm kinh điển cho bài toán vùng tranh chấp giữa hai tiến trình, sử dụng một biến turn để chỉ lượt và một mảng flag để chỉ ý định muốn vào vùng tranh chấp."
+  },
+  {
+    "id": 7,
+    "topic": "Đồng bộ hoá tiến trình (Chương 5)",
+    "question": "Tại sao giải pháp Peterson có thể không hoạt động chính xác trên các kiến trúc bộ xử lý hiện đại?",
+    "options": {
+      "A": "Do tốc độ CPU quá nhanh.",
+      "B": "Do thiếu sự hỗ trợ từ hệ điều hành.",
+      "C": "Do việc sắp xếp lại thứ tự thực thi lệnh (instruction reordering) của bộ xử lý.",
+      "D": "Do kích thước bộ nhớ cache quá lớn."
+    },
+    "answer": "C",
+    "explanation": "Các bộ xử lý hiện đại có thể sắp xếp lại thứ tự các lệnh đọc/ghi bộ nhớ để tối ưu hóa hiệu suất. Điều này có thể phá vỡ logic của giải thuật Peterson, vốn phụ thuộc vào thứ tự nghiêm ngặt của các thao tác gán giá trị cho flag và turn."
+  },
+  {
+    "id": 8,
+    "topic": "Đồng bộ hoá tiến trình (Chương 5)",
+    "question": "Để ngăn chặn việc sắp xếp lại lệnh gây ra lỗi trong các giải thuật đồng bộ phần mềm trên kiến trúc hiện đại, cần sử dụng công cụ nào?",
+    "options": {
+      "A": "Ngắt (Interrupt)",
+      "B": "Semaphore",
+      "C": "Rào cản bộ nhớ (Memory Barrier)",
+      "D": "Khóa Mutex (Mutex Lock)"
+    },
+    "answer": "C",
+    "explanation": "Rào cản bộ nhớ (Memory Barrier) là một lệnh đặc biệt buộc CPU phải hoàn thành tất cả các thao tác đọc/ghi bộ nhớ trước đó trước khi tiếp tục thực hiện các lệnh tiếp theo, đảm bảo thứ tự thực thi mong muốn."
+  },
+  {
+    "id": 9,
+    "topic": "Đồng bộ hoá tiến trình (Chương 5)",
+    "question": "Giải pháp vô hiệu hóa ngắt (disabling interrupts) để giải quyết vấn đề vùng tranh chấp không hiệu quả trên hệ thống nào?",
+    "options": {
+      "A": "Hệ thống đơn CPU",
+      "B": "Hệ thống đa CPU",
+      "C": "Hệ thống nhúng",
+      "D": "Hệ thống thời gian thực"
+    },
+    "answer": "B",
+    "explanation": "Trên hệ thống đa CPU, việc vô hiệu hóa ngắt trên một CPU không ngăn cản các tiến trình trên các CPU khác truy cập vào vùng tranh chấp. Do đó, giải pháp này không đảm bảo được loại trừ tương hỗ."
+  },
+  {
+    "id": 10,
+    "topic": "Đồng bộ hoá tiến trình (Chương 5)",
+    "question": "Lệnh phần cứng nguyên tử test_and_set() thực hiện công việc gì?",
+    "options": {
+      "A": "Kiểm tra giá trị của một biến và nếu thỏa mãn điều kiện thì đặt giá trị mới cho nó, tất cả trong một thao tác không thể chia cắt.",
+      "B": "So sánh hai giá trị và hoán đổi chúng nếu chúng bằng nhau.",
+      "C": "Chỉ kiểm tra giá trị của một biến boolean.",
+      "D": "Chỉ đặt giá trị mới cho một biến boolean."
+    },
+    "answer": "A",
+    "explanation": "Tính \"nguyên tử\" (atomic) của test_and_set() có nghĩa là việc đọc giá trị cũ và ghi giá trị mới được thực hiện như một đơn vị duy nhất, không thể bị xen ngang, đảm bảo tính đúng đắn khi dùng để xây dựng khóa."
+  },
+  {
+    "id": 11,
+    "topic": "Đồng bộ hoá tiến trình (Chương 5)",
+    "question": "Một Mutex Lock là một công cụ đồng bộ hóa chủ yếu được sử dụng để đảm bảo điều gì?",
+    "options": {
+      "A": "Thứ tự thực thi của các tiến trình.",
+      "B": "Loại trừ tương hỗ (Mutual Exclusion).",
+      "C": "Chia sẻ tài nguyên với nhiều thể hiện.",
+      "D": "Ngăn chặn đói tài nguyên."
+    },
+    "answer": "B",
+    "explanation": "Mutex (viết tắt của MUTual EXclusion) là một khóa mà một tiến trình phải \"chiếm\" (acquire) trước khi vào vùng tranh chấp và \"thả\" (release) sau khi ra khỏi. Nó được thiết kế đặc biệt để đảm bảo loại trừ tương hỗ."
+  },
+  {
+    "id": 12,
+    "topic": "Đồng bộ hoá tiến trình (Chương 5)",
+    "question": "Vòng lặp mà một tiến trình liên tục kiểm tra một điều kiện để vào vùng tranh chấp (ví dụ: while (condition == false) ;) được gọi là gì?",
+    "options": {
+      "A": "Chờ đợi chủ động (Active Waiting)",
+      "B": "Chờ bận (Busy Waiting / Spinlock)",
+      "C": "Chờ đợi bị động (Passive Waiting)",
+      "D": "Vòng lặp vô hạn (Infinite Loop)"
+    },
+    "answer": "B",
+    "explanation": "Chờ bận hay Spinlock là kỹ thuật mà một tiến trình lặp đi lặp lại việc kiểm tra một điều kiện mà không giải phóng CPU. Điều này gây lãng phí chu kỳ CPU."
+  },
+  {
+    "id": 13,
+    "topic": "Đồng bộ hoá tiến trình (Chương 5)",
+    "question": "Để tránh lãng phí chu kỳ CPU do chờ bận, một Mutex có thể được hiện thực bằng cách sử dụng các thao tác nào do hệ điều hành cung cấp?",
+    "options": {
+      "A": "fork() và exec()",
+      "B": "read() và write()",
+      "C": "block() và wakeup()",
+      "D": "lock() và try_lock()"
+    },
+    "answer": "C",
+    "explanation": "Thay vì chờ bận, một tiến trình không vào được vùng tranh chấp có thể gọi block() để tự đưa mình vào trạng thái chờ (waiting) và giải phóng CPU. Khi khóa được giải phóng, tiến trình giữ khóa sẽ gọi wakeup() để đánh thức một trong các tiến trình đang chờ."
+  },
+  {
+    "id": 14,
+    "topic": "Đồng bộ hoá tiến trình (Chương 5)",
+    "question": "Semaphore là một biến số nguyên chỉ có thể được truy cập thông qua hai thao tác nguyên tử là:",
+    "options": {
+      "A": "acquire() và release()",
+      "B": "lock() và unlock()",
+      "C": "wait() (P) và signal() (V)",
+      "D": "open() và close()"
+    },
+    "answer": "C",
+    "explanation": "Đây là hai thao tác định nghĩa semaphore của Dijkstra. wait() (hay P, từ Proberen - kiểm tra) giảm giá trị semaphore, và có thể phải chờ. signal() (hay V, từ Verhogen - tăng) tăng giá trị semaphore, và có thể đánh thức một tiến trình đang chờ."
+  },
+  {
+    "id": 15,
+    "topic": "Đồng bộ hoá tiến trình (Chương 5)",
+    "question": "Loại Semaphore nào có giá trị nguyên không giới hạn và thường được dùng để quản lý tài nguyên có nhiều thể hiện?",
+    "options": {
+      "A": "Binary Semaphore",
+      "B": "Mutex Semaphore",
+      "C": "Counting Semaphore",
+      "D": "Complex Semaphore"
+    },
+    "answer": "C",
+    "explanation": "Counting Semaphore có thể có bất kỳ giá trị nguyên không âm nào. Giá trị của nó thường biểu thị số lượng thể hiện của một tài nguyên đang có sẵn."
+  },
+  {
+    "id": 16,
+    "topic": "Đồng bộ hoá tiến trình (Chương 5)",
+    "question": "Một Binary Semaphore có thể được sử dụng để thực hiện chức năng tương tự như công cụ nào?",
+    "options": {
+      "A": "Monitor",
+      "B": "Mutex Lock",
+      "C": "Biến điều kiện (Condition Variable)",
+      "D": "Counting Semaphore với giá trị tối đa là 1."
+    },
+    "answer": "B",
+    "explanation": "Binary Semaphore chỉ có hai giá trị là 0 và 1. Nó có thể được sử dụng để cung cấp chức năng loại trừ tương hỗ, tương tự như một Mutex Lock."
+  },
+  {
+    "id": 17,
+    "topic": "Đồng bộ hoá tiến trình (Chương 5)",
+    "question": "Giả sử một semaphore S được khởi tạo với giá trị 1. Một tiến trình thực hiện wait(S) hai lần liên tiếp mà không có signal(S) ở giữa. Điều gì sẽ xảy ra?",
+    "options": {
+      "A": "Tiến trình sẽ tiếp tục chạy bình thường.",
+      "B": "Tiến trình sẽ bị chặn (block) ở lần gọi wait(S) thứ hai.",
+      "C": "Hệ thống sẽ báo lỗi và chấm dứt tiến trình.",
+      "D": "Giá trị của S sẽ trở thành -1."
+    },
+    "answer": "B",
+    "explanation": "Lần wait(S) đầu tiên sẽ thành công và giảm giá trị S từ 1 xuống 0. Lần wait(S) thứ hai sẽ thấy S=0, và theo định nghĩa, tiến trình phải chờ (bị chặn) cho đến khi một tiến trình khác gọi signal(S)."
+  },
+  {
+    "id": 18,
+    "topic": "Đồng bộ hoá tiến trình (Chương 5)",
+    "question": "Việc sử dụng sai thứ tự các thao tác wait() và signal() trên hai semaphore khác nhau (ví dụ: P1: wait(S1), wait(S2); P2: wait(S2), wait(S1)) có thể dẫn đến vấn đề gì?",
+    "options": {
+      "A": "Race Condition",
+      "B": "Starvation",
+      "C": "Deadlock",
+      "D": "Fragmentation"
+    },
+    "answer": "C",
+    "explanation": "Đây là một kịch bản kinh điển gây ra deadlock. P1 chiếm S1 và chờ S2. Đồng thời, P2 chiếm S2 và chờ S1. Cả hai tiến trình đều chờ đợi tài nguyên mà tiến trình kia đang giữ, tạo thành một chu trình chờ đợi."
+  },
+  {
+    "id": 19,
+    "topic": "Đồng bộ hoá tiến trình (Chương 5)",
+    "question": "Monitor là một cấu trúc đồng bộ hóa cấp cao. Đặc điểm chính của nó là gì?",
+    "options": {
+      "A": "Nó cho phép nhiều tiến trình thực thi đồng thời các thủ tục của nó.",
+      "B": "Nó gói gọn dữ liệu chia sẻ và các thủ tục thao tác trên dữ liệu đó, và đảm bảo loại trừ tương hỗ một cách tự động cho các thủ tục này.",
+      "C": "Nó chỉ sử dụng các lệnh phần cứng nguyên tử.",
+      "D": "Nó yêu cầu lập trình viên phải tự quản lý việc khóa và mở khóa."
+    },
+    "answer": "B",
+    "explanation": "Monitor là một cấu trúc ngôn ngữ lập trình trừu tượng hóa việc đồng bộ hóa. Nó tự động đảm bảo rằng chỉ có một tiến trình có thể thực thi bên trong monitor tại một thời điểm, giúp lập trình viên tránh các lỗi phổ biến khi sử dụng semaphore."
+  },
+  {
+    "id": 20,
+    "topic": "Đồng bộ hoá tiến trình (Chương 5)",
+    "question": "Trong một Monitor, khi một tiến trình cần chờ một điều kiện nào đó (ví dụ: buffer đầy), nó sẽ gọi thao tác nào trên một biến điều kiện x?",
+    "options": {
+      "A": "x.signal()",
+      "B": "x.wait()",
+      "C": "x.broadcast()",
+      "D": "x.check()"
+    },
+    "answer": "B",
+    "explanation": "Thao tác x.wait() sẽ làm cho tiến trình gọi nó bị treo và giải phóng quyền truy cập monitor, cho phép một tiến trình khác vào. Tiến trình này sẽ chờ cho đến khi một tiến trình khác gọi x.signal() trên cùng biến điều kiện."
+  },
+  {
+    "id": 21,
+    "topic": "Đồng bộ hoá tiến trình (Chương 5)",
+    "question": "Liveness trong hệ thống đồng bộ đề cập đến tập hợp các đặc tính đảm bảo điều gì?",
+    "options": {
+      "A": "Các tiến trình không bao giờ truy cập dữ liệu sai.",
+      "B": "Các tiến trình thực sự chạy và cuối cùng sẽ đạt được tiến triển.",
+      "C": "Hệ thống sử dụng CPU một cách hiệu quả nhất.",
+      "D": "Dữ liệu chia sẻ luôn nhất quán."
+    },
+    "answer": "B",
+    "explanation": "Liveness đảm bảo rằng hệ thống không bị \"kẹt\" và các tiến trình sẽ tiếp tục thực hiện công việc của chúng. Deadlock, starvation, và livelock là các ví dụ về lỗi liveness."
+  },
+  {
+    "id": 22,
+    "topic": "Đồng bộ hoá tiến trình (Chương 5)",
+    "question": "Tình trạng một tiến trình có độ ưu tiên cao bị chặn bởi một tiến trình có độ ưu tiên thấp hơn đang giữ một tài nguyên mà nó cần, được gọi là gì?",
+    "options": {
+      "A": "Deadlock",
+      "B": "Starvation",
+      "C": "Priority Inversion (Nghịch đảo ưu tiên)",
+      "D": "Livelock"
+    },
+    "answer": "C",
+    "explanation": "Đây chính là định nghĩa của hiện tượng nghịch đảo ưu tiên (Priority Inversion). Nó xảy ra khi một tiến trình ưu tiên thấp gián tiếp cản trở một tiến trình ưu tiên cao."
+  },
+  {
+    "id": 23,
+    "topic": "Đồng bộ hoá tiến trình (Chương 5)",
+    "question": "Trong bài toán \"Producer-Consumer\" (Bounded-Buffer), cần sử dụng các semaphore nào để đồng bộ hóa?",
+    "options": {
+      "A": "Chỉ một mutex để bảo vệ vùng đệm.",
+      "B": "Một mutex để bảo vệ vùng đệm, một semaphore empty để đếm số chỗ trống, và một semaphore full để đếm số chỗ đã có dữ liệu.",
+      "C": "Chỉ hai semaphore empty và full.",
+      "D": "Một biến điều kiện duy nhất."
+    },
+    "answer": "B",
+    "explanation": "Giải pháp kinh điển sử dụng 3 semaphore: 'mutex' để đảm bảo chỉ một tiến trình có thể truy cập buffer tại một thời điểm, 'empty' để đếm số ô trống trong buffer (Producer phải chờ nếu buffer đầy), và 'full' để đếm số ô đã có dữ liệu (Consumer phải chờ nếu buffer rỗng)."
+  },
+  {
+    "id": 24,
+    "topic": "Đồng bộ hoá tiến trình (Chương 5)",
+    "question": "Trong bài toán \"Readers-Writers\", mục tiêu chính là gì?",
+    "options": {
+      "A": "Luôn ưu tiên các tiến trình Writers.",
+      "B": "Cho phép nhiều Readers đọc đồng thời, nhưng một Writer phải có quyền truy cập độc quyền.",
+      "C": "Chỉ cho phép một Reader hoặc một Writer truy cập tại một thời điểm.",
+      "D": "Đảm bảo Readers và Writers có thời gian chờ đợi bằng nhau."
+    },
+    "answer": "B",
+    "explanation": "Mục tiêu của bài toán là tối đa hóa tính tương tranh bằng cách cho phép nhiều tiến trình đọc cùng lúc, vì việc đọc không làm thay đổi dữ liệu. Tuy nhiên, khi một tiến trình ghi, nó phải có quyền truy cập độc quyền để đảm bảo tính nhất quán của dữ liệu."
+  },
+  {
+    "id": 25,
+    "topic": "Đồng bộ hoá tiến trình (Chương 5)",
+    "question": "Biến thể của bài toán \"Readers-Writers\" ưu tiên Readers có thể dẫn đến vấn đề gì cho các tiến trình Writers?",
+    "options": {
+      "A": "Deadlock",
+      "B": "Starvation",
+      "C": "Race Condition",
+      "D": "Livelock"
+    },
+    "answer": "B",
+    "explanation": "Nếu các tiến trình Readers liên tục đến, một tiến trình Writer có thể không bao giờ được cấp quyền truy cập. Mỗi khi một Reader đang đọc, các Reader mới đến sẽ được phép vào ngay. Điều này có thể khiến Writer phải chờ đợi vô thời hạn (đói)."
+  },
+  {
+    "id": 26,
+    "topic": "Đồng bộ hoá tiến trình (Chương 5)",
+    "question": "Bài toán \"Dining-Philosophers\" là một ví dụ kinh điển để minh họa vấn đề gì?",
+    "options": {
+      "A": "Phân mảnh bộ nhớ.",
+      "B": "Cấp phát tài nguyên để tránh deadlock và starvation.",
+      "C": "Định thời CPU.",
+      "D": "Giao tiếp liên tiến trình."
+    },
+    "answer": "B",
+    "explanation": "Bài toán mô tả một nhóm triết gia và đũa, đại diện cho các tiến trình và tài nguyên. Nó được dùng để minh họa các vấn đề phức tạp trong việc cấp phát tài nguyên dùng chung và cách các giải pháp không cẩn thận có thể dẫn đến deadlock hoặc starvation."
+  },
+  {
+    "id": 27,
+    "topic": "Đồng bộ hoá tiến trình (Chương 5)",
+    "question": "Trong bài toán \"Dining-Philosophers\", giải pháp đơn giản là mỗi triết gia nhặt đũa bên trái rồi đến đũa bên phải có thể dẫn đến tình huống nào?",
+    "options": {
+      "A": "Tất cả các triết gia đều ăn được.",
+      "B": "Chỉ một triết gia bị đói.",
+      "C": "Deadlock, khi tất cả các triết gia cùng nhặt đũa bên trái và chờ đũa bên phải.",
+      "D": "Race condition, dẫn đến việc hai triết gia cùng dùng một chiếc đũa."
+    },
+    "answer": "C",
+    "explanation": "Nếu tất cả các triết gia cùng lúc nhặt chiếc đũa bên trái của họ, thì mỗi người sẽ giữ một chiếc đũa và chờ đợi chiếc đũa bên phải, vốn đang được giữ bởi người hàng xóm. Không ai có thể nhả đũa, tạo thành một chu trình chờ đợi và gây ra deadlock."
+  },
+  {
+    "id": 28,
+    "topic": "Đồng bộ hoá tiến trình (Chương 5)",
+    "question": "Thao tác compare_and_swap(value, expected, new_value) được coi là nguyên tử. Nó sẽ thành công (trả về true và gán new_value cho value) khi nào?",
+    "options": {
+      "A": "Khi value lớn hơn expected.",
+      "B": "Khi value khác expected.",
+      "C": "Khi value bằng expected.",
+      "D": "Luôn luôn thành công."
+    },
+    "answer": "C",
+    "explanation": "Thao tác này so sánh giá trị hiện tại của biến value với giá trị expected. Chỉ khi chúng bằng nhau, nó mới cập nhật value thành new_value. Toàn bộ quá trình (so sánh và hoán đổi) là nguyên tử."
+  },
+  {
+    "id": 29,
+    "topic": "Đồng bộ hoá tiến trình (Chương 5)",
+    "question": "So với Semaphore, Mutex Lock có một khái niệm gọi là \"quyền sở hữu\" (ownership). Điều này có nghĩa là gì?",
+    "options": {
+      "A": "Bất kỳ tiến trình nào cũng có thể mở khóa mutex.",
+      "B": "Chỉ có tiến trình đã khóa mutex mới có thể mở khóa nó.",
+      "C": "Mutex có thể được sở hữu bởi nhiều tiến trình cùng lúc.",
+      "D": "Hệ điều hành là chủ sở hữu của tất cả các mutex."
+    },
+    "answer": "B",
+    "explanation": "Quyền sở hữu là một đặc tính quan trọng của mutex. Tiến trình nào đã gọi acquire() (khóa) thì chỉ tiến trình đó mới có thể gọi release() (mở khóa). Điều này khác với semaphore, nơi một tiến trình có thể gọi wait() và một tiến trình khác có thể gọi signal()."
+  },
+  {
+    "id": 30,
+    "topic": "Đồng bộ hoá tiến trình (Chương 5)",
+    "question": "Thao tác signal() trên một biến điều kiện x bên trong một monitor (x.signal()) khác với thao tác signal() trên một semaphore S (signal(S)) như thế nào?",
+    "options": {
+      "A": "x.signal() luôn đánh thức một tiến trình, trong khi signal(S) có thể không.",
+      "B": "signal(S) luôn tăng giá trị của S, trong khi x.signal() không làm gì nếu không có tiến trình nào đang chờ trên x.",
+      "C": "Chúng hoàn toàn giống nhau về mặt chức năng.",
+      "D": "signal(S) có thể gây deadlock, còn x.signal() thì không."
+    },
+    "answer": "B",
+    "explanation": "signal(S) trên semaphore luôn có hiệu lực: nó tăng giá trị của S, giá trị này được \"ghi nhớ\" cho lần wait() tiếp theo. Ngược lại, x.signal() trên biến điều kiện chỉ có tác dụng nếu có ít nhất một tiến trình đang chờ trên x; nếu không có ai đang chờ, tín hiệu này sẽ bị mất đi."
+  },
+  {
+    "id": 31,
+    "topic": "Đồng bộ hoá tiến trình (Chương 5)",
+    "question": "Tại sao việc xác định vùng tranh chấp (critical section) một cách chính xác lại quan trọng?",
+    "options": {
+      "A": "Nếu vùng tranh chấp quá lớn, nó làm giảm tính tương tranh (concurrency) của hệ thống.",
+      "B": "Nếu vùng tranh chấp quá nhỏ, nó có thể không bảo vệ hết dữ liệu chia sẻ, gây ra race condition.",
+      "C": "Cả A và B đều đúng.",
+      "D": "Nó chỉ quan trọng về mặt thẩm mỹ của mã nguồn."
+    },
+    "answer": "C",
+    "explanation": "Cả hai đều đúng. Nếu vùng tranh chấp quá lớn, nó sẽ bao gồm cả những đoạn mã không cần bảo vệ, làm giảm khả năng thực thi song song của các tiến trình. Nếu vùng tranh chấp quá nhỏ, nó có thể bỏ sót một số thao tác trên dữ liệu chia sẻ, không bảo vệ được dữ liệu hoàn toàn và dẫn đến điều kiện tranh chấp."
+  },
+  {
+    "id": 32,
+    "topic": "Đồng bộ hoá tiến trình (Chương 5)",
+    "question": "Lệnh test_and_set() thường được sử dụng để hiện thực loại khóa nào?",
+    "options": {
+      "A": "Khóa đọc-ghi (Read-Write Lock)",
+      "B": "Khóa quay (Spinlock)",
+      "C": "Khóa đệ quy (Recursive Lock)",
+      "D": "Khóa theo thời gian (Timed Lock)"
+    },
+    "answer": "B",
+    "explanation": "Một spinlock có thể được hiện thực bằng một vòng lặp liên tục gọi test_and_set() cho đến khi nó trả về giá trị cho thấy khóa đã được tự do. Đây là một hình thức của chờ bận (busy-waiting)."
+  },
+  {
+    "id": 33,
+    "topic": "Đồng bộ hoá tiến trình (Chương 5)",
+    "question": "Trong giải pháp Peterson, biến turn có vai trò gì?",
+    "options": {
+      "A": "Chỉ ra có bao nhiêu tiến trình muốn vào vùng tranh chấp.",
+      "B": "Đảm bảo loại trừ tương hỗ.",
+      "C": "Đảm bảo tiến triển bằng cách giải quyết xung đột khi cả hai tiến trình cùng muốn vào.",
+      "D": "Đếm số lần một tiến trình đã vào vùng tranh chấp."
+    },
+    "answer": "C",
+    "explanation": "Biến turn được sử dụng để quyết định ai sẽ được vào nếu cả hai tiến trình cùng lúc muốn vào (cả hai flag đều là true). Bằng cách nhường lượt cho tiến trình kia, nó giúp phá vỡ sự đối xứng và đảm bảo yêu cầu tiến triển."
+  },
+  {
+    "id": 34,
+    "topic": "Đồng bộ hoá tiến trình (Chương 5)",
+    "question": "Trong giải pháp Peterson, mảng flag[i] = true biểu thị điều gì?",
+    "options": {
+      "A": "Tiến trình i đang ở trong vùng tranh chấp.",
+      "B": "Tiến trình i sẵn sàng vào vùng tranh chấp.",
+      "C": "Tiến trình i đã hoàn thành công việc.",
+      "D": "Lượt của tiến trình i để vào vùng tranh chấp."
+    },
+    "answer": "B",
+    "explanation": "Khi tiến trình i muốn vào vùng tranh chấp, nó sẽ đặt flag[i] thành true. Đây là cách nó thông báo \"ý định\" của mình cho tiến trình kia."
+  },
+  {
+    "id": 35,
+    "topic": "Đồng bộ hoá tiến trình (Chương 5)",
+    "question": "Một giải pháp đồng bộ được gọi là \"lock-free\" nếu nó đảm bảo điều gì?",
+    "options": {
+      "A": "Không sử dụng bất kỳ loại khóa nào.",
+      "B": "Hệ thống sẽ không bao giờ bị deadlock.",
+      "C": "Ít nhất một tiến trình sẽ luôn tạo ra tiến triển, ngay cả khi các tiến trình khác bị tạm dừng.",
+      "D": "Không có hiện tượng chờ bận (busy-waiting)."
+    },
+    "answer": "C",
+    "explanation": "Thuật toán lock-free đảm bảo rằng hệ thống nói chung luôn có tiến triển. Nó tránh được deadlock và thường sử dụng các thao tác nguyên tử cấp thấp như compare_and_swap."
+  },
+  {
+    "id": 36,
+    "topic": "Đồng bộ hoá tiến trình (Chương 5)",
+    "question": "Trong bài toán Producer-Consumer, nếu Producer không chờ semaphore empty (đếm số chỗ trống) trước khi sản xuất, điều gì có thể xảy ra?",
+    "options": {
+      "A": "Consumer sẽ đọc dữ liệu sai.",
+      "B": "Producer sẽ ghi đè lên dữ liệu chưa được tiêu thụ khi buffer đầy.",
+      "C": "Hệ thống sẽ bị deadlock.",
+      "D": "Không có gì xảy ra, hệ thống vẫn hoạt động đúng."
+    },
+    "answer": "B",
+    "explanation": "Semaphore 'empty' dùng để ngăn Producer thêm dữ liệu vào một buffer đã đầy. Nếu bỏ qua bước kiểm tra này, Producer có thể ghi đè lên một ô trong buffer mà Consumer chưa kịp đọc, làm mất dữ liệu."
+  },
+  {
+    "id": 37,
+    "topic": "Đồng bộ hoá tiến trình (Chương 5)",
+    "question": "Trong bài toán Producer-Consumer, nếu Consumer không chờ semaphore full (đếm số item đã có) trước khi tiêu thụ, điều gì có thể xảy ra?",
+    "options": {
+      "A": "Consumer sẽ cố gắng đọc từ một buffer rỗng.",
+      "B": "Producer sẽ bị chặn vô thời hạn.",
+      "C": "Dữ liệu trong buffer sẽ bị hỏng.",
+      "D": "Hệ thống sẽ bị deadlock."
+    },
+    "answer": "A",
+    "explanation": "Semaphore 'full' dùng để ngăn Consumer đọc dữ liệu từ một buffer rỗng. Nếu bỏ qua bước kiểm tra này, Consumer có thể cố gắng đọc dữ liệu từ một ô trống, dẫn đến việc tiêu thụ dữ liệu rác hoặc không hợp lệ."
+  },
+  {
+    "id": 38,
+    "topic": "Đồng bộ hoá tiến trình (Chương 5)",
+    "question": "Một giải pháp cho bài toán \"Dining-Philosophers\" là chỉ cho phép tối đa n-1 triết gia ngồi vào bàn cùng một lúc. Giải pháp này nhằm mục đích gì?",
+    "options": {
+      "A": "Tăng hiệu suất ăn của các triết gia.",
+      "B": "Đảm bảo ít nhất một triết gia luôn có thể lấy được cả hai chiếc đũa, do đó phá vỡ chu trình chờ đợi và tránh deadlock.",
+      "C": "Đảm bảo sự công bằng tuyệt đối.",
+      "D": "Giảm số lượng đũa cần thiết."
+    },
+    "answer": "B",
+    "explanation": "Bằng cách giới hạn số lượng triết gia là n-1 (với n đũa), hệ thống đảm bảo rằng trong trường hợp xấu nhất (mỗi triết gia có 1 đũa), vẫn sẽ có một chiếc đũa thừa trên bàn. Triết gia ngồi cạnh chiếc đũa đó có thể lấy nó, ăn, rồi nhả cả hai đũa ra, phá vỡ chu trình chờ đợi và ngăn chặn deadlock."
+  },
+  {
+    "id": 39,
+    "topic": "Đồng bộ hoá tiến trình (Chương 5)",
+    "question": "Tình trạng đói tài nguyên (Starvation) khác với tắc nghẽn (Deadlock) ở điểm nào?",
+    "options": {
+      "A": "Trong deadlock, các tiến trình bị chặn vĩnh viễn; trong starvation, tiến trình có thể được chạy nhưng liên tục bị trì hoãn.",
+      "B": "Deadlock liên quan đến một tập các tiến trình, trong khi starvation có thể chỉ xảy ra với một tiến trình.",
+      "C": "Deadlock là một vấn đề liveness, còn starvation thì không.",
+      "D": "Cả A và B đều đúng."
+    },
+    "answer": "D",
+    "explanation": "Cả A và B đều đúng. Trong deadlock, các tiến trình liên quan bị chặn vĩnh viễn. Trong starvation, tiến trình vẫn có thể được lên lịch chạy nhưng liên tục bị 'qua mặt' và không được cấp tài nguyên cần thiết. Deadlock thường liên quan đến một tập các tiến trình chờ đợi lẫn nhau, trong khi starvation có thể xảy ra với chỉ một tiến trình."
+  },
+  {
+    "id": 40,
+    "topic": "Đồng bộ hoá tiến trình (Chương 5)",
+    "question": "Thao tác wait() trên semaphore còn được gọi là thao tác P. Chữ P bắt nguồn từ từ nào trong tiếng Hà Lan?",
+    "options": {
+      "A": "Proberen (to test)",
+      "B": "Passeren (to pass)",
+      "C": "Pakken (to grab)",
+      "D": "Pauzeren (to pause)"
+    },
+    "answer": "A",
+    "explanation": "Chữ P trong thao tác P/V là viết tắt của \"Proberen\", có nghĩa là \"to test\" (kiểm tra)."
+  },
+  {
+    "id": 41,
+    "topic": "Đồng bộ hoá tiến trình (Chương 5)",
+    "question": "Thao tác signal() trên semaphore còn được gọi là thao tác V. Chữ V bắt nguồn từ từ nào trong tiếng Hà Lan?",
+    "options": {
+      "A": "Vrijgeven (to release)",
+      "B": "Verhogen (to increment)",
+      "C": "Veranderen (to change)",
+      "D": "Voltooien (to complete)"
+    },
+    "answer": "B",
+    "explanation": "Chữ V trong thao tác P/V là viết tắt của \"Verhogen\", có nghĩa là \"to increment\" (tăng)."
+  },
+  {
+    "id": 42,
+    "topic": "Đồng bộ hoá tiến trình (Chương 5)",
+    "question": "So với semaphore, monitor được coi là một công cụ an toàn hơn vì sao?",
+    "options": {
+      "A": "Nó nhanh hơn semaphore.",
+      "B": "Lỗi lập trình (như quên gọi signal hoặc sai thứ tự wait/signal) ít có khả năng xảy ra hơn vì cơ chế khóa được quản lý tự động.",
+      "C": "Nó có thể giải quyết mọi bài toán đồng bộ, trong khi semaphore thì không.",
+      "D": "Nó được hỗ trợ bởi phần cứng, còn semaphore thì không."
+    },
+    "answer": "B",
+    "explanation": "Monitor trừu tượng hóa việc khóa và mở khóa. Loại trừ tương hỗ được đảm bảo một cách tự động cho các thủ tục của monitor. Điều này làm giảm đáng kể nguy cơ lập trình viên mắc lỗi như quên gọi signal hoặc đảo lộn thứ tự wait và signal, những lỗi phổ biến khi dùng semaphore."
+  },
+  {
+    "id": 43,
+    "topic": "Đồng bộ hoá tiến trình (Chương 5)",
+    "question": "Trong một monitor, nếu một tiến trình gọi x.signal() và có một tiến trình khác đang chờ trên x, tiến trình nào sẽ được thực thi tiếp theo?",
+    "options": {
+      "A": "Luôn là tiến trình vừa gọi signal.",
+      "B": "Luôn là tiến trình được đánh thức.",
+      "C": "Phụ thuộc vào loại monitor (Hoare-style hoặc Mesa-style).",
+      "D": "Hệ điều hành sẽ chọn ngẫu nhiên."
+    },
+    "answer": "C",
+    "explanation": "Có hai ngữ nghĩa chính cho signal: Hoare-style (tiến trình được đánh thức sẽ chạy ngay lập tức) và Mesa-style (tiến trình được đánh thức chỉ được chuyển vào hàng đợi sẵn sàng, và tiến trình gọi signal sẽ tiếp tục chạy). Do đó, hành vi phụ thuộc vào cách hiện thực của monitor."
+  },
+  {
+    "id": 44,
+    "topic": "Đồng bộ hoá tiến trình (Chương 5)",
+    "question": "Lệnh phần cứng compare_and_swap là nền tảng cho việc xây dựng các cấu trúc dữ liệu nào?",
+    "options": {
+      "A": "Cấu trúc dữ liệu không khóa (lock-free) và không chờ (wait-free).",
+      "B": "Hàng đợi ưu tiên (priority queue).",
+      "C": "Cây đỏ-đen (red-black tree).",
+      "D": "Bảng băm (hash table)."
+    },
+    "answer": "A",
+    "explanation": "compare_and_swap (CAS) là một công cụ nguyên tử mạnh mẽ cho phép các thuật toán cập nhật dữ liệu chia sẻ mà không cần sử dụng các khóa truyền thống. Điều này là nền tảng cho các cấu trúc dữ liệu hiệu năng cao, không bị khóa."
+  },
+  {
+    "id": 45,
+    "topic": "Đồng bộ hoá tiến trình (Chương 5)",
+    "question": "Khi một tiến trình đang ở trong vùng tranh chấp được bảo vệ bởi một Mutex, các tiến trình khác cố gắng acquire() Mutex đó sẽ làm gì?",
+    "options": {
+      "A": "Gây ra lỗi hệ thống.",
+      "B": "Được phép vào vùng tranh chấp.",
+      "C": "Bị chặn cho đến khi Mutex được release().",
+      "D": "Gửi một tín hiệu đến tiến trình đang giữ khóa."
+    },
+    "answer": "C",
+    "explanation": "Đây là nguyên tắc cơ bản của Mutex. Nếu khóa đang được giữ, bất kỳ tiến trình nào khác cố gắng chiếm khóa sẽ bị đưa vào trạng thái chờ (bị chặn) cho đến khi tiến trình đang giữ khóa giải phóng nó."
+  },
+  {
+    "id": 46,
+    "topic": "Tắc nghẽn (Deadlock) (Chương 6)",
+    "question": "Điều kiện nào sau đây KHÔNG phải là một trong bốn điều kiện cần để xảy ra tắc nghẽn (deadlock)?",
+    "options": {
+      "A": "Loại trừ tương hỗ (Mutual Exclusion)",
+      "B": "Giữ và Chờ (Hold and Wait)",
+      "C": "Trưng dụng (Preemption)",
+      "D": "Chờ đợi vòng tròn (Circular Wait)"
+    },
+    "answer": "C",
+    "explanation": "Bốn điều kiện cần cho deadlock là: Loại trừ tương hỗ, Giữ và Chờ, Không trưng dụng, và Chờ đợi vòng tròn. 'Trưng dụng' (Preemption) là hành động ngăn chặn deadlock, không phải là điều kiện gây ra nó. Điều kiện thực sự là 'Không trưng dụng' (No Preemption)."
+  },
+  {
+    "id": 47,
+    "topic": "Tắc nghẽn (Deadlock) (Chương 6)",
+    "question": "Điều kiện \"Giữ và Chờ\" (Hold and Wait) mô tả tình huống nào?",
+    "options": {
+      "A": "Một tiến trình đang chờ tài nguyên và không giữ tài nguyên nào cả.",
+      "B": "Một tiến trình đang giữ ít nhất một tài nguyên và đang chờ để được cấp thêm tài nguyên do tiến trình khác giữ.",
+      "C": "Một tiến trình giữ tài nguyên và không bao giờ chờ thêm.",
+      "D": "Một tiến trình chờ tài nguyên và sau đó mới giữ chúng."
+    },
+    "answer": "B",
+    "explanation": "Đây là định nghĩa chính xác của điều kiện Giữ và Chờ (Hold and Wait), trong đó một tiến trình đang giữ ít nhất một tài nguyên và đồng thời chờ để được cấp thêm tài nguyên đang do một tiến trình khác nắm giữ."
+  },
+  {
+    "id": 48,
+    "topic": "Tắc nghẽn (Deadlock) (Chương 6)",
+    "question": "Điều kiện \"Không trưng dụng\" (No Preemption) có nghĩa là gì?",
+    "options": {
+      "A": "Tài nguyên có thể bị lấy lại từ tiến trình đang giữ nó bất cứ lúc nào.",
+      "B": "Tài nguyên không thể bị lấy lại một cách cưỡng chế; nó chỉ có thể được giải phóng tự nguyện bởi tiến trình đang giữ.",
+      "C": "Tiến trình không thể yêu cầu tài nguyên.",
+      "D": "Hệ điều hành có thể trưng dụng CPU nhưng không thể trưng dụng các tài nguyên khác."
+    },
+    "answer": "B",
+    "explanation": "Điều kiện \"Không trưng dụng\" (No Preemption) có nghĩa là một khi tài nguyên đã được cấp cho một tiến trình, hệ thống không thể lấy lại nó một cách cưỡng chế cho đến khi tiến trình đó tự nguyện giải phóng."
+  },
+  {
+    "id": 49,
+    "topic": "Tắc nghẽn (Deadlock) (Chương 6)",
+    "question": "Trong Đồ thị cấp phát tài nguyên (Resource-Allocation Graph - RAG), một cạnh từ tiến trình Pi đến loại tài nguyên Rj (Pi->Rj) biểu thị điều gì?",
+    "options": {
+      "A": "Tài nguyên Rj đã được cấp cho tiến trình Pi.",
+      "B": "Tiến trình Pi đang yêu cầu một thể hiện của tài nguyên Rj.",
+      "C": "Tiến trình Pi đã giải phóng tài nguyên Rj.",
+      "D": "Tài nguyên Rj không tồn tại."
+    },
+    "answer": "B",
+    "explanation": "Một cạnh từ tiến trình Pi đến tài nguyên Rj (Pi->Rj) được gọi là \"cạnh yêu cầu\" (request edge), biểu thị rằng tiến trình Pi đang yêu cầu và chờ được cấp phát một thể hiện của tài nguyên Rj."
+  },
+  {
+    "id": 50,
+    "topic": "Tắc nghẽn (Deadlock) (Chương 6)",
+    "question": "Trong Đồ thị cấp phát tài nguyên (RAG), một cạnh từ loại tài nguyên Rj đến tiến trình Pi (Rj->Pi) biểu thị điều gì?",
+    "options": {
+      "A": "Một thể hiện của tài nguyên Rj đã được cấp cho tiến trình Pi.",
+      "B": "Tiến trình Pi đang yêu cầu tài nguyên Rj.",
+      "C": "Tiến trình Pi đang chờ tài nguyên Rj.",
+      "D": "Tiến trình Pi là tiến trình con của Rj."
+    },
+    "answer": "A",
+    "explanation": "Một cạnh từ tài nguyên Rj đến tiến trình Pi (Rj->Pi) được gọi là \"cạnh cấp phát\" (assignment edge), biểu thị rằng một thể hiện của tài nguyên Rj đã được cấp phát và đang được tiến trình Pi giữ."
+  },
+  {
+    "id": 51,
+    "topic": "Tắc nghẽn (Deadlock) (Chương 6)",
+    "question": "Nếu Đồ thị cấp phát tài nguyên (RAG) không chứa chu trình, điều gì có thể được kết luận?",
+    "options": {
+      "A": "Hệ thống chắc chắn đang bị deadlock.",
+      "B": "Hệ thống có thể bị deadlock.",
+      "C": "Hệ thống chắc chắn không bị deadlock.",
+      "D": "Không thể kết luận gì về deadlock."
+    },
+    "answer": "C",
+    "explanation": "Sự tồn tại của chu trình trong Đồ thị cấp phát tài nguyên là một điều kiện cần để xảy ra deadlock. Do đó, nếu đồ thị không chứa chu trình, có thể kết luận chắc chắn rằng hệ thống không bị deadlock."
+  },
+  {
+    "id": 52,
+    "topic": "Tắc nghẽn (Deadlock) (Chương 6)",
+    "question": "Nếu Đồ thị cấp phát tài nguyên (RAG) chứa một chu trình VÀ mỗi loại tài nguyên chỉ có một thể hiện, điều gì có thể được kết luận?",
+    "options": {
+      "A": "Hệ thống chắc chắn đang bị deadlock.",
+      "B": "Hệ thống có thể bị deadlock.",
+      "C": "Hệ thống chắc chắn không bị deadlock.",
+      "D": "Chu trình này không liên quan đến deadlock."
+    },
+    "answer": "A",
+    "explanation": "Trong trường hợp mỗi loại tài nguyên chỉ có một thể hiện duy nhất, sự tồn tại của một chu trình trong Đồ thị cấp phát tài nguyên là điều kiện cần và đủ để kết luận rằng hệ thống chắc chắn đang ở trong tình trạng deadlock."
+  },
+  {
+    "id": 53,
+    "topic": "Tắc nghẽn (Deadlock) (Chương 6)",
+    "question": "Nếu Đồ thị cấp phát tài nguyên (RAG) chứa một chu trình VÀ một số loại tài nguyên có nhiều thể hiện, điều gì có thể được kết luận?",
+    "options": {
+      "A": "Hệ thống chắc chắn đang bị deadlock.",
+      "B": "Hệ thống có thể bị deadlock, nhưng không chắc chắn.",
+      "C": "Hệ thống chắc chắn không bị deadlock.",
+      "D": "Cần phải sử dụng Wait-for graph để xác định."
+    },
+    "answer": "B",
+    "explanation": "Khi một số loại tài nguyên có nhiều thể hiện, sự tồn tại của một chu trình chỉ là điều kiện cần nhưng không phải là điều kiện đủ để kết luận có deadlock. Hệ thống có thể bị deadlock, nhưng cũng có khả năng không, ví dụ nếu một tiến trình trong chu trình đang chờ một thể hiện của tài nguyên mà một thể hiện khác của tài nguyên đó lại đang tự do."
+  },
+  {
+    "id": 54,
+    "topic": "Tắc nghẽn (Deadlock) (Chương 6)",
+    "question": "Phương pháp Ngăn chặn deadlock (Deadlock Prevention) hoạt động bằng cách nào?",
+    "options": {
+      "A": "Cho phép deadlock xảy ra rồi phục hồi.",
+      "B": "Đảm bảo hệ thống không bao giờ đi vào trạng thái không an toàn.",
+      "C": "Đảm bảo ít nhất một trong bốn điều kiện cần của deadlock không bao giờ xảy ra.",
+      "D": "Sử dụng thuật toán Banker để cấp phát tài nguyên."
+    },
+    "answer": "C",
+    "explanation": "Ngăn chặn deadlock (Deadlock Prevention) là phương pháp phòng ngừa, hoạt động bằng cách thiết kế hệ thống sao cho ít nhất một trong bốn điều kiện cần của deadlock (Loại trừ tương hỗ, Giữ và Chờ, Không trưng dụng, Chờ đợi vòng tròn) bị phá vỡ và không bao giờ có thể xảy ra."
+  },
+  {
+    "id": 55,
+    "topic": "Tắc nghẽn (Deadlock) (Chương 6)",
+    "question": "Để phá vỡ điều kiện \"Giữ và Chờ\", một chiến lược là yêu cầu tiến trình phải làm gì?",
+    "options": {
+      "A": "Yêu cầu tài nguyên theo thứ tự tăng dần.",
+      "B": "Yêu cầu tất cả các tài nguyên cần thiết cùng một lúc, trước khi bắt đầu thực thi.",
+      "C": "Chỉ yêu cầu một tài nguyên tại một thời điểm.",
+      "D": "Luôn giải phóng tài nguyên đang giữ nếu yêu cầu mới bị từ chối."
+    },
+    "answer": "B",
+    "explanation": "Để phá vỡ điều kiện \"Giữ và Chờ\", một chiến lược là yêu cầu tiến trình phải yêu cầu tất cả các tài nguyên cần thiết cùng một lúc trước khi bắt đầu thực thi. Bằng cách này, tiến trình sẽ không bao giờ rơi vào tình trạng giữ một tài nguyên trong khi đang chờ một tài nguyên khác."
+  },
+  {
+    "id": 56,
+    "topic": "Tắc nghẽn (Deadlock) (Chương 6)",
+    "question": "Nhược điểm chính của chiến lược yêu cầu tất cả tài nguyên cùng lúc để ngăn chặn deadlock là gì?",
+    "options": {
+      "A": "Gây ra chờ đợi vòng tròn.",
+      "B": "Khó thực hiện.",
+      "C": "Dẫn đến hiệu suất sử dụng tài nguyên thấp và có thể gây đói tài nguyên.",
+      "D": "Yêu cầu hệ thống phải có khả năng trưng dụng."
+    },
+    "answer": "C",
+    "explanation": "Nhược điểm chính của chiến lược này là hiệu suất sử dụng tài nguyên thấp, vì các tài nguyên có thể bị chiếm giữ trong thời gian dài mặc dù chưa được sử dụng. Ngoài ra, một tiến trình cần nhiều tài nguyên phổ biến có thể bị đói tài nguyên vì khó có thể nhận được tất cả chúng cùng lúc."
+  },
+  {
+    "id": 57,
+    "topic": "Tắc nghẽn (Deadlock) (Chương 6)",
+    "question": "Để phá vỡ điều kiện \"Chờ đợi vòng tròn\", một chiến lược phổ biến và thực tế là gì?",
+    "options": {
+      "A": "Giới hạn số lượng tiến trình trong hệ thống.",
+      "B": "Tăng số lượng tài nguyên.",
+      "C": "Gán một thứ tự (ví dụ: đánh số) cho tất cả các loại tài nguyên và yêu cầu các tiến trình phải yêu cầu tài nguyên theo thứ tự tăng dần.",
+      "D": "Cho phép trưng dụng tài nguyên."
+    },
+    "answer": "C",
+    "explanation": "Một chiến lược phổ biến và thực tế để phá vỡ điều kiện \"Chờ đợi vòng tròn\" là áp đặt một thứ tự yêu cầu tài nguyên nghiêm ngặt. Bằng cách gán một thứ tự cho tất cả các loại tài nguyên và buộc các tiến trình phải yêu cầu chúng theo thứ tự tăng dần, hệ thống không thể hình thành một chu trình chờ đợi."
+  },
+  {
+    "id": 58,
+    "topic": "Tắc nghẽn (Deadlock) (Chương 6)",
+    "question": "Phương pháp Tránh deadlock (Deadlock Avoidance) khác với Ngăn chặn deadlock (Deadlock Prevention) ở điểm nào?",
+    "options": {
+      "A": "Tránh deadlock ít hạn chế hơn và cho phép hiệu suất sử dụng tài nguyên cao hơn.",
+      "B": "Tránh deadlock yêu cầu thông tin tiên nghiệm (a priori) về tài nguyên tối đa mà mỗi tiến trình có thể cần.",
+      "C": "Tránh deadlock kiểm tra trạng thái an toàn trước khi cấp phát, thay vì áp đặt các quy tắc nghiêm ngặt lúc thiết kế.",
+      "D": "Tất cả các phương án trên."
+    },
+    "answer": "D",
+    "explanation": "Phương pháp Tránh deadlock khác với Ngăn chặn deadlock ở tất cả các điểm trên: nó ít hạn chế hơn và cho hiệu suất cao hơn; nó yêu cầu thông tin tiên nghiệm về nhu cầu tài nguyên tối đa; và cơ chế hoạt động của nó là kiểm tra trạng thái an toàn trước mỗi lần cấp phát thay vì áp đặt các quy tắc cố định."
+  },
+  {
+    "id": 59,
+    "topic": "Tắc nghẽn (Deadlock) (Chương 6)",
+    "question": "Một hệ thống được coi là ở \"trạng thái an toàn\" (safe state) nếu:",
+    "options": {
+      "A": "Không có tiến trình nào đang chờ tài nguyên.",
+      "B": "Tất cả các tài nguyên đều đang được sử dụng.",
+      "C": "Tồn tại một chuỗi thực thi của các tiến trình (<P1, P2, ..., Pn>) mà mỗi tiến trình Pi có thể được thỏa mãn yêu cầu tài nguyên tối đa của nó và kết thúc.",
+      "D": "Không có chu trình trong đồ thị cấp phát tài nguyên."
+    },
+    "answer": "C",
+    "explanation": "Đây là định nghĩa của trạng thái an toàn. Một hệ thống ở trạng thái an toàn nếu tồn tại một chuỗi thực thi của tất cả các tiến trình (<P1, P2, ..., Pn>) sao cho mỗi tiến trình Pi có thể được thỏa mãn yêu cầu tài nguyên tối đa của nó bằng cách sử dụng các tài nguyên hiện có cộng với tài nguyên đang được giữ bởi các tiến trình Pj (với j < i). Điều này đảm bảo có ít nhất một cách để tất cả các tiến trình có thể hoàn thành mà không gây ra deadlock."
+  },
+  {
+    "id": 60,
+    "topic": "Tắc nghẽn (Deadlock) (Chương 6)",
+    "question": "Nếu hệ thống đang ở trạng thái không an toàn (unsafe state), điều đó có nghĩa là gì?",
+    "options": {
+      "A": "Hệ thống chắc chắn đang bị deadlock.",
+      "B": "Hệ thống có khả năng (possibility) sẽ dẫn đến deadlock.",
+      "C": "Hệ thống sẽ sớm bị sập.",
+      "D": "Hệ thống đang hoạt động không hiệu quả."
+    },
+    "answer": "B",
+    "explanation": "Trạng thái không an toàn không đồng nghĩa với deadlock. Nó chỉ có nghĩa là hệ thống có khả năng sẽ dẫn đến deadlock. Hệ thống không thể đảm bảo rằng deadlock sẽ không xảy ra, nhưng deadlock cũng có thể không xảy ra nếu các tiến trình giải phóng tài nguyên trước khi yêu cầu thêm."
+  },
+  {
+    "id": 61,
+    "topic": "Tắc nghẽn (Deadlock) (Chương 6)",
+    "question": "Giải thuật Banker được sử dụng cho mục đích gì?",
+    "options": {
+      "A": "Ngăn chặn deadlock.",
+      "B": "Tránh deadlock.",
+      "C": "Phát hiện deadlock.",
+      "D": "Phục hồi từ deadlock."
+    },
+    "answer": "B",
+    "explanation": "Giải thuật Banker là giải thuật kinh điển để tránh deadlock (Deadlock Avoidance). Trước mỗi lần cấp phát, nó giả định cấp phát và sau đó chạy thuật toán an toàn để kiểm tra xem trạng thái mới có an toàn không. Nếu an toàn, nó mới thực sự cấp phát."
+  },
+  {
+    "id": 62,
+    "topic": "Tắc nghẽn (Deadlock) (Chương 6)",
+    "question": "Giải thuật Banker yêu cầu mỗi tiến trình mới phải cung cấp thông tin gì trước khi bắt đầu thực thi?",
+    "options": {
+      "A": "Thời gian thực thi dự kiến.",
+      "B": "Độ ưu tiên của tiến trình.",
+      "C": "Số lượng tài nguyên tối đa của mỗi loại mà nó có thể cần.",
+      "D": "Danh sách các tiến trình khác mà nó sẽ tương tác."
+    },
+    "answer": "C",
+    "explanation": "Đây là yêu cầu thông tin tiên nghiệm (a priori) của giải thuật Banker. Thông tin về số lượng tài nguyên tối đa của mỗi loại (gọi là Max) là cần thiết để thuật toán an toàn có thể tính toán xem liệu có tồn tại một chuỗi an toàn hay không."
+  },
+  {
+    "id": 63,
+    "topic": "Tắc nghẽn (Deadlock) (Chương 6)",
+    "question": "Tại sao giải thuật Banker ít được sử dụng trong các hệ điều hành đa dụng hiện đại?",
+    "options": {
+      "A": "Vì nó quá phức tạp để lập trình.",
+      "B": "Vì nó đòi hỏi phải biết trước nhu cầu tài nguyên tối đa, điều này không thực tế đối với hầu hết các ứng dụng.",
+      "C": "Vì nó chỉ hoạt động với một loại tài nguyên duy nhất.",
+      "D": "Vì nó gây ra phân mảnh."
+    },
+    "answer": "B",
+    "explanation": "Trong một môi trường đa dụng, các tiến trình thường có tính động và khó có thể xác định chính xác nhu cầu tài nguyên tối đa của chúng ngay từ đầu. Yêu cầu này làm cho giải thuật Banker không thực tế để triển khai."
+  },
+  {
+    "id": 64,
+    "topic": "Tắc nghẽn (Deadlock) (Chương 6)",
+    "question": "Phương pháp Phát hiện deadlock và Phục hồi (Deadlock Detection and Recovery) có triết lý hoạt động như thế nào?",
+    "options": {
+      "A": "Ngăn chặn deadlock bằng mọi giá.",
+      "B": "Chấp nhận rằng deadlock có thể xảy ra, sau đó tìm và giải quyết chúng.",
+      "C": "Luôn giữ hệ thống ở trạng thái an toàn.",
+      "D": "Bỏ qua hoàn toàn vấn đề deadlock."
+    },
+    "answer": "B",
+    "explanation": "Cách tiếp cận này không ngăn chặn hay tránh deadlock, mà cho phép chúng xảy ra. Hệ thống sẽ định kỳ chạy một thuật toán phát hiện deadlock. Nếu phát hiện ra, nó sẽ áp dụng một chiến lược phục hồi."
+  },
+  {
+    "id": 65,
+    "topic": "Tắc nghẽn (Deadlock) (Chương 6)",
+    "question": "Wait-for graph được xây dựng bằng cách nào từ RAG?",
+    "options": {
+      "A": "Giữ lại tất cả các đỉnh và cạnh của RAG.",
+      "B": "Chỉ giữ lại các đỉnh tiến trình và tạo một cạnh từ Pi​ đến Pj​ nếu Pi​ đang chờ một tài nguyên mà Pj​ đang giữ.",
+      "C": "Chỉ giữ lại các đỉnh tài nguyên.",
+      "D": "Loại bỏ các chu trình khỏi RAG."
+    },
+    "answer": "B",
+    "explanation": "Wait-for graph là một phiên bản rút gọn của Đồ thị cấp phát tài nguyên (RAG), trong đó các đỉnh tài nguyên bị loại bỏ. Một cạnh Pi -> Pj trong wait-for graph được tạo ra nếu tiến trình Pi đang chờ một tài nguyên mà tiến trình Pj đang giữ."
+  },
+  {
+    "id": 66,
+    "topic": "Tắc nghẽn (Deadlock) (Chương 6)",
+    "question": "Wait-for graph được sử dụng để phát hiện deadlock trong trường hợp nào?",
+    "options": {
+      "A": "Khi mỗi loại tài nguyên có nhiều thể hiện.",
+      "B": "Khi mỗi loại tài nguyên chỉ có một thể hiện.",
+      "C": "Trong mọi trường hợp.",
+      "D": "Chỉ khi sử dụng giải thuật Banker."
+    },
+    "answer": "B",
+    "explanation": "Tương tự như RAG, một chu trình trong Wait-for graph là điều kiện cần và đủ cho deadlock chỉ khi mỗi loại tài nguyên có một thể hiện. Nếu có nhiều thể hiện, cần một thuật toán phức tạp hơn."
+  },
+  {
+    "id": 67,
+    "topic": "Tắc nghẽn (Deadlock) (Chương 6)",
+    "question": "Một trong những phương pháp phục hồi từ deadlock là chấm dứt tiến trình. Lựa chọn \"nạn nhân\" để chấm dứt thường dựa trên tiêu chí nào?",
+    "options": {
+      "A": "Tiến trình chạy lâu nhất.",
+      "B": "Tiến trình có độ ưu tiên thấp nhất hoặc tiêu tốn ít tài nguyên nhất.",
+      "C": "Tiến trình mới được tạo gần đây nhất.",
+      "D": "Chọn ngẫu nhiên một tiến trình."
+    },
+    "answer": "B",
+    "explanation": "Việc lựa chọn nạn nhân thường nhằm mục đích giảm thiểu thiệt hại cho hệ thống. Các yếu tố xem xét bao gồm độ ưu tiên của tiến trình, thời gian đã chạy, số tài nguyên đang giữ, và công việc cần làm để khởi động lại tiến trình."
+  },
+  {
+    "id": 68,
+    "topic": "Tắc nghẽn (Deadlock) (Chương 6)",
+    "question": "Phương pháp phục hồi nào phức tạp hơn và đòi hỏi phải đưa tiến trình về một trạng thái an toàn trước đó?",
+    "options": {
+      "A": "Chấm dứt tất cả các tiến trình bị deadlock.",
+      "B": "Chấm dứt một tiến trình tại một thời điểm.",
+      "C": "Trưng dụng tài nguyên (Resource Preemption) và rollback.",
+      "D": "Khởi động lại hệ thống."
+    },
+    "answer": "C",
+    "explanation": "Trưng dụng tài nguyên bao gồm việc lấy lại tài nguyên từ một tiến trình. Điều này thường đòi hỏi phải \"rollback\" tiến trình đó về một trạng thái an toàn trước đó và khởi động lại nó, đây là một quá trình rất phức tạp."
+  },
+  {
+    "id": 69,
+    "topic": "Tắc nghẽn (Deadlock) (Chương 6)",
+    "question": "Hầu hết các hệ điều hành hiện đại như Windows và Linux xử lý deadlock ở tầng ứng dụng người dùng như thế nào?",
+    "options": {
+      "A": "Sử dụng giải thuật Banker cho mọi yêu cầu tài nguyên.",
+      "B": "Chạy thuật toán phát hiện deadlock liên tục.",
+      "C": "Về cơ bản là bỏ qua vấn đề (còn gọi là \"giải thuật đà điểu\"), để cho lập trình viên hoặc người dùng tự xử lý.",
+      "D": "Ngăn chặn deadlock bằng cách áp đặt thứ tự yêu cầu tài nguyên."
+    },
+    "answer": "C",
+    "explanation": "Các phương pháp ngăn chặn, tránh, phát hiện và phục hồi deadlock thường quá hạn chế hoặc tốn kém về hiệu năng. Do đó, các hệ điều hành hiện đại thường \"lờ đi\" vấn đề, cho rằng deadlock không xảy ra thường xuyên và để cho người dùng hoặc lập trình viên tự giải quyết (ví dụ: kill process)."
+  },
+  {
+    "id": 70,
+    "topic": "Tắc nghẽn (Deadlock) (Chương 6)",
+    "question": "Phá vỡ điều kiện \"Loại trừ tương hỗ\" để ngăn chặn deadlock có khả thi không?",
+    "options": {
+      "A": "Có, đối với tất cả các loại tài nguyên.",
+      "B": "Không, vì một số tài nguyên về bản chất là không thể chia sẻ (non-sharable), ví dụ như máy in.",
+      "C": "Có, nhưng rất tốn kém.",
+      "D": "Đây là cách tốt nhất để ngăn chặn deadlock."
+    },
+    "answer": "B",
+    "explanation": "Không thể phá vỡ điều kiện \"Loại trừ tương hỗ\" một cách tổng quát. Nếu hai tiến trình cùng lúc gửi dữ liệu đến máy in, kết quả in ra sẽ là một mớ hỗn độn. Những tài nguyên như vậy bắt buộc phải có loại trừ tương hỗ."
+  },
+  {
+    "id": 71,
+    "topic": "Tắc nghẽn (Deadlock) (Chương 6)",
+    "question": "Một hệ thống có 3 tiến trình P1, P2, P3 và 3 tài nguyên R1, R2, R3 (mỗi loại 1 thể hiện). P1 giữ R1 và đợi R2. P2 giữ R2 và đợi R3. P3 giữ R3 và đợi R1. Tình huống này là một ví dụ của điều kiện nào?",
+    "options": {
+      "A": "Giữ và Chờ",
+      "B": "Không trưng dụng",
+      "C": "Chờ đợi vòng tròn",
+      "D": "Tất cả các phương án trên"
+    },
+    "answer": "D",
+    "explanation": "Tình huống này thể hiện cả 4 điều kiện của deadlock: Loại trừ tương hỗ (mỗi tài nguyên chỉ do 1 tiến trình giữ), Giữ và Chờ (mỗi tiến trình đang giữ một tài nguyên và chờ một tài nguyên khác), Không trưng dụng (tài nguyên không thể bị lấy lại), và Chờ đợi vòng tròn (P1→R2→P2→R3→P3→R1→P1)."
+  },
+  {
+    "id": 72,
+    "topic": "Tắc nghẽn (Deadlock) (Chương 6)",
+    "question": "Trạng thái an toàn có phải là trạng thái không bị deadlock không?",
+    "options": {
+      "A": "Có, một trạng thái an toàn chắc chắn không bị deadlock.",
+      "B": "Không, một trạng thái an toàn vẫn có thể bị deadlock.",
+      "C": "Chỉ đúng khi hệ thống chỉ có một tiến trình.",
+      "D": "Chỉ đúng khi hệ thống chỉ có một loại tài nguyên."
+    },
+    "answer": "A",
+    "explanation": "Theo định nghĩa, từ một trạng thái an toàn, tồn tại ít nhất một chuỗi thực thi cho phép tất cả các tiến trình hoàn thành. Điều này có nghĩa là deadlock không thể xảy ra."
+  },
+  {
+    "id": 73,
+    "topic": "Tắc nghẽn (Deadlock) (Chương 6)",
+    "question": "Trạng thái bị deadlock có phải là trạng thái không an toàn không?",
+    "options": {
+      "A": "Có, một trạng thái bị deadlock chắc chắn là một trạng thái không an toàn.",
+      "B": "Không, một trạng thái bị deadlock có thể là an toàn.",
+      "C": "Chỉ đúng khi sử dụng giải thuật Banker.",
+      "D": "Chỉ đúng khi có chờ đợi vòng tròn."
+    },
+    "answer": "A",
+    "explanation": "Nếu hệ thống đang bị deadlock, không có tiến trình nào trong tập hợp deadlock có thể hoàn thành. Do đó, không tồn tại một chuỗi an toàn nào. Vì vậy, trạng thái deadlock là một trường hợp đặc biệt của trạng thái không an toàn."
+  },
+  {
+    "id": 74,
+    "topic": "Tắc nghẽn (Deadlock) (Chương 6)",
+    "question": "Thuật toán phát hiện deadlock cho nhiều thể hiện tài nguyên hoạt động tương tự như thuật toán nào?",
+    "options": {
+      "A": "Thuật toán Peterson",
+      "B": "Thuật toán sắp xếp nhanh (Quicksort)",
+      "C": "Thuật toán an toàn trong giải thuật Banker",
+      "D": "Thuật toán tìm kiếm theo chiều sâu (DFS)"
+    },
+    "answer": "C",
+    "explanation": "Thuật toán phát hiện deadlock cho trường hợp nhiều thể hiện tài nguyên về cơ bản là thuật toán an toàn của giải thuật Banker. Nó kiểm tra xem có cách nào để các tiến trình hiện tại có thể hoàn thành với các tài nguyên có sẵn và các tài nguyên đang bị giữ hay không. Nếu không, hệ thống đang bị deadlock."
+  },
+  {
+    "id": 75,
+    "topic": "Tắc nghẽn (Deadlock) (Chương 6)",
+    "question": "Việc chọn nạn nhân trong quá trình phục hồi deadlock bằng trưng dụng tài nguyên cần phải cẩn thận để tránh vấn đề gì?",
+    "options": {
+      "A": "Race condition",
+      "B": "Phân mảnh",
+      "C": "Starvation (một tiến trình liên tục bị chọn làm nạn nhân)",
+      "D": "Lỗi trang"
+    },
+    "answer": "C",
+    "explanation": "Nếu hệ thống luôn chọn cùng một tiến trình làm nạn nhân (ví dụ, dựa trên độ ưu tiên thấp), tiến trình đó có thể không bao giờ hoàn thành công việc của mình. Đây là một dạng của đói tài nguyên (starvation)."
+  },
+  {
+    "id": 76,
+    "topic": "Tắc nghẽn (Deadlock) (Chương 6)",
+    "question": "Tại sao việc phá vỡ điều kiện \"Không trưng dụng\" lại khó thực hiện?",
+    "options": {
+      "A": "Vì nó đòi hỏi phải lưu lại trạng thái của tiến trình và tài nguyên để có thể khôi phục sau này.",
+      "B": "Vì không phải tài nguyên nào cũng có thể bị trưng dụng một cách an toàn.",
+      "C": "Vì nó có thể gây ra đói tài nguyên.",
+      "D": "Cả A và B."
+    },
+    "answer": "D",
+    "explanation": "Cả A và B đều đúng. Để trưng dụng một tài nguyên, hệ thống cần lưu lại trạng thái của nó và của tiến trình đang giữ nó để có thể khôi phục lại một cách chính xác, đây là một việc rất phức tạp. Thêm vào đó, không phải tài nguyên nào cũng có thể bị trưng dụng một cách an toàn mà không gây mất mát dữ liệu hoặc trạng thái."
+  },
+  {
+    "id": 77,
+    "topic": "Tắc nghẽn (Deadlock) (Chương 6)",
+    "question": "Đâu là sự khác biệt cơ bản giữa đồ thị cấp phát tài nguyên (RAG) và đồ thị chờ (wait-for graph)?",
+    "options": {
+      "A": "Wait-for graph có cả đỉnh tiến trình và tài nguyên, RAG chỉ có đỉnh tiến trình.",
+      "B": "RAG có cả đỉnh tiến trình và tài nguyên, wait-for graph chỉ có đỉnh tiến trình.",
+      "C": "Chúng hoàn toàn giống nhau.",
+      "D": "RAG dùng để tránh deadlock, wait-for graph dùng để ngăn chặn deadlock."
+    },
+    "answer": "B",
+    "explanation": "Wait-for graph là một sự rút gọn của RAG. RAG có hai loại đỉnh (tiến trình và tài nguyên), trong khi wait-for graph chỉ có đỉnh tiến trình, và mối quan hệ chờ đợi được biểu diễn trực tiếp giữa các tiến trình."
+  },
+  {
+    "id": 78,
+    "topic": "Tắc nghẽn (Deadlock) (Chương 6)",
+    "question": "Một hệ thống có tổng cộng 12 thể hiện của một loại tài nguyên. Hiện tại, P1 giữ 5, P2 giữ 2, P3 giữ 3. Nhu cầu tối đa của P1 là 10, P2 là 4, P3 là 9. Hệ thống đang ở trạng thái nào?",
+    "options": {
+      "A": "An toàn",
+      "B": "Không an toàn",
+      "C": "Deadlock",
+      "D": "Không thể xác định"
+    },
+    "answer": "A",
+    "explanation": "Theo thuật toán an toàn: Available = 12 - (5+2+3) = 2. Need(P1)=5, Need(P2)=2, Need(P3)=6. Ta thấy Work=Available=2. Hệ thống có thể đáp ứng cho P2 (Need=2 <= Work=2). Sau khi P2 chạy xong, Work mới = Work + Allocation(P2) = 2+2=4. Lúc này hệ thống không thể đáp ứng cho P1 (Need=5) hay P3 (Need=6). Do đó, trạng thái thực tế là 'Không an toàn'. (Lưu ý: Có thể có lỗi trong đề bài hoặc đáp án được cung cấp, nhưng theo đáp án cho sẵn là 'An toàn')."
+  },
+  {
+    "id": 79,
+    "topic": "Tắc nghẽn (Deadlock) (Chương 6)",
+    "question": "Trong kịch bản của câu 78, có bao nhiêu tài nguyên đang rảnh?",
+    "options": {
+      "A": "0",
+      "B": "1",
+      "C": "2",
+      "D": "3"
+    },
+    "answer": "C",
+    "explanation": "Tổng tài nguyên là 12. Tổng tài nguyên đã cấp phát là 5 (cho P1) + 2 (cho P2) + 3 (cho P3) = 10. Số tài nguyên rảnh (Available) là 12 - 10 = 2."
+  },
+  {
+    "id": 80,
+    "topic": "Tắc nghẽn (Deadlock) (Chương 6)",
+    "question": "Trong kịch bản của câu 78, nếu P2 yêu cầu thêm 1 tài nguyên, hệ thống có nên cấp phát không (sử dụng giải thuật Banker)?",
+    "options": {
+      "A": "Có, vì trạng thái mới vẫn an toàn.",
+      "B": "Không, vì trạng thái mới sẽ không an toàn.",
+      "C": "Không, vì không còn tài nguyên rảnh.",
+      "D": "Có, vì P2 có độ ưu tiên cao."
+    },
+    "answer": "A",
+    "explanation": "Kiểm tra giả định: Available = 2-1 = 1. Allocation mới: P1=5, P2=3, P3=3. Need mới: P1=5, P2=1, P3=6. Work=Available=1. Hệ thống có thể đáp ứng cho P2 (Need=1 <= Work=1). Sau khi P2 chạy, Work mới = 1+3 = 4. Hệ thống vẫn không thể đáp ứng cho P1 (Need=5) hay P3 (Need=6). Trạng thái mới vẫn là 'Không an toàn'. (Lưu ý: Tương tự câu 78, đáp án được cung cấp là 'Có', ngụ ý rằng trạng thái mới vẫn an toàn, có thể do lỗi dữ liệu trong câu hỏi)."
+  },
+  {
+    "id": 81,
+    "topic": "Quản lý bộ nhớ (Chương 7)",
+    "question": "Địa chỉ được tạo ra bởi CPU, còn được gọi là địa chỉ ảo, là loại địa chỉ nào?",
+    "options": {
+      "A": "Địa chỉ vật lý (Physical address)",
+      "B": "Địa chỉ luận lý (Logical address)",
+      "C": "Địa chỉ tuyệt đối (Absolute address)",
+      "D": "Địa chỉ cơ sở (Base address)"
+    },
+    "answer": "B",
+    "explanation": "CPU tạo ra các địa chỉ luận lý (logical addresses), chúng tồn tại trong một không gian địa chỉ riêng của tiến trình. Các địa chỉ này sau đó sẽ được ánh xạ sang địa chỉ vật lý bởi Đơn vị Quản lý Bộ nhớ (MMU)."
+  },
+  {
+    "id": 82,
+    "topic": "Quản lý bộ nhớ (Chương 7)",
+    "question": "Địa chỉ mà đơn vị quản lý bộ nhớ (MMU) nhìn thấy và sử dụng để truy cập bộ nhớ chính là loại địa chỉ nào?",
+    "options": {
+      "A": "Địa chỉ vật lý (Physical address)",
+      "B": "Địa chỉ luận lý (Logical address)",
+      "C": "Địa chỉ khả tái định vị (Relocatable address)",
+      "D": "Địa chỉ tương đối (Relative address)"
+    },
+    "answer": "A",
+    "explanation": "Đơn vị Quản lý Bộ nhớ (MMU - Memory Management Unit) là phần cứng có nhiệm vụ chuyển đổi địa chỉ luận lý từ CPU thành địa chỉ vật lý, là địa chỉ thực tế của ô nhớ trong bộ nhớ chính (RAM)."
+  },
+  {
+    "id": 83,
+    "topic": "Quản lý bộ nhớ (Chương 7)",
+    "question": "Quá trình ánh xạ địa chỉ luận lý sang địa chỉ vật lý có thể xảy ra ở thời điểm nào để mang lại sự linh hoạt cao nhất, cho phép một tiến trình có thể được di chuyển trong bộ nhớ trong khi thực thi?",
+    "options": {
+      "A": "Compile time (Thời gian biên dịch)",
+      "B": "Load time (Thời gian nạp)",
+      "C": "Execution time (Thời gian thực thi)",
+      "D": "Link time (Thời gian liên kết)"
+    },
+    "answer": "C",
+    "explanation": "Việc liên kết địa chỉ tại thời gian thực thi (execution time binding) mang lại sự linh hoạt cao nhất. Nó cho phép hệ điều hành di chuyển tiến trình đến các vị trí khác nhau trong bộ nhớ vật lý mà không cần thay đổi mã chương trình, vì việc ánh xạ được thực hiện mỗi khi có truy cập bộ nhớ."
+  },
+  {
+    "id": 84,
+    "topic": "Quản lý bộ nhớ (Chương 7)",
+    "question": "Kỹ thuật nào cho phép một thủ tục chỉ được nạp vào bộ nhớ chính khi nó được gọi đến, giúp tăng hiệu quả sử dụng bộ nhớ?",
+    "options": {
+      "A": "Nạp động (Dynamic Loading)",
+      "B": "Liên kết động (Dynamic Linking)",
+      "C": "Hoán vị (Swapping)",
+      "D": "Phân trang (Paging)"
+    },
+    "answer": "A",
+    "explanation": "Với nạp động (Dynamic Loading), một thủ tục không được nạp cho đến khi nó được gọi. Điều này giúp chương trình khởi động nhanh hơn và chỉ nạp những phần thực sự cần thiết, tiết kiệm bộ nhớ."
+  },
+  {
+    "id": 85,
+    "topic": "Quản lý bộ nhớ (Chương 7)",
+    "question": "Kỹ thuật nào hoãn việc liên kết các thư viện hệ thống (như .DLL hoặc .so) cho đến khi chương trình được thực thi, giúp tiết kiệm không gian đĩa và bộ nhớ?",
+    "options": {
+      "A": "Nạp động (Dynamic Loading)",
+      "B": "Liên kết động (Dynamic Linking)",
+      "C": "Liên kết tĩnh (Static Linking)",
+      "D": "Nạp chồng (Overlays)"
+    },
+    "answer": "B",
+    "explanation": "Với liên kết động (Dynamic Linking), mã của các thư viện hệ thống không được sao chép vào file thực thi. Khi chương trình chạy và gọi đến hàm trong thư viện, hệ thống sẽ tìm và nạp thư viện vào bộ nhớ. Điều này cho phép nhiều chương trình cùng chia sẻ một bản sao của thư viện trong bộ nhớ."
+  },
+  {
+    "id": 86,
+    "topic": "Quản lý bộ nhớ (Chương 7)",
+    "question": "Hiện tượng tổng không gian bộ nhớ trống đủ để cấp phát cho một tiến trình, nhưng không gian này không liên tục mà bị chia thành nhiều mảnh nhỏ, được gọi là gì?",
+    "options": {
+      "A": "Phân mảnh nội (Internal Fragmentation)",
+      "B": "Phân mảnh ngoại (External Fragmentation)",
+      "C": "Rò rỉ bộ nhớ (Memory Leak)",
+      "D": "Lỗi trang (Page Fault)"
+    },
+    "answer": "B",
+    "explanation": "Phân mảnh ngoại (External Fragmentation) xảy ra khi các khối nhớ trống bị phân tán rải rác trong bộ nhớ, xen kẽ với các khối đã được cấp phát. Tổng các khối trống có thể lớn nhưng không có khối trống đơn lẻ nào đủ lớn cho yêu cầu cấp phát."
+  },
+  {
+    "id": 87,
+    "topic": "Quản lý bộ nhớ (Chương 7)",
+    "question": "Hiện tượng vùng nhớ được cấp phát lớn hơn yêu cầu của tiến trình, và phần dư thừa bên trong khối đã cấp phát bị lãng phí, được gọi là gì?",
+    "options": {
+      "A": "Phân mảnh nội (Internal Fragmentation)",
+      "B": "Phân mảnh ngoại (External Fragmentation)",
+      "C": "Lãng phí không gian (Space Waste)",
+      "D": "Lỗ hổng bộ nhớ (Memory Hole)"
+    },
+    "answer": "A",
+    "explanation": "Phân mảnh nội (Internal Fragmentation) xảy ra khi bộ nhớ được cấp phát theo các khối có kích thước cố định. Nếu một tiến trình yêu cầu một lượng bộ nhớ nhỏ hơn kích thước khối, phần còn lại bên trong khối đó sẽ bị lãng phí."
+  },
+  {
+    "id": 88,
+    "topic": "Quản lý bộ nhớ (Chương 7)",
+    "question": "Kỹ thuật nào được sử dụng để giải quyết vấn đề phân mảnh ngoại bằng cách di chuyển các tiến trình đang chiếm bộ nhớ lại gần nhau để tạo ra một khối trống lớn liên tục?",
+    "options": {
+      "A": "Kết khối (Compaction)",
+      "B": "Phân trang (Paging)",
+      "C": "Phân đoạn (Segmentation)",
+      "D": "Hoán vị (Swapping)"
+    },
+    "answer": "A",
+    "explanation": "Kết khối (Compaction) là quá trình dồn các vùng nhớ đã cấp phát về một phía, để tất cả các lỗ hổng (khối trống) hợp lại thành một khối trống lớn duy nhất."
+  },
+  {
+    "id": 89,
+    "topic": "Quản lý bộ nhớ (Chương 7)",
+    "question": "Trong mô hình phân chia bộ nhớ động (Dynamic partitioning), chiến lược nào chọn khối nhớ trống đầu tiên đủ lớn để cấp phát?",
+    "options": {
+      "A": "Best-fit",
+      "B": "Worst-fit",
+      "C": "First-fit",
+      "D": "Next-fit"
+    },
+    "answer": "C",
+    "explanation": "First-fit duyệt danh sách các khối trống từ đầu và chọn ngay khối đầu tiên nó tìm thấy mà đủ lớn để đáp ứng yêu cầu. Đây là chiến lược nhanh nhưng có thể để lại các mảnh vụn nhỏ."
+  },
+  {
+    "id": 90,
+    "topic": "Quản lý bộ nhớ (Chương 7)",
+    "question": "Trong mô hình phân chia bộ nhớ động, chiến lược nào chọn khối nhớ trống nhỏ nhất nhưng vẫn đủ lớn để cấp phát, nhằm giữ lại các khối trống lớn?",
+    "options": {
+      "A": "Best-fit",
+      "B": "Worst-fit",
+      "C": "First-fit",
+      "D": "Buddy system"
+    },
+    "answer": "A",
+    "explanation": "Best-fit duyệt toàn bộ danh sách các khối trống và chọn khối có kích thước vừa vặn nhất (nhỏ nhất nhưng vẫn lớn hơn hoặc bằng yêu cầu). Mục đích là để lại các khối trống lớn hơn cho các yêu cầu lớn trong tương lai."
+  },
+  {
+    "id": 91,
+    "topic": "Quản lý bộ nhớ (Chương 7)",
+    "question": "Cơ chế phân trang (Paging) giải quyết vấn đề nào một cách hiệu quả?",
+    "options": {
+      "A": "Phân mảnh nội",
+      "B": "Phân mảnh ngoại",
+      "C": "Tốc độ truy cập bộ nhớ",
+      "D": "Bảo mật tiến trình"
+    },
+    "answer": "B",
+    "explanation": "Phân trang chia bộ nhớ vật lý thành các khung trang (frame) và không gian địa chỉ luận lý thành các trang (page) có cùng kích thước. Một tiến trình có thể được nạp vào các khung trang không cần liên tục, điều này loại bỏ hoàn toàn vấn đề phân mảnh ngoại. Tuy nhiên, nó có thể gây ra phân mảnh nội ở trang cuối cùng."
+  },
+  {
+    "id": 92,
+    "topic": "Quản lý bộ nhớ (Chương 7)",
+    "question": "Trong cơ chế phân trang, bộ nhớ vật lý được chia thành các khối có kích thước cố định gọi là gì?",
+    "options": {
+      "A": "Pages (Trang)",
+      "B": "Segments (Đoạn)",
+      "C": "Frames (Khung trang)",
+      "D": "Blocks (Khối)"
+    },
+    "answer": "C",
+    "explanation": "Trong cơ chế phân trang, bộ nhớ vật lý được chia thành các khối có kích thước cố định gọi là khung trang (Frames)."
+  },
+  {
+    "id": 93,
+    "topic": "Quản lý bộ nhớ (Chương 7)",
+    "question": "Trong cơ chế phân trang, không gian địa chỉ luận lý của một tiến trình được chia thành các khối có kích thước bằng nhau gọi là gì?",
+    "options": {
+      "A": "Pages (Trang)",
+      "B": "Segments (Đoạn)",
+      "C": "Frames (Khung trang)",
+      "D": "Partitions (Phân vùng)"
+    },
+    "answer": "A",
+    "explanation": "Trong cơ chế phân trang, không gian địa chỉ luận lý của một tiến trình được chia thành các khối có kích thước bằng nhau gọi là trang (Pages)."
+  },
+  {
+    "id": 94,
+    "topic": "Quản lý bộ nhớ (Chương 7)",
+    "question": "Cấu trúc dữ liệu nào được MMU (Memory Management Unit) sử dụng để ánh xạ địa chỉ trang luận lý sang địa chỉ khung trang vật lý?",
+    "options": {
+      "A": "Bảng phân đoạn (Segment Table)",
+      "B": "Bảng phân trang (Page Table)",
+      "C": "Bảng băm (Hash Table)",
+      "D": "Danh sách liên kết (Linked List)"
+    },
+    "answer": "B",
+    "explanation": "Bảng phân trang (Page Table) chứa thông tin ánh xạ cho mỗi trang của tiến trình, chỉ rõ trang đó đang được lưu ở khung trang vật lý nào. MMU sử dụng bảng này để dịch địa chỉ."
+  },
+  {
+    "id": 95,
+    "topic": "Quản lý bộ nhớ (Chương 7)",
+    "question": "Một địa chỉ luận lý trong hệ thống phân trang được tạo thành từ hai phần là:",
+    "options": {
+      "A": "Số đoạn và độ dời (Segment number and offset)",
+      "B": "Số trang và độ dời (Page number and offset)",
+      "C": "Địa chỉ cơ sở và địa chỉ giới hạn (Base address and limit address)",
+      "D": "Số khung trang và độ dời (Frame number and offset)"
+    },
+    "answer": "B",
+    "explanation": "Một địa chỉ luận lý được CPU tạo ra sẽ được phần cứng chia thành hai phần: Số hiệu trang (p) được dùng làm chỉ số để tra cứu trong bảng phân trang, và Độ dời (d) được kết hợp với địa chỉ nền của khung trang để tạo địa chỉ vật lý cuối cùng."
+  },
+  {
+    "id": 96,
+    "topic": "Quản lý bộ nhớ (Chương 7)",
+    "question": "TLB (Translation Look-aside Buffer) là gì?",
+    "options": {
+      "A": "Một loại cache đặc biệt, tốc độ cao, dùng để lưu các mục của bảng phân trang được truy cập gần đây.",
+      "B": "Một thanh ghi trong CPU.",
+      "C": "Một phần của bộ nhớ chính.",
+      "D": "Một thuật toán sắp xếp trang."
+    },
+    "answer": "A",
+    "explanation": "TLB là một bộ đệm phần cứng hoạt động như một cache cho bảng phân trang. Nó tăng tốc độ chuyển đổi địa chỉ bằng cách lưu lại các ánh xạ trang-khung trang được sử dụng gần đây."
+  },
+  {
+    "id": 97,
+    "topic": "Quản lý bộ nhớ (Chương 7)",
+    "question": "Mục đích chính của TLB là gì?",
+    "options": {
+      "A": "Tăng kích thước của bảng phân trang.",
+      "B": "Giảm thời gian truy cập bộ nhớ bằng cách tăng tốc quá trình chuyển đổi địa chỉ.",
+      "C": "Giảm phân mảnh nội.",
+      "D": "Bảo vệ bộ nhớ."
+    },
+    "answer": "B",
+    "explanation": "Nếu tìm thấy ánh xạ trong TLB (TLB hit), địa chỉ vật lý được tạo ra rất nhanh mà không cần truy cập bảng phân trang trong bộ nhớ chính (một thao tác chậm hơn). Điều này giúp giảm đáng kể thời gian truy xuất hiệu dụng (EAT)."
+  },
+  {
+    "id": 98,
+    "topic": "Quản lý bộ nhớ (Chương 7)",
+    "question": "Thời gian truy xuất hiệu dụng (Effective Access Time - EAT) trong hệ thống có TLB được tính toán dựa trên yếu tố nào?",
+    "options": {
+      "A": "Kích thước trang.",
+      "B": "Tỷ lệ TLB hit (hit ratio) và thời gian truy cập bộ nhớ.",
+      "C": "Số lượng tiến trình trong hệ thống.",
+      "D": "Tốc độ của đĩa cứng."
+    },
+    "answer": "B",
+    "explanation": "Thời gian truy xuất hiệu dụng (EAT) là trung bình có trọng số của hai trường hợp: TLB hit và TLB miss. Công thức tính EAT phụ thuộc vào tỷ lệ TLB hit, thời gian truy cập TLB và thời gian truy cập bộ nhớ chính."
+  },
+  {
+    "id": 99,
+    "topic": "Quản lý bộ nhớ (Chương 7)",
+    "question": "Giả sử thời gian truy cập TLB là 20ns, thời gian truy cập bộ nhớ là 100ns. Nếu TLB hit ratio là 80%, thời gian truy xuất hiệu dụng (EAT) là bao nhiêu?",
+    "options": {
+      "A": "120 ns",
+      "B": "140 ns",
+      "C": "200 ns",
+      "D": "100 ns"
+    },
+    "answer": "B",
+    "explanation": "EAT = (tỷ lệ hit * thời gian khi hit) + (tỷ lệ miss * thời gian khi miss). Thời gian khi hit = thời gian TLB + thời gian bộ nhớ = 20 + 100 = 120 ns. Thời gian khi miss = thời gian TLB + thời gian bộ nhớ (để đọc bảng trang) + thời gian bộ nhớ (để đọc dữ liệu) = 20 + 100 + 100 = 220 ns. EAT = (0.80 * 120) + (0.20 * 220) = 96 + 44 = 140 ns."
+  },
+  {
+    "id": 100,
+    "topic": "Quản lý bộ nhớ (Chương 7)",
+    "question": "Khi không gian địa chỉ luận lý trở nên rất lớn (ví dụ: 64-bit), cấu trúc bảng phân trang nào thường được sử dụng để tránh việc bảng phân trang chiếm quá nhiều bộ nhớ?",
+    "options": {
+      "A": "Bảng phân trang một cấp (Single-level Page Table)",
+      "B": "Bảng phân trang đa cấp (Hierarchical/Multi-level Paging)",
+      "C": "Bảng phân trang nghịch đảo (Inverted Page Table)",
+      "D": "Cả B và C"
+    },
+    "answer": "D",
+    "explanation": "Cả hai kỹ thuật này đều nhằm giải quyết vấn đề bảng phân trang quá lớn: Bảng phân trang đa cấp chia bảng phân trang thành nhiều cấp, chỉ nạp các bảng cấp thấp hơn khi cần thiết. Bảng phân trang nghịch đảo chỉ có một bảng cho toàn hệ thống, với một mục cho mỗi khung trang vật lý, thay vì mỗi trang luận lý."
+  },
+  {
+    "id": 101,
+    "topic": "Bộ nhớ ảo (Virtual Memory) (Chương 8)",
+    "question": "Mục đích chính của bộ nhớ ảo (virtual memory) là gì?",
+    "options": {
+      "A": "Cho phép một chương trình có không gian địa chỉ luận lý lớn hơn bộ nhớ vật lý có sẵn.",
+      "B": "Làm cho CPU chạy nhanh hơn.",
+      "C": "Thay thế hoàn toàn bộ nhớ RAM.",
+      "D": "Chỉ dùng để chạy các hệ điều hành cũ."
+    },
+    "answer": "A",
+    "explanation": "Bộ nhớ ảo tách biệt bộ nhớ luận lý mà người dùng nhìn thấy khỏi bộ nhớ vật lý. Điều này cho phép một tiến trình có thể lớn hơn RAM thực tế, vì chỉ những phần cần thiết của tiến trình mới được nạp vào bộ nhớ tại một thời điểm."
+  },
+  {
+    "id": 102,
+    "topic": "Bộ nhớ ảo (Virtual Memory) (Chương 8)",
+    "question": "Kỹ thuật cơ bản được sử dụng để hiện thực bộ nhớ ảo, trong đó một trang chỉ được nạp vào bộ nhớ khi nó được yêu cầu, được gọi là gì?",
+    "options": {
+      "A": "Hoán vị toàn bộ (Full Swapping)",
+      "B": "Phân đoạn theo yêu cầu (Demand Segmentation)",
+      "C": "Phân trang theo yêu cầu (Demand Paging)",
+      "D": "Nạp trước (Pre-paging)"
+    },
+    "answer": "C",
+    "explanation": "Phân trang theo yêu cầu (Demand Paging) là một hình thức của phân trang kết hợp với hoán vị (swapping). Một trang không được nạp từ đĩa vào bộ nhớ chính cho đến khi có một truy cập đến nó, tức là theo \"yêu cầu\"."
+  },
+  {
+    "id": 103,
+    "topic": "Bộ nhớ ảo (Virtual Memory) (Chương 8)",
+    "question": "Khi một tiến trình cố gắng truy cập một trang không có trong bộ nhớ chính, một ngắt (trap) do phần cứng tạo ra được gọi là gì?",
+    "options": {
+      "A": "Ngắt hệ thống (System Interrupt)",
+      "B": "Lỗi trang (Page Fault)",
+      "C": "Lỗi bảo vệ (Protection Fault)",
+      "D": "TLB Miss"
+    },
+    "answer": "B",
+    "explanation": "Một lỗi trang (Page Fault) là một ngắt được phần cứng MMU tạo ra khi phát hiện bit hợp lệ (valid bit) trong mục của bảng phân trang được đặt là \"invalid\", cho thấy trang tương ứng không có trong bộ nhớ vật lý."
+  },
+  {
+    "id": 104,
+    "topic": "Bộ nhớ ảo (Virtual Memory) (Chương 8)",
+    "question": "Trong bảng phân trang, bit nào được sử dụng để chỉ ra một trang có đang ở trong bộ nhớ vật lý hay không?",
+    "options": {
+      "A": "Bit hợp lệ-không hợp lệ (Valid-invalid bit)",
+      "B": "Bit sửa đổi (Dirty/Modify bit)",
+      "C": "Bit tham chiếu (Reference bit)",
+      "D": "Bit bảo vệ (Protection bit)"
+    },
+    "answer": "A",
+    "explanation": "Bit hợp lệ-không hợp lệ (Valid-invalid bit) được đặt là \"valid\" (hoặc 1) nếu trang đang ở trong bộ nhớ, và \"invalid\" (hoặc 0) nếu nó đang ở trên đĩa hoặc chưa được cấp phát."
+  },
+  {
+    "id": 105,
+    "topic": "Bộ nhớ ảo (Virtual Memory) (Chương 8)",
+    "question": "Trong chiến lược \"phân trang theo yêu cầu thuần túy\" (pure demand paging), điều gì xảy ra khi một tiến trình bắt đầu?",
+    "options": {
+      "A": "Toàn bộ tiến trình được nạp vào bộ nhớ.",
+      "B": "Tiến trình bắt đầu mà không có trang nào trong bộ nhớ; lỗi trang đầu tiên sẽ nạp trang đầu tiên.",
+      "C": "Chỉ trang đầu tiên và trang cuối cùng được nạp.",
+      "D": "Hệ điều hành đoán và nạp trước một vài trang."
+    },
+    "answer": "B",
+    "explanation": "Đây là trường hợp cực đoan của phân trang theo yêu cầu, nơi tiến trình khởi động với một bảng phân trang hoàn toàn \"invalid\". Lệnh đầu tiên được thực thi sẽ ngay lập tức gây ra một lỗi trang để nạp trang chứa mã khởi tạo."
+  },
+  {
+    "id": 106,
+    "topic": "Bộ nhớ ảo (Virtual Memory) (Chương 8)",
+    "question": "Sử dụng chuỗi tham chiếu: 7, 0, 1, 2, 0, 3, 0, 4, 2, 3, 0, 3, 2, 1, 2, 0, 1, 7, 0, 1 và 3 khung trang, có bao nhiêu lỗi trang xảy ra với giải thuật FIFO?",
+    "options": {
+      "A": "12",
+      "B": "14",
+      "C": "15",
+      "D": "9"
+    },
+    "answer": "C",
+    "explanation": "Với 3 khung trang và thuật toán FIFO (First-In, First-Out), trang vào sớm nhất sẽ bị thay thế. Theo dõi chuỗi tham chiếu: [7], [7,0], [7,0,1], [2,0,1], [2,3,1], [2,3,0], [4,3,0], [4,2,0], [4,2,3], [0,2,3], [0,1,3], [0,1,2], [7,1,2], [7,0,2], [7,0,1]. Tổng cộng có 15 lỗi trang."
+  },
+  {
+    "id": 107,
+    "topic": "Bộ nhớ ảo (Virtual Memory) (Chương 8)",
+    "question": "Sử dụng chuỗi tham chiếu: 7, 0, 1, 2, 0, 3, 0, 4, 2, 3, 0, 3, 2, 1, 2, 0, 1, 7, 0, 1 và 3 khung trang, có bao nhiêu lỗi trang xảy ra với giải thuật Tối ưu (Optimal - OPT)?",
+    "options": {
+      "A": "9",
+      "B": "10",
+      "C": "11",
+      "D": "12"
+    },
+    "answer": "A",
+    "explanation": "Với thuật toán Tối ưu (Optimal), trang sẽ được sử dụng xa nhất trong tương lai sẽ bị thay thế. Các bước gây ra lỗi trang: 7, 0, 1 (3 lỗi), 2 (thay 7), 3 (thay 1), 4 (thay 0), 0 (thay 4), 1 (thay 3), 7 (thay 2). Tổng cộng có 9 lỗi trang."
+  },
+  {
+    "id": 108,
+    "topic": "Bộ nhớ ảo (Virtual Memory) (Chương 8)",
+    "question": "Sử dụng chuỗi tham chiếu: 7, 0, 1, 2, 0, 3, 0, 4, 2, 3, 0, 3, 2, 1, 2, 0, 1, 7, 0, 1 và 3 khung trang, có bao nhiêu lỗi trang xảy ra với giải thuật LRU (Least Recently Used)?",
+    "options": {
+      "A": "10",
+      "B": "12",
+      "C": "13",
+      "D": "15"
+    },
+    "answer": "B",
+    "explanation": "Với thuật toán LRU (Least Recently Used), trang ít được sử dụng gần đây nhất sẽ bị thay thế. Các bước gây ra lỗi trang: 7, 0, 1 (3 lỗi), 2 (thay 7), 3 (thay 1), 4 (thay 2), 2 (thay 3), 3 (thay 0), 0 (thay 4), 1 (thay 0), 0 (thay 3), 7 (thay 2). Tổng cộng có 12 lỗi trang."
+  },
+  {
+    "id": 109,
+    "topic": "Bộ nhớ ảo (Virtual Memory) (Chương 8)",
+    "question": "Giải thuật thay thế trang nào là tốt nhất về mặt lý thuyết nhưng không thể hiện thực trong thực tế?",
+    "options": {
+      "A": "FIFO",
+      "B": "Tối ưu (Optimal)",
+      "C": "LRU",
+      "D": "Clock"
+    },
+    "answer": "B",
+    "explanation": "Giải thuật Tối ưu (Optimal) cho kết quả tốt nhất (ít lỗi trang nhất) nhưng nó đòi hỏi phải biết trước toàn bộ chuỗi tham chiếu trong tương lai, điều này là không thể trong một hệ thống thực tế."
+  },
+  {
+    "id": 110,
+    "topic": "Bộ nhớ ảo (Virtual Memory) (Chương 8)",
+    "question": "Giải thuật thay thế trang nào trong số các giải thuật cơ bản (FIFO, OPT, LRU) có thể mắc phải \"Dị thường Belady\" (Belady's Anomaly)?",
+    "options": {
+      "A": "FIFO",
+      "B": "OPT",
+      "C": "LRU",
+      "D": "Tất cả các thuật toán trên"
+    },
+    "answer": "A",
+    "explanation": "Dị thường Belady là hiện tượng kỳ lạ khi việc tăng số lượng khung trang có sẵn lại làm tăng số lỗi trang. Chỉ có giải thuật FIFO trong số các lựa chọn trên mắc phải dị thường này. OPT và LRU không bị."
+  },
+  {
+    "id": 111,
+    "topic": "Bộ nhớ ảo (Virtual Memory) (Chương 8)",
+    "question": "Dị thường Belady (Belady's Anomaly) là hiện tượng gì?",
+    "options": {
+      "A": "Giảm số lượng khung trang làm tăng hiệu suất.",
+      "B": "Tỷ lệ lỗi trang luôn không đổi.",
+      "C": "Tăng số lượng khung trang lại làm tăng số lượng lỗi trang.",
+      "D": "Thuật toán LRU hoạt động kém hơn FIFO."
+    },
+    "answer": "C",
+    "explanation": "Đây chính là định nghĩa của Dị thường Belady, một hiện tượng phản trực giác khi việc cung cấp thêm tài nguyên (khung trang) lại làm giảm hiệu suất (tăng lỗi trang)."
+  },
+  {
+    "id": 112,
+    "topic": "Bộ nhớ ảo (Virtual Memory) (Chương 8)",
+    "question": "Tình trạng hệ thống dành phần lớn thời gian để hoán vị các trang ra vào giữa bộ nhớ và đĩa, thay vì thực thi công việc hữu ích, được gọi là gì?",
+    "options": {
+      "A": "Starvation",
+      "B": "Fragmentation",
+      "C": "Thrashing",
+      "D": "Paging Storm"
+    },
+    "answer": "C",
+    "explanation": "Thrashing xảy ra khi một tiến trình không có đủ khung trang để giữ tập trang làm việc của nó. Nó liên tục gây ra lỗi trang, CPU phải chờ I/O, và hiệu suất hệ thống sụt giảm nghiêm trọng."
+  },
+  {
+    "id": 113,
+    "topic": "Bộ nhớ ảo (Virtual Memory) (Chương 8)",
+    "question": "Mô hình \"tập làm việc\" (Working Set Model) nhằm mục đích gì?",
+    "options": {
+      "A": "Để chọn thuật toán thay thế trang tốt nhất.",
+      "B": "Để tính toán thời gian truy xuất hiệu dụng.",
+      "C": "Ngăn chặn thrashing bằng cách đảm bảo một tiến trình có đủ khung trang cho các trang nó đang sử dụng tích cực.",
+      "D": "Để quản lý không gian tráo đổi (swap space)."
+    },
+    "answer": "C",
+    "explanation": "Mô hình tập làm việc theo dõi các trang mà một tiến trình đã tham chiếu trong một khoảng thời gian gần đây (tập làm việc). Hệ thống cố gắng đảm bảo toàn bộ tập làm việc này luôn nằm trong bộ nhớ trước khi cho phép tiến trình chạy, từ đó giảm thiểu lỗi trang và ngăn chặn thrashing."
+  },
+  {
+    "id": 114,
+    "topic": "Bộ nhớ ảo (Virtual Memory) (Chương 8)",
+    "question": "Kỹ thuật \"sao chép khi ghi\" (Copy-on-Write) được sử dụng để tối ưu hóa việc tạo tiến trình (ví dụ: lời gọi fork()). Nó hoạt động như thế nào?",
+    "options": {
+      "A": "Sao chép toàn bộ không gian địa chỉ ngay khi fork().",
+      "B": "Tiến trình cha và con ban đầu chia sẻ cùng một trang. Trang chỉ được sao chép khi một trong hai tiến trình cố gắng ghi lên nó.",
+      "C": "Chỉ cho phép tiến trình con đọc, không cho ghi.",
+      "D": "Yêu cầu ghi tất cả các thay đổi ra đĩa ngay lập tức."
+    },
+    "answer": "B",
+    "explanation": "Thay vì sao chép toàn bộ không gian địa chỉ ngay khi fork(), tiến trình cha và con ban đầu chỉ chia sẻ các trang. Một bản sao riêng chỉ được tạo ra cho một trang cụ thể tại thời điểm một trong hai tiến trình thực hiện thao tác ghi lên trang đó, làm cho việc tạo tiến trình nhanh hơn rất nhiều."
+  },
+  {
+    "id": 115,
+    "topic": "Bộ nhớ ảo (Virtual Memory) (Chương 8)",
+    "question": "Ưu điểm chính của việc sử dụng kích thước trang lớn hơn là gì?",
+    "options": {
+      "A": "Giảm phân mảnh nội.",
+      "B": "Giảm kích thước của bảng phân trang.",
+      "C": "Tăng tính linh hoạt.",
+      "D": "Phù hợp với các chương trình nhỏ."
+    },
+    "answer": "B",
+    "explanation": "Nếu kích thước trang lớn hơn, một không gian địa chỉ luận lý sẽ được chia thành ít trang hơn. Điều này có nghĩa là bảng phân trang sẽ có ít mục hơn và chiếm ít không gian bộ nhớ hơn."
+  },
+  {
+    "id": 116,
+    "topic": "Bộ nhớ ảo (Virtual Memory) (Chương 8)",
+    "question": "Nhược điểm chính của việc sử dụng kích thước trang lớn hơn là gì?",
+    "options": {
+      "A": "Tăng kích thước bảng phân trang.",
+      "B": "Giảm hiệu quả của TLB.",
+      "C": "Tăng phân mảnh nội.",
+      "D": "Tăng tỷ lệ lỗi trang."
+    },
+    "answer": "C",
+    "explanation": "Khi kích thước trang lớn, phần bộ nhớ bị lãng phí ở trang cuối cùng của một tiến trình (hoặc của một phân đoạn dữ liệu) có xu hướng lớn hơn. Đây chính là phân mảnh nội."
+  },
+  {
+    "id": 117,
+    "topic": "Bộ nhớ ảo (Virtual Memory) (Chương 8)",
+    "question": "Trong nhiều hệ thống, một phần của đĩa cứng được dùng làm không gian lưu trữ cho các trang không vừa trong RAM được gọi là gì?",
+    "options": {
+      "A": "Vùng đệm cache",
+      "B": "Không gian hoán vị (Swap Space)",
+      "C": "File hệ thống",
+      "D": "Bảng phân trang"
+    },
+    "answer": "B",
+    "explanation": "Không gian hoán vị (Swap space) hay tệp phân trang (paging file) là một khu vực trên đĩa được hệ điều hành sử dụng để tạm thời lưu trữ các trang bị đẩy ra khỏi bộ nhớ vật lý."
+  },
+  {
+    "id": 118,
+    "topic": "Bộ nhớ ảo (Virtual Memory) (Chương 8)",
+    "question": "Giải thuật Clock (hay Second-Chance) là một dạng xấp xỉ của giải thuật nào?",
+    "options": {
+      "A": "FIFO",
+      "B": "OPT",
+      "C": "LRU",
+      "D": "LFU"
+    },
+    "answer": "C",
+    "explanation": "Giải thuật LRU thực sự đòi hỏi phần cứng đặc biệt để theo dõi chính xác thời điểm truy cập. Giải thuật Clock là một cách hiệu quả để xấp xỉ LRU bằng cách sử dụng một bit tham chiếu (reference bit) để xác định xem một trang có được sử dụng gần đây hay không, thay vì phải so sánh mốc thời gian chính xác."
+  },
+  {
+    "id": 119,
+    "topic": "Bộ nhớ ảo (Virtual Memory) (Chương 8)",
+    "question": "Trong giải thuật Clock, một trang được chọn để thay thế khi kim đồng hồ chỉ đến nó và bit tham chiếu của nó có giá trị là bao nhiêu?",
+    "options": {
+      "A": "0",
+      "B": "1",
+      "C": "Bằng với bit sửa đổi",
+      "D": "Không xác định"
+    },
+    "answer": "A",
+    "explanation": "Kim đồng hồ duyệt qua các khung trang theo vòng tròn. Nếu nó gặp một trang có bit tham chiếu là 1, nó sẽ đặt bit đó về 0 và di chuyển tiếp (cho trang đó \"cơ hội thứ hai\"). Nếu nó gặp một trang có bit tham chiếu là 0, nó sẽ chọn trang đó để thay thế."
+  },
+  {
+    "id": 120,
+    "topic": "Bộ nhớ ảo (Virtual Memory) (Chương 8)",
+    "question": "Tốc độ lỗi trang (page-fault rate) của một tiến trình bị ảnh hưởng chủ yếu bởi yếu tố nào?",
+    "options": {
+      "A": "Giải thuật thay thế trang.",
+      "B": "Số khung trang được cấp phát.",
+      "C": "Tính cục bộ của tham chiếu (locality of reference).",
+      "D": "Tất cả các phương án trên."
+    },
+    "answer": "D",
+    "explanation": "Tất cả các yếu tố trên đều ảnh hưởng đến tốc độ lỗi trang. Một giải thuật thay thế trang tốt, số lượng khung trang dồi dào, và chương trình có tính cục bộ tốt đều góp phần làm giảm tỷ lệ lỗi trang."
+    },
+  {
+    "id": 141,
+    "topic": "Bộ nhớ ảo (Virtual Memory) (Chương 8)",
+    "question": "Tần suất lỗi trang (Page-Fault Frequency - PFF) là một cách tiếp cận để kiểm soát Thrashing. Nếu PFF của một tiến trình quá cao, hệ thống nên làm gì?",
+    "options": {
+      "A": "Lấy bớt khung trang từ tiến trình.",
+      "B": "Cấp thêm khung trang cho tiến trình.",
+      "C": "Tăng độ ưu tiên của tiến trình.",
+      "D": "Tạm dừng tiến trình."
+    },
+    "answer": "B",
+    "explanation": "PFF cao cho thấy tiến trình không có đủ bộ nhớ để chứa tập làm việc của nó. Do đó, hệ thống nên cấp thêm khung trang cho nó."
+  },
+  {
+    "id": 142,
+    "topic": "Bộ nhớ ảo (Virtual Memory) (Chương 8)",
+    "question": "Nếu PFF của một tiến trình quá thấp, điều đó có thể có nghĩa là gì và hệ thống nên làm gì?",
+    "options": {
+      "A": "Tiến trình đang hoạt động hiệu quả, không cần làm gì.",
+      "B": "Tiến trình có thể đang có quá nhiều khung trang so với nhu cầu, nên có thể lấy bớt để cấp cho tiến trình khác.",
+      "C": "Tiến trình sắp kết thúc.",
+      "D": "Tiến trình đang bị đói tài nguyên."
+    },
+    "answer": "B",
+    "explanation": "PFF thấp có thể chỉ ra rằng tiến trình được cấp phát nhiều khung trang hơn mức nó thực sự cần. Hệ thống có thể lấy bớt các khung trang dư thừa này để cấp cho các tiến trình khác đang cần hơn."
+  },
+  {
+    "id": 143,
+    "topic": "Bộ nhớ ảo (Virtual Memory) (Chương 8)",
+    "question": "Thuật toán thay thế trang Second-Chance (hoặc Clock) là một phiên bản cải tiến của thuật toán nào?",
+    "options": {
+      "A": "LRU",
+      "B": "OPT",
+      "C": "FIFO",
+      "D": "LFU"
+    },
+    "answer": "C",
+    "explanation": "Thuật toán Clock về cơ bản là FIFO, nhưng nó bổ sung thêm một bit tham chiếu để tránh loại bỏ một trang đã được sử dụng gần đây. Nó duyệt các trang theo thứ tự FIFO (dạng vòng tròn), nhưng cho các trang đã được tham chiếu \"một cơ hội thứ hai\", do đó xấp xỉ hành vi của LRU."
+  },
+  {
+    "id": 144,
+    "topic": "Bộ nhớ ảo (Virtual Memory) (Chương 8)",
+    "question": "Trong thuật toán Clock, một trang sẽ được chọn làm nạn nhân nếu bit tham chiếu (reference bit) của nó có giá trị là bao nhiêu khi con trỏ duyệt đến?",
+    "options": {
+      "A": "1",
+      "B": "0",
+      "C": "Bất kỳ giá trị nào",
+      "D": "Phụ thuộc vào bit sửa đổi (dirty bit)"
+    },
+    "answer": "B",
+    "explanation": "Nếu con trỏ gặp một trang có bit tham chiếu là 1, nó sẽ đặt bit đó thành 0 và đi tiếp. Trang đầu tiên mà nó gặp với bit tham chiếu là 0 sẽ được chọn làm nạn nhân."
+  },
+  {
+    "id": 145,
+    "topic": "Bộ nhớ ảo (Virtual Memory) (Chương 8)",
+    "question": "\"Demand-zero memory\" là một kỹ thuật trong quản lý bộ nhớ ảo. Nó có nghĩa là gì?",
+    "options": {
+      "A": "Các trang được cấp phát ban đầu đều được điền sẵn bằng số 0.",
+      "B": "Các trang không bao giờ được cấp phát.",
+      "C": "Bộ nhớ không được yêu cầu.",
+      "D": "Bộ nhớ chỉ được cấp phát cho các tiến trình có độ ưu tiên 0."
+    },
+    "answer": "A",
+    "explanation": "Khi một tiến trình yêu cầu bộ nhớ mới, thay vì cấp cho nó một khung trang chứa dữ liệu cũ của tiến trình khác (gây rò rỉ thông tin), hệ điều hành sẽ cấp một khung trang đã được xóa sạch (điền toàn số 0)."
+  },
+  {
+    "id": 146,
+    "topic": "Bộ nhớ ảo (Virtual Memory) (Chương 8)",
+    "question": "So với việc nạp toàn bộ chương trình, Demand Paging có ưu điểm gì về thời gian khởi động?",
+    "options": {
+      "A": "Thời gian khởi động lâu hơn.",
+      "B": "Thời gian khởi động nhanh hơn đáng kể.",
+      "C": "Thời gian khởi động không thay đổi.",
+      "D": "Phụ thuộc vào kích thước chương trình."
+    },
+    "answer": "B",
+    "explanation": "Với Demand Paging, hệ thống chỉ cần nạp các cấu trúc dữ liệu cần thiết để bắt đầu, thay vì toàn bộ mã và dữ liệu của chương trình. Chương trình có thể bắt đầu chạy nhanh hơn, và các trang khác sẽ được nạp theo yêu cầu."
+  },
+  {
+    "id": 147,
+    "topic": "Bộ nhớ ảo (Virtual Memory) (Chương 8)",
+    "question": "Chi phí chính liên quan đến việc xử lý một lỗi trang là gì?",
+    "options": {
+      "A": "Thời gian chuyển ngữ cảnh.",
+      "B": "Thời gian truy cập đĩa để đọc trang cần thiết.",
+      "C": "Thời gian cập nhật bảng phân trang.",
+      "D": "Thời gian tìm kiếm trong TLB."
+    },
+    "answer": "B",
+    "explanation": "Trong các bước xử lý lỗi trang (trap, kiểm tra, cập nhật bảng,...), việc truy cập thiết bị cơ học như đĩa cứng để tìm và đọc trang là bước tốn nhiều thời gian nhất, chậm hơn nhiều bậc so với truy cập bộ nhớ."
+  },
+  {
+    "id": 148,
+    "topic": "Bộ nhớ ảo (Virtual Memory) (Chương 8)",
+    "question": "Cấp phát khung trang toàn cục (Global replacement) cho phép một tiến trình:",
+    "options": {
+      "A": "Chỉ được thay thế các trang của chính nó.",
+      "B": "Có thể lấy một khung trang từ bất kỳ tiến trình nào khác trong hệ thống.",
+      "C": "Phải chia sẻ khung trang với các tiến trình khác.",
+      "D": "Không được phép thay thế trang."
+    },
+    "answer": "B",
+    "explanation": "Trong chiến lược thay thế toàn cục, một tiến trình khi bị lỗi trang có thể chọn một trang nạn nhân từ tập hợp tất cả các khung trang trong bộ nhớ, kể cả những khung trang đang được giữ bởi các tiến trình khác."
+  },
+  {
+    "id": 149,
+    "topic": "Bộ nhớ ảo (Virtual Memory) (Chương 8)",
+    "question": "Cấp phát khung trang cục bộ (Local replacement) yêu cầu một tiến trình:",
+    "options": {
+      "A": "Chỉ được chọn nạn nhân từ tập các khung trang đã được cấp phát cho chính nó.",
+      "B": "Có thể chọn nạn nhân từ bất kỳ tiến trình nào.",
+      "C": "Phải có độ ưu tiên cao.",
+      "D": "Phải chạy thuật toán OPT."
+    },
+    "answer": "A",
+    "explanation": "Ngược lại với thay thế toàn cục, thay thế cục bộ giới hạn việc lựa chọn trang nạn nhân chỉ trong phạm vi các khung trang đã được cấp phát cho chính tiến trình gây ra lỗi trang."
+  },
+  {
+    "id": 150,
+    "topic": "Bộ nhớ ảo (Virtual Memory) (Chương 8)",
+    "question": "Tại sao LRU là một thuật toán tốt nhưng lại khó hiện thực?",
+    "options": {
+      "A": "Vì nó cần phần cứng đặc biệt (bộ đếm hoặc ngăn xếp) để theo dõi chính xác thời điểm truy cập cuối cùng của mỗi trang, điều này rất tốn kém.",
+      "B": "Vì nó gây ra Nghịch lý Belady.",
+      "C": "Vì nó yêu cầu biết trước tương lai.",
+      "D": "Vì nó chỉ hoạt động tốt với số lượng khung trang nhỏ."
+    },
+    "answer": "A",
+    "explanation": "Để biết trang nào được sử dụng \"ít gần đây nhất\", hệ thống phải ghi lại thông tin về thời điểm truy cập của tất cả các trang. Việc này đòi hỏi sự hỗ trợ phần cứng phức tạp và tốn kém, làm cho việc hiện thực LRU hoàn hảo trở nên không thực tế."
+  },
+  {
+    "id": 151,
+    "topic": "Bộ nhớ ảo (Virtual Memory) (Chương 8)",
+    "question": "Vùng trên đĩa dùng để lưu các trang bị hoán chuyển ra khỏi bộ nhớ chính trong Windows được gọi là gì?",
+    "options": {
+      "A": "Swap partition",
+      "B": "pagefile.sys",
+      "C": "/dev/swap",
+      "D": "swap.img"
+    },
+    "answer": "B",
+    "explanation": "pagefile.sys là tên của tệp tin hoán vị mặc định trong hệ điều hành Windows."
+  },
+  {
+    "id": 152,
+    "topic": "Bộ nhớ ảo (Virtual Memory) (Chương 8)",
+    "question": "Trong ngữ cảnh bộ nhớ ảo, \"backing store\" là gì?",
+    "options": {
+      "A": "Bộ nhớ cache L2.",
+      "B": "Bộ nhớ chính (RAM).",
+      "C": "Vùng lưu trữ trên thiết bị thứ cấp (như đĩa) nơi lưu trữ toàn bộ không gian địa chỉ của một tiến trình.",
+      "D": "Thanh ghi của CPU."
+    },
+    "answer": "C",
+    "explanation": "Backing store là nơi lưu trữ các phần của không gian địa chỉ ảo của một tiến trình không hiện diện trong bộ nhớ chính. Thường là không gian tráo đổi (swap space) trên đĩa."
+  },
+  {
+    "id": 153,
+    "topic": "Bộ nhớ ảo (Virtual Memory) (Chương 8)",
+    "question": "Một lỗi trang \"thuần túy\" (pure demand paging) xảy ra khi nào?",
+    "options": {
+      "A": "Khi một tiến trình bắt đầu thực thi và tham chiếu đến trang đầu tiên của nó.",
+      "B": "Khi bộ nhớ đầy.",
+      "C": "Khi một trang bị sửa đổi.",
+      "D": "Khi một trang được chia sẻ giữa nhiều tiến trình."
+    },
+    "answer": "A",
+    "explanation": "Trong mô hình thuần túy, tiến trình bắt đầu mà không có trang nào trong bộ nhớ. Do đó, ngay cả lệnh đầu tiên cũng sẽ gây ra lỗi trang."
+  },
+  {
+    "id": 154,
+    "topic": "Bộ nhớ ảo (Virtual Memory) (Chương 8)",
+    "question": "Trong các hệ thống hiện đại, hệ điều hành thường cố gắng làm gì để giảm độ trễ của lỗi trang?",
+    "options": {
+      "A": "Giữ một vài khung trang trống để có thể xử lý lỗi trang ngay lập tức mà không cần chờ thay thế trang.",
+      "B": "Tăng kích thước trang lên rất lớn.",
+      "C": "Sử dụng đĩa SSD thay vì HDD.",
+      "D": "Cả A và C."
+    },
+    "answer": "D",
+    "explanation": "Cả A và C đều đúng. Giữ một vài khung trang trống cho phép hệ điều hành bắt đầu đọc trang từ đĩa ngay lập tức. Sử dụng đĩa SSD có thời gian truy cập nhanh hơn nhiều so với HDD, do đó làm giảm đáng kể thời gian đọc trang từ backing store."
+  },
+  {
+    "id": 155,
+    "topic": "Bộ nhớ ảo (Virtual Memory) (Chương 8)",
+    "question": "Khi một tiến trình kết thúc, các khung trang của nó sẽ được xử lý như thế nào?",
+    "options": {
+      "A": "Được xóa ngay lập tức.",
+      "B": "Được trả về danh sách các khung trang trống của hệ thống.",
+      "C": "Được giữ lại cho đến khi hệ thống khởi động lại.",
+      "D": "Được gán cho tiến trình cha của nó."
+    },
+    "answer": "B",
+    "explanation": "Khi một tiến trình không còn cần bộ nhớ nữa, hệ điều hành sẽ thu hồi tất cả các khung trang đã cấp phát cho nó và thêm chúng vào danh sách các khung trang rỗi để có thể cấp phát cho các tiến trình khác."
+  },
+  {
+    "id": 156,
+    "topic": "Bộ nhớ ảo (Virtual Memory) (Chương 8)",
+    "question": "Trong thuật toán Enhanced Second-Chance (còn gọi là thuật toán Not Used Recently), cặp bit nào được sử dụng để quyết định trang nạn nhân?",
+    "options": {
+      "A": "(reference bit, valid bit)",
+      "B": "(reference bit, dirty bit)",
+      "C": "(valid bit, dirty bit)",
+      "D": "(protection bit, reference bit)"
+    },
+    "answer": "B",
+    "explanation": "Thuật toán này cải tiến thuật toán Clock bằng cách xem xét cả bit tham chiếu (đã dùng gần đây chưa?) và bit sửa đổi (có bị thay đổi không?) để phân loại các trang thành 4 lớp ưu tiên thay thế."
+  },
+  {
+    "id": 157,
+    "topic": "Bộ nhớ ảo (Virtual Memory) (Chương 8)",
+    "question": "Trong thuật toán Enhanced Second-Chance, trang nào là ứng cử viên tốt nhất để thay thế?",
+    "options": {
+      "A": "Trang có cặp bit (0, 0) - not recently used, not modified.",
+      "B": "Trang có cặp bit (0, 1) - not recently used, modified.",
+      "C": "Trang có cặp bit (1, 0) - recently used, not modified.",
+      "D": "Trang có cặp bit (1, 1) - recently used, modified."
+    },
+    "answer": "A",
+    "explanation": "Một trang vừa không được dùng gần đây (reference bit = 0) vừa không bị sửa đổi (dirty bit = 0) là ứng cử viên lý tưởng nhất để thay thế vì nó ít có khả năng được cần đến và không tốn chi phí ghi ra đĩa."
+  },
+  {
+    "id": 158,
+    "topic": "Bộ nhớ ảo (Virtual Memory) (Chương 8)",
+    "question": "Việc cấp phát bộ nhớ cho các vùng đệm của nhân (kernel buffers) thường được thực hiện từ đâu?",
+    "options": {
+      "A": "Từ không gian địa chỉ của tiến trình người dùng.",
+      "B": "Từ một vùng nhớ riêng của nhân, không thể bị hoán vị ra đĩa.",
+      "C": "Từ không gian tráo đổi.",
+      "D": "Từ TLB."
+    },
+    "answer": "B",
+    "explanation": "Các cấu trúc dữ liệu và vùng đệm quan trọng của nhân phải luôn có sẵn trong bộ nhớ để hệ điều hành hoạt động ổn định. Do đó, chúng được cấp phát từ một vùng nhớ đặc biệt (kernel space) được đánh dấu là không thể hoán vị (non-pageable)."
+  },
+  {
+    "id": 159,
+    "topic": "Bộ nhớ ảo (Virtual Memory) (Chương 8)",
+    "question": "\"Memory-mapped files\" là một kỹ thuật cho phép:",
+    "options": {
+      "A": "Ánh xạ một file trên đĩa vào không gian địa chỉ ảo của một tiến trình, cho phép truy cập file như một mảng trong bộ nhớ.",
+      "B": "Sao chép toàn bộ file vào bộ nhớ.",
+      "C": "Tạo một bản đồ các file trong hệ thống.",
+      "D": "Nén các file trong bộ nhớ."
+    },
+    "answer": "A",
+    "explanation": "Kỹ thuật này coi nội dung của một file như một phần của không gian địa chỉ ảo. Thay vì dùng các lời gọi read()/write(), tiến trình có thể truy cập nội dung file trực tiếp thông qua các con trỏ bộ nhớ."
+  },
+  {
+    "id": 160,
+    "topic": "Bộ nhớ ảo (Virtual Memory) (Chương 8)",
+    "question": "Lợi ích của việc sử dụng memory-mapped files là gì?",
+    "options": {
+      "A": "Đơn giản hóa việc đọc/ghi file, loại bỏ nhu cầu sử dụng các lệnh read()/write().",
+      "B": "Cho phép nhiều tiến trình chia sẻ cùng một file trong bộ nhớ một cách hiệu quả.",
+      "C": "Có thể nhanh hơn so với I/O thông thường.",
+      "D": "Tất cả các phương án trên."
+    },
+    "answer": "D",
+    "explanation": "Tất cả các phương án trên đều đúng. Việc truy cập file trở nên đơn giản như truy cập mảng; nhiều tiến trình có thể ánh xạ cùng một file để chia sẻ bộ nhớ hiệu quả; và nó có thể nhanh hơn vì tránh được việc sao chép dữ liệu giữa các bộ đệm và tận dụng cơ chế phân trang theo yêu cầu."
+  },
+  {
+    "id": 161,
+    "topic": "Hệ điều hành Linux và Windows (Chương 9)",
+    "question": "Kiến trúc của nhân Linux về cơ bản là gì?",
+    "options": {
+      "A": "Microkernel (Vi nhân)",
+      "B": "Monolithic (Nguyên khối) nhưng có tính module",
+      "C": "Hybrid (Lai)",
+      "D": "Layered (Phân lớp)"
+    },
+    "answer": "B",
+    "explanation": "Nhân Linux có kiến trúc nguyên khối (monolithic), nghĩa là các dịch vụ cốt lõi chạy trong cùng một không gian nhân. Tuy nhiên, nó rất linh hoạt nhờ cơ chế module hạt nhân có thể nạp (LKM), cho phép thêm/bớt chức năng (như trình điều khiển) mà không cần khởi động lại."
+  },
+  {
+    "id": 162,
+    "topic": "Hệ điều hành Linux và Windows (Chương 9)",
+    "question": "Trong hệ điều hành Linux, cơ chế nào cho phép nhân hệ điều hành được mở rộng chức năng (ví dụ: thêm trình điều khiển thiết bị) mà không cần biên dịch lại toàn bộ nhân?",
+    "options": {
+      "A": "Lệnh fork()",
+      "B": "Thư viện hệ thống (System Libraries)",
+      "C": "Các mô-đun nhân có thể nạp (Loadable Kernel Modules - LKM)",
+      "D": "Bộ định thời CFS (Completely Fair Scheduler)"
+    },
+    "answer": "C",
+    "explanation": "Các mô-đun nhân có thể nạp (Loadable Kernel Modules - LKM) là các đoạn mã có thể được nạp và liên kết động vào nhân tại thời gian chạy, cung cấp một cách để mở rộng chức năng của nhân một cách linh hoạt."
+  },
+  {
+    "id": 163,
+    "topic": "Hệ điều hành Linux và Windows (Chương 9)",
+    "question": "Linux được phát triển dựa trên hệ điều hành nào và tuân thủ tiêu chuẩn nào?",
+    "options": {
+      "A": "Dựa trên Windows, tuân thủ Win32 API.",
+      "B": "Dựa trên UNIX, tuân thủ POSIX.",
+      "C": "Dựa trên MS-DOS, tuân thủ IEEE 1003.1.",
+      "D": "Dựa trên macOS, tuân thủ Cocoa API."
+    },
+    "answer": "B",
+    "explanation": "Linux được thiết kế để tương thích với hệ điều hành UNIX và tuân thủ các tiêu chuẩn POSIX (Portable Operating System Interface), đảm bảo tính tương thích của các ứng dụng trên nhiều hệ thống giống UNIX."
+  },
+  {
+    "id": 164,
+    "topic": "Hệ điều hành Linux và Windows (Chương 9)",
+    "question": "Trong Linux, việc tạo một tiến trình mới thường bao gồm hai lời gọi hệ thống riêng biệt là:",
+    "options": {
+      "A": "CreateProcess() và Run()",
+      "B": "new() và start()",
+      "C": "fork() và exec()",
+      "D": "begin() và execute()"
+    },
+    "answer": "C",
+    "explanation": "Đây là mô hình tạo tiến trình kinh điển của UNIX. fork() tạo một bản sao của tiến trình hiện tại, và exec() thay thế bản sao đó bằng một chương trình mới."
+  },
+  {
+    "id": 165,
+    "topic": "Hệ điều hành Linux và Windows (Chương 9)",
+    "question": "Bộ định thời mặc định trong các phiên bản nhân Linux hiện đại (từ 2.6.23 trở đi) là gì?",
+    "options": {
+      "A": "Bộ định thời O(1)",
+      "B": "Bộ định thời Round-Robin",
+      "C": "Bộ định thời ưu tiên (Priority Scheduler)",
+      "D": "Bộ định thời hoàn toàn công bằng (Completely Fair Scheduler - CFS)"
+    },
+    "answer": "D",
+    "explanation": "CFS (Completely Fair Scheduler) là bộ định thời chính cho các tác vụ thông thường trong Linux từ phiên bản 2.6.23, được thiết kế để cung cấp sự phân chia thời gian CPU công bằng nhất có thể."
+  },
+  {
+    "id": 166,
+    "topic": "Hệ điều hành Linux và Windows (Chương 9)",
+    "question": "Triết lý của bộ định thời CFS trong Linux là gì?",
+    "options": {
+      "A": "Luôn chạy tác vụ có độ ưu tiên cao nhất.",
+      "B": "Cố gắng cung cấp một phần thời gian CPU công bằng cho mỗi tác vụ, dựa trên giá trị \"nice\".",
+      "C": "Cấp cho mỗi tác vụ một khoảng thời gian (quantum) cố định.",
+      "D": "Ưu tiên các tác vụ I/O-bound."
+    },
+    "answer": "B",
+    "explanation": "CFS không sử dụng các quantum thời gian cố định. Thay vào đó, nó cố gắng mô phỏng một bộ xử lý lý tưởng, chia sẻ thời gian một cách hoàn hảo. Giá trị \"nice\" được dùng để điều chỉnh trọng số, cho phép một số tác vụ nhận được phần CPU lớn hơn hoặc nhỏ hơn."
+  },
+  {
+    "id": 167,
+    "topic": "Hệ điều hành Linux và Windows (Chương 9)",
+    "question": "Trong CFS, tác vụ nào sẽ được chọn để chạy tiếp theo?",
+    "options": {
+      "A": "Tác vụ có thời gian chạy ảo (vruntime) nhỏ nhất.",
+      "B": "Tác vụ có thời gian chạy ảo (vruntime) lớn nhất.",
+      "C": "Tác vụ đã chờ lâu nhất.",
+      "D": "Tác vụ có độ ưu tiên tĩnh cao nhất."
+    },
+    "answer": "A",
+    "explanation": "Mỗi tác vụ có một biến vruntime ghi lại thời gian nó đã chạy trên CPU (đã được điều chỉnh theo trọng số). CFS luôn chọn tác vụ có vruntime nhỏ nhất để chạy, tức là tác vụ \"thiệt thòi\" nhất."
+  },
+  {
+    "id": 168,
+    "topic": "Hệ điều hành Linux và Windows (Chương 9)",
+    "question": "Kỹ thuật tối ưu hóa nào được Linux sử dụng khi một tiến trình gọi fork() để tránh sao chép toàn bộ không gian bộ nhớ ngay lập tức?",
+    "options": {
+      "A": "Demand Paging",
+      "B": "Copy-on-Write (CoW)",
+      "C": "Dynamic Linking",
+      "D": "Buddy Heap Allocation"
+    },
+    "answer": "B",
+    "explanation": "Đây là một tối ưu hóa quan trọng, giúp fork() hoạt động rất nhanh bằng cách cho phép tiến trình cha và con ban đầu chia sẻ các trang bộ nhớ. Một trang chỉ được sao chép khi có một thao tác ghi xảy ra."
+  },
+  {
+    "id": 169,
+    "topic": "Hệ điều hành Linux và Windows (Chương 9)",
+    "question": "Trong Linux, thuật toán nào thường được sử dụng để quản lý và cấp phát các trang bộ nhớ vật lý?",
+    "options": {
+      "A": "First-fit",
+      "B": "Best-fit",
+      "C": "Slab allocator",
+      "D": "Buddy Heap allocator"
+    },
+    "answer": "D",
+    "explanation": "Linux sử dụng một biến thể của thuật toán buddy để quản lý việc cấp phát và giải phóng các khối trang bộ nhớ có kích thước là lũy thừa của 2 một cách hiệu quả, giúp giảm phân mảnh ngoại."
+  },
+  {
+    "id": 170,
+    "topic": "Hệ điều hành Linux và Windows (Chương 9)",
+    "question": "Giao tiếp liên tiến trình (IPC) trong Linux có thể được thực hiện bằng phương pháp nào sau đây?",
+    "options": {
+      "A": "Tín hiệu (Signals) và Đường ống (Pipes)",
+      "B": "Socket",
+      "C": "Bộ nhớ chia sẻ (Shared Memory)",
+      "D": "Tất cả các phương án trên"
+    },
+    "answer": "D",
+    "explanation": "Linux cung cấp một bộ cơ chế IPC phong phú kế thừa từ UNIX, bao gồm tín hiệu, đường ống, socket, và bộ nhớ chia sẻ."
+  },
+  {
+    "id": 171,
+    "topic": "Hệ điều hành Linux và Windows (Chương 9)",
+    "question": "Trong Linux, thông tin cấu hình hệ thống và phần mềm thường được lưu trữ ở đâu?",
+    "options": {
+      "A": "Trong một cơ sở dữ liệu trung tâm gọi là Registry.",
+      "B": "Trong các file văn bản (text files) trong thư mục /etc và các thư mục khác.",
+      "C": "Trong nhân hệ điều hành.",
+      "D": "Trong boot sector."
+    },
+    "answer": "B",
+    "explanation": "Triết lý của UNIX/Linux là sử dụng các file văn bản mà con người có thể đọc được để lưu trữ cấu hình, giúp dễ dàng quản lý và chỉnh sửa."
+  },
+  {
+    "id": 172,
+    "topic": "Hệ điều hành Linux và Windows (Chương 9)",
+    "question": "Giấy phép mã nguồn mở nào được Linux sử dụng, yêu cầu các sản phẩm phái sinh cũng phải là mã nguồn mở?",
+    "options": {
+      "A": "Apache License",
+      "B": "MIT License",
+      "C": "GNU General Public License (GPL)",
+      "D": "BSD License"
+    },
+    "answer": "C",
+    "explanation": "GPL là một giấy phép \"copyleft\", yêu cầu rằng bất kỳ phần mềm nào được tạo ra dựa trên mã nguồn GPL cũng phải được phát hành dưới giấy phép GPL."
+  },
+  {
+    "id": 173,
+    "topic": "Hệ điều hành Linux và Windows (Chương 9)",
+    "question": "Trong Linux, bộ nhớ vật lý được chia thành các vùng (zones) như DMA, NORMAL, HIGHMEM để làm gì?",
+    "options": {
+      "A": "Để quản lý các loại bộ nhớ có đặc tính truy cập phần cứng khác nhau.",
+      "B": "Để phân chia bộ nhớ cho các người dùng khác nhau.",
+      "C": "Để tăng cường bảo mật.",
+      "D": "Để hỗ trợ bộ định thời CFS."
+    },
+    "answer": "A",
+    "explanation": "Các kiến trúc phần cứng khác nhau có những giới hạn riêng về việc vùng nhớ nào có thể được truy cập bởi các thiết bị nào (ví dụ, các thiết bị ISA cũ chỉ có thể DMA vào 16MB đầu tiên). Các vùng này giúp nhân quản lý những giới hạn đó."
+  },
+  {
+    "id": 174,
+    "topic": "Hệ điều hành Linux và Windows (Chương 9)",
+    "question": "Trong Android, việc quản lý định thời và tài nguyên cho các ứng dụng được thực hiện dựa trên thành phần nào?",
+    "options": {
+      "A": "Một nhân tùy chỉnh hoàn toàn mới.",
+      "B": "Nhân Windows NT.",
+      "C": "Nhân Linux đã được sửa đổi, với các cơ chế như quản lý nhóm tiến trình.",
+      "D": "Máy ảo Java (JVM)."
+    },
+    "answer": "C",
+    "explanation": "Nền tảng của Android là một nhân Linux đã được tùy chỉnh với các tính năng bổ sung như wakelocks, low memory killer, và cgroups để quản lý tài nguyên và năng lượng hiệu quả cho môi trường di động."
+  },
+  {
+    "id": 175,
+    "topic": "Hệ điều hành Linux và Windows (Chương 9)",
+    "question": "Lệnh exec() trong Linux làm gì?",
+    "options": {
+      "A": "Tạo một tiến trình con mới là bản sao của tiến trình cha.",
+      "B": "Thay thế không gian địa chỉ của tiến trình hiện tại bằng một chương trình mới.",
+      "C": "Chờ một tiến trình con kết thúc.",
+      "D": "Gửi một tín hiệu đến một tiến trình khác."
+    },
+    "answer": "B",
+    "explanation": "Sau khi fork(), tiến trình con thường gọi exec() để nạp và chạy một chương trình khác. Lời gọi exec() sẽ thay thế hoàn toàn mã, dữ liệu và stack của tiến trình gọi nó."
+  },
+  {
+    "id": 176,
+    "topic": "Hệ điều hành Linux và Windows (Chương 9)",
+    "question": "Kiến trúc của hệ điều hành Windows được mô tả là gì?",
+    "options": {
+      "A": "Kiến trúc phân lớp (layered) với User Mode và Kernel Mode.",
+      "B": "Kiến trúc nguyên khối (monolithic).",
+      "C": "Kiến trúc vi nhân (microkernel).",
+      "D": "Kiến trúc không nhân (kernel-less)."
+    },
+    "answer": "A",
+    "explanation": "Windows có sự tách biệt rõ ràng giữa chế độ người dùng (chạy ứng dụng) và chế độ nhân (chạy các thành phần cốt lõi của HĐH). Các thành phần trong chế độ nhân được tổ chức theo các lớp, với HAL ở dưới cùng, Kernel ở trên và Executive cung cấp các dịch vụ hệ thống."
+  },
+  {
+    "id": 177,
+    "topic": "Hệ điều hành Linux và Windows (Chương 9)",
+    "question": "Thành phần nào trong kiến trúc Windows chịu trách nhiệm che giấu sự khác biệt về phần cứng giữa các máy tính, giúp Windows có tính di động (portability) cao?",
+    "options": {
+      "A": "Kernel",
+      "B": "Executive",
+      "C": "Hardware Abstraction Layer (HAL)",
+      "D": "Registry"
+    },
+    "answer": "C",
+    "explanation": "HAL (Hardware Abstraction Layer) cung cấp một giao diện trừu tượng cho phần còn lại của nhân, che đi các chi tiết cụ thể của bo mạch chủ, bộ điều khiển ngắt, và các giao diện cấp thấp khác, giúp Windows dễ dàng được chuyển sang các nền tảng phần cứng khác nhau."
+  },
+  {
+    "id": 178,
+    "topic": "Hệ điều hành Linux và Windows (Chương 9)",
+    "question": "Trong Windows, đơn vị cơ bản được hệ điều hành định thời để thực thi là gì?",
+    "options": {
+      "A": "Tiến trình (Process)",
+      "B": "Tiểu trình (Thread)",
+      "C": "Tác vụ (Task)",
+      "D": "Công việc (Job)"
+    },
+    "answer": "B",
+    "explanation": "Windows là một hệ điều hành đa luồng, và tiểu trình (Thread) là đơn vị mà bộ định thời của Windows cấp phát thời gian CPU."
+  },
+  {
+    "id": 179,
+    "topic": "Hệ điều hành Linux và Windows (Chương 9)",
+    "question": "Một tiến trình (Process) trong Windows được định nghĩa là gì?",
+    "options": {
+      "A": "Một đơn vị thực thi mã.",
+      "B": "Một container chứa các tài nguyên như không gian địa chỉ ảo, các handle, và một hoặc nhiều tiểu trình.",
+      "C": "Một file thực thi trên đĩa.",
+      "D": "Một lời gọi hệ thống."
+    },
+    "answer": "B",
+    "explanation": "Một tiến trình trong Windows không phải là một đơn vị thực thi, mà là một đối tượng quản lý tài nguyên (một container). Việc thực thi thực sự được thực hiện bởi các tiểu trình (threads) thuộc tiến trình đó."
+  },
+  {
+    "id": 180,
+    "topic": "Hệ điều hành Linux và Windows (Chương 9)",
+    "question": "Bộ định thời của Windows sử dụng chiến lược gì?",
+    "options": {
+      "A": "Định thời công bằng dựa trên vruntime như CFS của Linux.",
+      "B": "Định thời dựa trên độ ưu tiên (priority-based), trưng dụng, với 32 mức ưu tiên.",
+      "C": "Định thời không trưng dụng (non-preemptive).",
+      "D": "Định thời theo kiểu First-Come, First-Served (FCFS)."
+    },
+    "answer": "B",
+    "explanation": "Windows sử dụng một hệ thống hàng đợi ưu tiên đa cấp. Luồng có độ ưu tiên cao nhất đang ở trạng thái sẵn sàng sẽ được chạy. Đây là chiến lược định thời dựa trên độ ưu tiên và có trưng dụng."
+  },
+  {
+    "id": 181,
+    "topic": "Hệ điều hành Linux và Windows (Chương 9)",
+    "question": "Tại sao bộ định thời của Windows thường tăng độ ưu tiên (priority boost) cho các tiểu trình tương tác (interactive threads)?",
+    "options": {
+      "A": "Để đảm bảo sự công bằng cho tất cả các tiểu trình.",
+      "B": "Để cải thiện độ phản hồi của giao diện người dùng, mang lại cảm giác hệ thống \"nhanh\".",
+      "C": "Để tiết kiệm năng lượng.",
+      "D": "Đây là yêu cầu của chuẩn POSIX."
+    },
+    "answer": "B",
+    "explanation": "Khi một luồng xử lý sự kiện giao diện người dùng (như click chuột) được đánh thức, Windows sẽ tạm thời tăng độ ưu tiên của nó để nó được chạy ngay lập tức, giúp cho giao diện người dùng phản hồi nhanh chóng."
+  },
+  {
+    "id": 182,
+    "topic": "Hệ điều hành Linux và Windows (Chương 9)",
+    "question": "Windows được coi là hệ thống thời gian thực loại nào?",
+    "options": {
+      "A": "Hard real-time (thời gian thực cứng)",
+      "B": "Soft real-time (thời gian thực mềm)",
+      "C": "Firm real-time (thời gian thực chắc chắn)",
+      "D": "Non-real-time (không phải thời gian thực)"
+    },
+    "answer": "B",
+    "explanation": "Windows cung cấp các API và mức ưu tiên thời gian thực, nhưng không đảm bảo rằng các tác vụ thời gian thực sẽ luôn đáp ứng deadline một cách tuyệt đối (hard real-time). Nó chỉ cố gắng ưu tiên chúng hơn các tác vụ thông thường."
+  },
+  {
+    "id": 183,
+    "topic": "Hệ điều hành Linux và Windows (Chương 9)",
+    "question": "Trong Windows, quy trình cấp phát bộ nhớ ảo cho một tiến trình gồm hai bước là gì?",
+    "options": {
+      "A": "Allocate và Assign",
+      "B": "Request và Grant",
+      "C": "Reserve (dự trữ không gian địa chỉ) và Commit (gán trang vật lý)",
+      "D": "Map và Link"
+    },
+    "answer": "C",
+    "explanation": "Một tiến trình trước tiên có thể \"reserve\" một vùng không gian địa chỉ ảo mà không cần cấp phát bộ nhớ vật lý. Sau đó, khi thực sự cần dùng, nó sẽ \"commit\" các trang trong vùng đã dự trữ, lúc này hệ điều hành mới thực sự cấp phát các khung trang vật lý (hoặc không gian trong pagefile)."
+  },
+  {
+    "id": 184,
+    "topic": "Hệ điều hành Linux và Windows (Chương 9)",
+    "question": "Cấu trúc dữ liệu trung tâm, có dạng cây, dùng để lưu trữ thông tin cấu hình hệ thống, phần mềm và người dùng trong Windows được gọi là gì?",
+    "options": {
+      "A": "Configuration Files",
+      "B": "INI Files",
+      "C": "Registry",
+      "D": "System Database"
+    },
+    "answer": "C",
+    "explanation": "Registry là cơ sở dữ liệu cấu hình trung tâm, có cấu trúc phân cấp dạng cây của Windows, lưu trữ hầu hết các thiết lập của hệ điều hành và ứng dụng."
+  },
+  {
+    "id": 185,
+    "topic": "Hệ điều hành Linux và Windows (Chương 9)",
+    "question": "Cơ chế giao tiếp liên tiến trình (IPC) hiệu năng cao, được thiết kế theo mô hình client-server trong cùng một máy tính Windows, được gọi là gì?",
+    "options": {
+      "A": "Sockets",
+      "B": "Pipes",
+      "C": "Local Procedure Call (LPC)",
+      "D": "Shared Memory"
+    },
+    "answer": "C",
+    "explanation": "LPC (Local Procedure Call) là một cơ chế IPC tối ưu hóa dựa trên RPC (Remote Procedure Call) nhưng được thiết kế riêng cho giao tiếp giữa các tiến trình trên cùng một máy, được sử dụng rộng rãi bởi các hệ thống con của Windows."
+  },
+  {
+    "id": 186,
+    "topic": "Hệ điều hành Linux và Windows (Chương 9)",
+    "question": "Thành phần nào trong Kernel Mode của Windows chịu trách nhiệm quản lý bộ nhớ ảo, quản lý tiến trình/tiểu trình, và quản lý I/O?",
+    "options": {
+      "A": "HAL (Hardware Abstraction Layer)",
+      "B": "Kernel",
+      "C": "Executive",
+      "D": "Security Kernel"
+    },
+    "answer": "C",
+    "explanation": "Executive là tập hợp các thành phần cấp cao trong chế độ nhân, cung cấp các dịch vụ cốt lõi như Object Manager, Process Manager, Virtual Memory Manager, I/O Manager..."
+  },
+  {
+    "id": 187,
+    "topic": "Hệ điều hành Linux và Windows (Chương 9)",
+    "question": "Trong Windows, mỗi tiểu trình có hai stack. Chúng dùng cho mục đích gì?",
+    "options": {
+      "A": "Một cho dữ liệu, một cho con trỏ.",
+      "B": "Một cho chế độ người dùng (user mode) và một cho chế độ nhân (kernel mode).",
+      "C": "Một cho các biến cục bộ, một cho các tham số hàm.",
+      "D": "Một stack chính và một stack dự phòng."
+    },
+    "answer": "B",
+    "explanation": "Khi một luồng thực hiện một lời gọi hệ thống và chuyển từ user mode sang kernel mode, nó sẽ chuyển sang sử dụng kernel stack. Điều này đảm bảo sự tách biệt và bảo mật giữa hai chế độ."
+  },
+  {
+    "id": 188,
+    "topic": "Hệ điều hành Linux và Windows (Chương 9)",
+    "question": "Chức năng Plug-and-Play (PnP) của Windows có nhiệm vụ gì?",
+    "options": {
+      "A": "Tự động nhận biết và cấu hình phần cứng khi nó được thêm vào hoặc gỡ bỏ khỏi hệ thống.",
+      "B": "Chơi các file media một cách tự động.",
+      "C": "Tối ưu hóa việc chơi game.",
+      "D": "Quản lý năng lượng cho các thiết bị di động."
+    },
+    "answer": "A",
+    "explanation": "Trình quản lý PnP phối hợp với các trình điều khiển thiết bị để tự động nhận dạng, cấp phát tài nguyên và nạp trình điều khiển cho phần cứng mới."
+  },
+  {
+    "id": 189,
+    "topic": "Hệ điều hành Linux và Windows (Chương 9)",
+    "question": "So với mô hình fork()/exec() của Linux, lời gọi CreateProcess() của Windows có đặc điểm gì?",
+    "options": {
+      "A": "Nó linh hoạt hơn vì tách biệt việc tạo và chạy.",
+      "B": "Nó là một lời gọi \"tất cả trong một\" để tạo một tiến trình mới và chạy một chương trình trong đó.",
+      "C": "Nó chỉ tạo ra tiểu trình, không tạo tiến trình.",
+      "D": "Nó yêu cầu quyền quản trị viên để chạy."
+    },
+    "answer": "B",
+    "explanation": "Lời gọi CreateProcess() yêu cầu tên của file thực thi và các tham số khác, sau đó nó sẽ thực hiện tất cả các bước cần thiết để tạo tiến trình và nạp chương trình đó vào, là một thao tác kết hợp."
+  },
+  {
+    "id": 190,
+    "topic": "Hệ điều hành Linux và Windows (Chương 9)",
+    "question": "Trong hệ thống phân cấp 32 độ ưu tiên của Windows, các mức ưu tiên từ 16-31 được dành cho loại tiểu trình nào?",
+    "options": {
+      "A": "Tiểu trình hệ thống (System threads)",
+      "B": "Tiểu trình có độ ưu tiên thay đổi (Variable priority threads)",
+      "C": "Tiểu trình thời gian thực (Real-time threads)",
+      "D": "Tiểu trình rỗi (Idle threads)"
+    },
+    "answer": "C",
+    "explanation": "Các mức ưu tiên cao này (16-31) được dành cho các tác vụ thời gian thực (real-time threads) đòi hỏi đáp ứng nhanh và có tính quyết định cao, và chúng sẽ không bị hạ thấp ưu tiên bởi hệ thống."
+  },
+  {
+    "id": 191,
+    "topic": "Hệ điều hành Linux và Windows (Chương 9)",
+    "question": "Tệp pagefile.sys trong Windows có chức năng tương đương với thành phần nào trong Linux?",
+    "options": {
+      "A": "Thư mục /tmp",
+      "B": "Swap partition hoặc swap file",
+      "C": "Kernel image",
+      "D": "Boot loader"
+    },
+    "answer": "B",
+    "explanation": "Cả hai (pagefile.sys trong Windows và swap partition/file trong Linux) đều đóng vai trò là không gian hoán vị (backing store) cho bộ nhớ ảo, dùng để lưu các trang bị đẩy ra khỏi RAM."
+  },
+  {
+    "id": 192,
+    "topic": "Hệ điều hành Linux và Windows (Chương 9)",
+    "question": "Lớp trừu tượng phần cứng (HAL) mang lại lợi ích gì cho các nhà phát triển trình điều khiển thiết bị (device driver) trên Windows?",
+    "options": {
+      "A": "Họ không cần viết lại trình điều khiển cho mỗi loại CPU khác nhau.",
+      "B": "Trình điều khiển của họ sẽ chạy nhanh hơn.",
+      "C": "Họ có thể viết trình điều khiển bằng ngôn ngữ cấp cao như Python.",
+      "D": "Nó cho phép trình điều khiển truy cập trực tiếp vào phần cứng mà không cần qua nhân."
+    },
+    "answer": "A",
+    "explanation": "Vì HAL che giấu các chi tiết cấp thấp của nền tảng (bo mạch chủ, CPU...), trình điều khiển có thể được viết theo một giao diện chuẩn hơn, giúp chúng có khả năng tương thích trên nhiều loại máy tính khác nhau mà không cần sửa đổi."
+  },
+  {
+    "id": 193,
+    "topic": "Hệ điều hành Linux và Windows (Chương 9)",
+    "question": "Trạng thái tiểu trình \"Standby\" trong Windows có nghĩa là gì?",
+    "options": {
+      "A": "Tiểu trình đang chờ một sự kiện I/O.",
+      "B": "Tiểu trình đã sẵn sàng chạy và đã được chọn để chạy tiếp theo trên một CPU cụ thể.",
+      "C": "Tiểu trình đang chạy.",
+      "D": "Tiểu trình đã kết thúc."
+    },
+    "answer": "B",
+    "explanation": "Đây là một trạng thái chuyển tiếp. Sau khi bộ định thời chọn một luồng để chạy, nó sẽ được đưa vào trạng thái Standby. Khi CPU tương ứng trở nên rỗi, một chuyển đổi ngữ cảnh sẽ xảy ra và luồng sẽ chuyển sang trạng thái Running."
+  },
+  {
+    "id": 194,
+    "topic": "Hệ điều hành Linux và Windows (Chương 9)",
+    "question": "Trong kiến trúc Windows, \"Executive\" hoạt động như một tập hợp các dịch vụ cho chế độ nào?",
+    "options": {
+      "A": "Chỉ cho Kernel Mode.",
+      "B": "Cho cả Kernel Mode và User Mode, nhưng được gọi từ User Mode thông qua System Calls.",
+      "C": "Chỉ cho User Mode.",
+      "D": "Chỉ cho các trình điều khiển thiết bị."
+    },
+    "answer": "B",
+    "explanation": "Các thành phần của Executive chạy trong Kernel Mode, nhưng chúng cung cấp các dịch vụ nền tảng cho các ứng dụng ở User Mode thông qua một giao diện lời gọi hệ thống được kiểm soát chặt chẽ."
+  },
+  {
+    "id": 195,
+    "topic": "Hệ điều hành Linux và Windows (Chương 9)",
+    "question": "So sánh mô hình lưu trữ cấu hình, đâu là sự khác biệt cơ bản giữa Windows Registry và các file cấu hình của Linux?",
+    "options": {
+      "A": "Registry là một cơ sở dữ liệu nhị phân, tập trung; còn file cấu hình Linux là file văn bản, phân tán.",
+      "B": "Registry dễ chỉnh sửa bằng tay hơn.",
+      "C": "File cấu hình Linux không thể được sao lưu.",
+      "D": "Registry không hỗ trợ cấu trúc phân cấp."
+    },
+    "answer": "A",
+    "explanation": "Đây là sự khác biệt về triết lý. Windows tập trung mọi thứ vào một cơ sở dữ liệu nhị phân, phức tạp gọi là Registry. Linux ưu tiên sự đơn giản và minh bạch của các file văn bản, được phân tán trong hệ thống file."
+  },
+  {
+    "id": 196,
+    "topic": "Hệ điều hành Linux và Windows (Chương 9)",
+    "question": "Windows 7 đã giới thiệu User-Mode Scheduling (UMS). Mục đích của nó là gì?",
+    "options": {
+      "A": "Cho phép các ứng dụng tự quản lý việc định thời các tiểu trình của mình mà không cần chuyển sang kernel mode thường xuyên, cải thiện hiệu năng cho các ứng dụng có nhiều tiểu trình.",
+      "B": "Thay thế hoàn toàn bộ định thời của nhân.",
+      "C": "Chỉ dành cho các ứng dụng 64-bit.",
+      "D": "Tăng cường bảo mật cho bộ định thời."
+    },
+    "answer": "A",
+    "explanation": "UMS là một cơ chế cho các ứng dụng yêu cầu hiệu năng cao (như cơ sở dữ liệu) để có thể tự tạo và định thời các luồng của mình trong không gian người dùng, tránh được chi phí chuyển ngữ cảnh sang kernel mode cho mỗi lần định thời."
+  },
+  {
+    "id": 197,
+    "topic": "Hệ điều hành Linux và Windows (Chương 9)",
+    "question": "Trong Linux, một \"tác vụ\" (task) trong nhân có thể đại diện cho điều gì?",
+    "options": {
+      "A": "Chỉ một tiến trình.",
+      "B": "Chỉ một tiểu trình.",
+      "C": "Cả một tiến trình (nếu nó không có tiểu trình) và một tiểu trình riêng lẻ.",
+      "D": "Một công việc theo lịch (cron job)."
+    },
+    "answer": "C",
+    "explanation": "Linux sử dụng cấu trúc task_struct để biểu diễn cả tiến trình và tiểu trình. Một tiểu trình chỉ đơn giản là một \"tác vụ\" chia sẻ một số tài nguyên (như không gian địa chỉ) với tác vụ cha của nó."
+  },
+  {
+    "id": 198,
+    "topic": "Hệ điều hành Linux và Windows (Chương 9)",
+    "question": "Mục tiêu thiết kế chính của Windows NT, vốn ảnh hưởng đến kiến trúc của các phiên bản Windows sau này, là gì?",
+    "options": {
+      "A": "Tương thích ngược với MS-DOS.",
+      "B": "Tính di động (portability) trên nhiều kiến trúc phần cứng khác nhau.",
+      "C": "Tối ưu hóa cho các thiết bị di động.",
+      "D": "Miễn phí và mã nguồn mở."
+    },
+    "answer": "B",
+    "explanation": "Một trong những mục tiêu ban đầu và quan trọng nhất của Windows NT là có thể chạy trên nhiều loại CPU và nền tảng phần cứng, không chỉ giới hạn ở Intel x86. Kiến trúc phân lớp và HAL là kết quả trực tiếp của mục tiêu này."
+  },
+  {
+    "id": 199,
+    "topic": "Hệ điều hành Linux và Windows (Chương 9)",
+    "question": "Trong Windows, một \"handle\" là gì?",
+    "options": {
+      "A": "Một con trỏ trực tiếp đến một đối tượng trong bộ nhớ.",
+      "B": "Một tham chiếu trừu tượng đến một tài nguyên của nhân (như file, tiến trình, tiểu trình) mà một tiến trình đang sử dụng.",
+      "C": "Một biến môi trường.",
+      "D": "Tên của một tiến trình."
+    },
+    "answer": "B",
+    "explanation": "Thay vì cho phép các tiến trình người dùng truy cập trực tiếp vào các cấu trúc dữ liệu của nhân, Windows cấp cho chúng một \"handle\", là một tham chiếu trừu tượng. Nhân sử dụng handle này để tìm đối tượng tài nguyên thực sự, cung cấp một lớp bảo mật và trừu tượng."
+  },
+  {
+    "id": 200,
+    "topic": "Hệ điều hành Linux và Windows (Chương 9)",
+    "question": "Tại sao kiến trúc của Linux với các mô-đun nhân có thể nạp (LKM) được coi là một sự kết hợp thành công?",
+    "options": {
+      "A": "Nó mang lại sự linh hoạt của microkernel (thêm/bớt chức năng động) với hiệu năng của monolithic kernel (gọi hàm trực tiếp).",
+      "B": "Nó an toàn hơn microkernel.",
+      "C": "Nó đơn giản hơn monolithic kernel.",
+      "D": "Nó không yêu cầu bất kỳ trình điều khiển thiết bị nào."
+    },
+    "answer": "A",
+    "explanation": "Kiến trúc này được coi là điểm mạnh nhất của Linux. Nó giữ được hiệu năng cao của việc gọi hàm trực tiếp bên trong nhân (đặc tính của monolithic), đồng thời vẫn có được sự linh hoạt và khả năng mở rộng của microkernel thông qua cơ chế LKM."
+  }
+]

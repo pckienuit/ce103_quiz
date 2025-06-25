@@ -2,6 +2,22 @@
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
+    <title>Thẻ học (Flashcards) - CE103</title>
+    <link rel="stylesheet" href="css/flashcards.css">
+    <!-- MathJax for mathematical formulas -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            }
+        };
+    </script>
+</head>ml lang="vi">
+<head>
+    <meta charset="UTF-8">
     <title>Thẻ học (Flashcards) - CE103</title>    <link rel="stylesheet" href="css/flashcards.css">
     <!-- Prism.js for code highlighting -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
@@ -39,9 +55,8 @@
             <button id="prev-card-btn">Trước</button>
             <button id="flip-card-btn">Lật thẻ</button>
             <button id="next-card-btn">Sau</button>
-        </div>
-        <a href="index.html" class="nav-link">Về trang chủ</a>    </div>
-    <script src="js/enhanced_highlighter.js"></script>
-    <script src="js/flashcards_improved.js"></script>
+        </div>        <a href="index.html" class="nav-link">Về trang chủ</a>
+    </div>
+    <script src="js/flashcards.js"></script>
 </body>
 </html>

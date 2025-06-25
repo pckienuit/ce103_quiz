@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Test CE103 Simple Interface</title>
+    <link rel="stylesheet" href="css/quiz.css">
+    <style>
+        .test-container {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 20px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        .test-section {
+            margin: 20px 0;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .success {
+            color: #28a745;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="test-container">
+        <h1>🧪 Test CE103 Simple Interface</h1>
+        
+        <div class="test-section">
+            <h2>✅ Giao diện đã được đơn giản hóa</h2>
+            <p class="success">✅ Loại bỏ Bright Theme</p>
+            <p class="success">✅ Loại bỏ Gemini AI Highlighting</p>
+            <p class="success">✅ Loại bỏ Enhanced Highlighter</p>
+            <p class="success">✅ Loại bỏ Prism.js</p>
+            <p class="success">✅ Giữ lại MathJax cho công thức toán học</p>
+            <p class="success">✅ Chỉ sử dụng CSS và JS cơ bản</p>
+        </div>
+
+        <div class="test-section">
+            <h2>🔧 Các tính năng còn lại</h2>
+            <p><strong>Code Highlighting:</strong> Chỉ backticks cơ bản</p>
+            <p><strong>Math Rendering:</strong> MathJax với TeX input</p>
+            <p><strong>Exit Functionality:</strong> Confirmation dialog + ESC key</p>
+            <p><strong>Responsive Design:</strong> Mobile-friendly interface</p>
+            <p><strong>Tech Terms:</strong> ROM, RAM, CPU, UART, PWM, ADC, DAC</p>
+            <p><strong>Numbers:</strong> Hex numbers (0xFF, 1234H)</p>
+        </div>
+
+        <div class="test-section">
+            <h2>📝 Test Code Highlighting</h2>
+            <p>Inline code: <code class="inline-code">MOV A, #0xFF</code></p>
+            <p>Tech terms: <span class="tech-term">ROM</span>, <span class="tech-term">RAM</span>, <span class="tech-term">CPU</span></p>
+            <p>Numbers: <span class="number-highlight">0xFF</span>, <span class="number-highlight">1234H</span></p>
+        </div>
+
+        <div class="test-section">
+            <h2>📐 Test Mathematical Formula</h2>
+            <p>Inline math: $T_{machine} = \frac{12}{f_{osc}}$</p>
+            <p>Display math:</p>
+            <p>$$f_{osc} = 12MHz$$</p>
+        </div>
+
+        <div style="text-align: center; margin-top: 30px;">
+            <a href="index.html" style="padding: 10px 20px; background: #007bff; color: white; text-decoration: none; border-radius: 5px; margin-right: 10px;">🏠 Trang chủ</a>
+            <a href="quiz.html" style="padding: 10px 20px; background: #28a745; color: white; text-decoration: none; border-radius: 5px; margin-right: 10px;">📝 Quiz</a>
+            <a href="flashcards.html" style="padding: 10px 20px; background: #6c757d; color: white; text-decoration: none; border-radius: 5px;">📚 Flashcards</a>
+        </div>
+    </div>
+
+    <!-- MathJax for mathematical formulas -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            }
+        };
+    </script>
+</body>
+</html>

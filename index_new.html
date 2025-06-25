@@ -14,6 +14,7 @@
         }
         
         .subject-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             border-radius: 15px;
             padding: 2rem;
             color: white;
@@ -36,23 +37,21 @@
         
         .subject-title {
             font-size: 1.8rem;
-            margin-bottom: 1rem;
+            margin-bottom: 0.5rem;
             font-weight: bold;
         }
         
         .subject-description {
             margin-bottom: 1.5rem;
+            opacity: 0.9;
             line-height: 1.6;
-            opacity: 0.95;
         }
         
         .subject-stats {
             display: flex;
-            justify-content: space-around;
+            justify-content: space-between;
             margin-bottom: 1.5rem;
-            background: rgba(255,255,255,0.15);
-            padding: 1rem;
-            border-radius: 10px;
+            font-size: 0.9rem;
         }
         
         .stat-item {
@@ -63,12 +62,6 @@
             display: block;
             font-size: 1.5rem;
             font-weight: bold;
-            margin-bottom: 0.3rem;
-        }
-        
-        .stat-label {
-            font-size: 0.9rem;
-            opacity: 0.9;
         }
         
         .subject-actions {
@@ -78,7 +71,7 @@
         
         .subject-btn {
             flex: 1;
-            padding: 0.8rem 1.5rem;
+            padding: 0.8rem;
             border: 2px solid rgba(255,255,255,0.3);
             background: rgba(255,255,255,0.2);
             color: white;
@@ -93,27 +86,24 @@
             background: rgba(255,255,255,0.3);
             border-color: rgba(255,255,255,0.6);
             transform: translateY(-2px);
-            text-decoration: none;
-            color: white;
         }
         
-        .btn-primary {
+        .coming-soon {
+            opacity: 0.6;
+            position: relative;
+        }
+        
+        .coming-soon::after {
+            content: "Sắp ra mắt";
+            position: absolute;
+            top: 10px;
+            right: 10px;
             background: rgba(255,255,255,0.9);
             color: #333;
-            border-color: white;
-        }
-        
-        .btn-primary:hover {
-            background: white;
-            color: #333;
-        }
-        
-        .btn-primary.it007:hover {
-            color: #f5576c;
-        }
-        
-        .btn-primary.ce103:hover {
-            color: #667eea;
+            padding: 0.3rem 0.6rem;
+            border-radius: 15px;
+            font-size: 0.7rem;
+            font-weight: bold;
         }
     </style>
 </head>
@@ -138,23 +128,23 @@
                     <div class="subject-stats">
                         <div class="stat-item">
                             <span class="stat-number">230</span>
-                            <span class="stat-label">Câu hỏi</span>
+                            <span>Câu hỏi</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">40</span>
+                            <span>Câu/bài thi</span>
                         </div>
                         <div class="stat-item">
                             <span class="stat-number">60</span>
-                            <span class="stat-label">Flashcards</span>
-                        </div>
-                        <div class="stat-item">
-                            <span class="stat-number">70</span>
-                            <span class="stat-label">Phút thi</span>
+                            <span>Flashcards</span>
                         </div>
                     </div>
                     <div class="subject-actions">
-                        <a href="quiz.html" class="subject-btn btn-primary ce103">
-                            📝 Bắt đầu thi
+                        <a href="quiz.html?subject=ce103" class="subject-btn">
+                            📝 Trắc nghiệm
                         </a>
-                        <a href="flashcards.html" class="subject-btn">
-                            📚 Flashcards
+                        <a href="flashcards.html?subject=ce103" class="subject-btn">
+                            📚 Thẻ học
                         </a>
                     </div>
                 </div>
@@ -165,37 +155,47 @@
                         💻 IT007 - Hệ điều hành
                     </div>
                     <div class="subject-description">
-                        Quản lý tiến trình, đồng bộ hóa, quản lý bộ nhớ, 
-                        hệ thống file và các khái niệm cốt lõi của OS.
+                        Tiến trình, luồng, đồng bộ hóa, quản lý bộ nhớ, 
+                        hệ thống file và bảo mật hệ điều hành.
                     </div>
                     <div class="subject-stats">
                         <div class="stat-item">
-                            <span class="stat-number">180</span>
-                            <span class="stat-label">Câu hỏi</span>
+                            <span class="stat-number">25</span>
+                            <span>Câu hỏi</span>
                         </div>
                         <div class="stat-item">
-                            <span class="stat-number">40</span>
-                            <span class="stat-label">Câu/bài thi</span>
+                            <span class="stat-number">24</span>
+                            <span>Câu/bài thi</span>
                         </div>
                         <div class="stat-item">
-                            <span class="stat-number">75</span>
-                            <span class="stat-label">Phút thi</span>
+                            <span class="stat-number">-</span>
+                            <span>Flashcards</span>
                         </div>
-                    </div>                    <div class="subject-actions">
-                        <a href="quiz_it007_simple.html" class="subject-btn btn-primary it007">
-                            📝 Bắt đầu thi
+                    </div>
+                    <div class="subject-actions">
+                        <a href="quiz_it007.html" class="subject-btn">
+                            📝 Trắc nghiệm
                         </a>
-                        <a href="#" class="subject-btn" onclick="alert('Flashcards IT007 đang phát triển!')">
-                            📚 Flashcards
+                        <a href="#" class="subject-btn coming-soon" style="opacity: 0.5; pointer-events: none;">
+                            📚 Thẻ học
                         </a>
                     </div>
                 </div>
             </div>
-        </main>
 
-        <footer>
-            <p>&copy; 2025 Quiz System. Phát triển cho sinh viên Công nghệ thông tin.</p>
-        </footer>
+            <!-- Thông tin hệ thống -->
+            <div style="margin-top: 3rem; padding: 2rem; background: #f8f9fa; border-radius: 10px;">
+                <h3>🚀 Tính năng hệ thống</h3>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-top: 1rem;">
+                    <div>✨ AI-powered highlighting</div>
+                    <div>📐 Hỗ trợ công thức toán học</div>
+                    <div>🎨 Giao diện bright theme</div>
+                    <div>⏱️ Hẹn giờ tự động</div>
+                    <div>📊 Thống kê chi tiết</div>
+                    <div>💾 Lưu kết quả</div>
+                </div>
+            </div>
+        </main>
     </div>
 </body>
 </html>
